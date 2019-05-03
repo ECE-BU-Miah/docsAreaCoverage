@@ -1,6 +1,6 @@
 # BEMOSS Project
 
-# Title: Exploring BEMOSS and its Application
+# Title: BEMOSS and Its Enhanced Applications
 
 ## Authors: Brian Lauer and Dr. Suruz Miah
 
