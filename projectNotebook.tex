@@ -47,7 +47,7 @@
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------                               
-% \UseRawInputEncoding
+%\UseRawInputEncoding
 \documentclass[fontsize=11pt, % Document font size
                              paper=letter, % Document paper type
                              twoside, % Shifts odd pages to the left for easier reading when printed, can be changed to oneside
@@ -221,148 +221,10 @@ Example of citing a paper. ``Authors in~\cite{Martinelli2015-Robot} $\ldots$''
 %----------------------------------------------------------------------------------------
 %	LAB BOOK CONTENTS
 %----------------------------------------------------------------------------------------
-\labday{Thursday, 14 September 2017}
-Today was the official start date of the 2-DOF Helicopter Experiment. We met with Dr. Miah today for an introduction to the project and to discuss project logistics.
-
-\experiment{meeting1}
-With Dr. Miah, we went over project logistics. 
-\begin{itemize}
-    \item We decided on a weekly meting time of $11:30-12:30$ PM on Fridays. We will email him an agenda for the meeting prior to the meeting.
-    \item All of the files we will be using and creating will be using the camel case convention.
-    \item The electronic lab notebook template was also shared with us today. We will be using ShareLaTeX to update and modify the lab notebook.
-    \item Dr. Miah shared the Google Drive with us. This is where all of our work will be placed. Dr. Miah also has his work concerning in his work in the drive for us to study along with Quanser resources.
-    \item Dr. Miah also mentioned the software that we will need for the project. The software includes TexLive, IPE, ShareLaTeX, Dia Diagram Editor, MATLAB, and Microsoft Visual Studio 2015.
-    \item Dr. Miah also broke down the workload for the project. Tony will be in charge of half quadcopter and I will be in charge of the helicopter and Raspberry Pi implementation. For the half quadcopter, Tony will study the quadcopter in Vrep and try to turn it into a half quadcopter model. He will then implement Dr. Miah's algorith in MATLAB, Vrep, and on the Quanser AERO. I will do the same for the helicopter except I will also work on the Raspberry Pi implementation because the helicopter model is not in Vrep.
-\end{itemize}
+\labday{Monday, May 06, 2019}
 %----------------------------------------------------------------------------------------
-\labday{Friday, 15 September 2017}
-Another meeting was held with Dr. Miah to discuss more of the research involved with the project. We were also introduced to the robotics lab where we will be working on the project for the remainder of the year.
-
-\experiment{meeting1}
-More documents and MATLAB code were added to the Google Drive.
-\begin{itemize}
-\item Implementation
-    \begin{itemize}
-        \item Software information
-        \item Quanser AERO implementation examples
-        \item Specification documents
-    \end{itemize}
-\item Simulations
-    \begin{itemize}
-        \item Dr. Miah's MATLAB code and simulations of his developed algorithm using a robot
-    \end{itemize}
-\end{itemize}
-
-Dr. Miah mentioned that there was an issue with the licensing for the Quanser AERO. He is going to try and set up a meeting with one of the technicians from Quanser to see if there is a way for us to get a license or use Dr. Miah's existing one.
-\bigbreak \noindent
-Dr. Miah also showed us the robotics lab where he would like us to start working on a daily basis. The first cabinet on the North wall is reserved for his projects. There are supplies in the cabinet and room for storage. Dr. Miah keeps the key to the cabinet in his office. There is still a question if the Quanser AERO will fit in the cabinet.
-\bigbreak \noindent
-As for working in the robotics lab daily, Dr. Miah would prefer we work in the robotics lab Monday, Wednesday, Friday $9-12, 1-2$. This schedule works with Andrew's schedule but may need to be adjusted for Tony's.
-%----------------------------------------------------------------------------------------
-\labday{Monday, 18 September 2017}
-The purpose of the project is to be able to control a Quanser AERO 2-DOF helicopter. Because of the nonlinearities and coupling present in the system model, different control methods have been developed.
-
 \experiment{lab1}
-In order to be able to implement the proposed algorithm with the Quanser AERO, we begin researching not only the proposed algorithm but also other methods of control that have been implemented. Today was dedicated to reading the documents provided by Dr. Miah which implemented or considered various other control methods. % \cite{Ahmed2010-Sliding}, \cite{Chang2017-Fuzzy}, \cite{Gao2016-DataDriven}, \cite{Hernandez2012-Decentralized}, \cite{Kayacan2016-Fuzzy}, \cite{Subbarao2016-Reinforcement}, and \cite{Subramanian2016-Robust} used various algorithms and control methods for the helicopter problem. Dr. Miah also provided his current paper on his own algorithm \cite{Miah2017-ADP}. Dr. Miah's paper needs to be understood more fully since its implementation is the goal of the project.
-%----------------------------------------------------------------------------------------
-\labday{Wednesday, 20 September 2017}
-
-\experiment{lab1}
-I spent most of the day reviewing Dr. Miah's proposed algorithm and corresponding MATLAB code. To better understand the algorithm, I went through Dr. Miah's paper multiple times trying to better understand the mathematical concepts behind the algorithm. I also went through his MATLAB code used for his simulations piecing together the proposed algorithm. For both the paper and code, I noted lingering questions I still had that we can discuss in our next weekly meeting. Dr. Miah's paper and MATLAB code can be found in the Google Drive inside the folder workOfDrMiah which can be found in the simulations folder.
-
-\labday{Friday, 22 September 2017}
-
-\experiment{lab1}
-I spent a few hours reading over the Quanser AERO resources in the Google Drive. I started reading about how the implementation is set up. I also found out that most of the parameters needed for the model, and thus the state-space model, can be experimentally determined with labs already designed by Quanser. This may be helpful when developing an accurate model of our specific Quanser AERO.
-
-\experiment{meeting1}
-During our weekly meeting, we discussed we had accomplished during the week. I had read over most of the references and Dr. Miah's algorithm to get a better idea for the goal of the project. Now that I understand our main emphasis, I can begin working on how to model the Quanser AERO accurately. Dr. Miah mentioned that the Quanser AERO model given by Quanser is very simple with many assumptions. I will need to look into this next week. Tony started looking at the Vrep code for the quadcopter.
-\bigbreak \noindent
-Dr. Miah shared a book with us today as well. I will need to add the reference to the bibliography. This book should be helpful in the modleing of the quadcopter and some of the Vrep. I may be able to use it for help when working with the helicopter. We also decided that because mine and Tony's work is rather separate we will be keeping two separate lab notebooks.
-\bigbreak \noindent
-The plans for next week are to begin working on the model of the helicopter. I will need to look at the Quanser AERO Simulink model and other resources for the derivation of the model. Understanding the derivation of the model will allow us a better understanding when applying control techniques.
-%----------------------------------------------------------------------------------------
-\labday{Monday, 25 September 2017}
-
-\experiment{lab1}
-I began deriving the state-space model of the helicopter today. It was a little slow getting started because I had to jump back to physics, but my notes for the day can be seen in~%\autoref{fig:notes1-9-25} and \autoref{fig:notes2-9-25}.
-Once I get the derivation correct and full, I will type it out in the notebook.
-\bigbreak \noindent
-I also noticed something interesting today. I cannot open the Simulink model of the Quanser AERO by itself. Because we don't have the software installed yet, the model is missing a couple libraries, so I cannot view the state-space model used in the Simulink model.
-%
-% \begin{figure}
-%   \centering
-%   \includegraphics[width=1\textwidth]{figs/img/notes1-9-25}
-%   \caption{Handwritten notes for the day.}
-%   \label{fig:notes1-9-25}
-% \end{figure}
-% \begin{figure}
-%   \centering
-%   \includegraphics[width=1\textwidth]{figs/img/notes2-9-25}
-%   \caption{Handwritten notes for the day.}
-%   \label{fig:notes2-9-25}
-% \end{figure}
-%----------------------------------------------------------------------------------------
-\labday{Wednesday, 27 September 2017}
-
-\experiment{lab1}
-I am still working on the derivation of the state-space model for the 2-DOF helicopter. I am going to start writing out the derivation in this notebook as well as creating the images. We will then have the figures and derivation in LaTeX form for future use.
-
-\experiment{derivation1}
-% \begin{figure}
-%   \centering
-%   \includegraphics[width=1\textwidth]{figs/ipe/helicopterFreeBodyDiagramGeneral.eps}
-%   \caption{Free body diagram of the 2-DOF helicopter. Only the propeller forces are represented. Measurements are also shown.}
-%   \label{fig:helicopterFreeBodyDiagramGeneral}
-% \end{figure}
-
-We can see in~%\autoref{fig:helicopterFreeBodyDiagramGeneral}
-a very high-level description of the 2-DOF helicopter. Let us state that the rotor that controls the pitch will be called the main rotor from here on. The force the rotor produces is $F_p$. The distance from the pivot to the main rotor is $R_p$. Let us also state that the rotor that controls the yaw will be called the tail rotor from here on. The force that this rotor produces is $F_y$. The distance from the tail rotor to the pivot is $R_y$. Let us also define the distance from the pivot to the center of gravity as $R_c$.
-\bigbreak \noindent
-Let us define the pitch to be $\theta$. $\theta > 0$ when the main rotor lifts the helicopter above the horizon. Define the yaw to be $\psi$. $\psi > 0$ when the tail rotor moves the helicopter in a counter-clockwise rotation from the initial equilibrium point. Let us also define $\dot{\theta}(t) > 0$ when the helicopter moves up or when $V_p > 0$. $V_p$ is the applied voltage to the main rotor. This means $\dot{\psi}(t) > 0$ when the helicopter rotates in a counter-clockwise turn or $V_y > 0$ where $V_y$ is the applied voltage to the tail rotor. 
-% %
-% \begin{figure}
-%   \centering
-%   \includegraphics[width=1\textwidth]{figs/ipe/helicopterPitchForces.eps}
-%   \caption{Free body diagram of the 2-DOF helicopter. Only the propeller forces are represented. Measurements are also shown.}
-%   \label{fig:helicopterPitchForces}
-% \end{figure}
-% %
-
-To derive the state-space model of the 2-DOF helicopter, let's look at the two rotors separately. Look at the main rotor shown in~%\autoref{fig:helicopterPitchForces}.
-Here we show the forces acting on the main rotor as if it were a point mass. In deriving the state-space model, we can either think in terms of forces or torques. I find it easier to visualize the forces, so we will do that and then convert to torques. The forces are labelled in~%\autoref{fig:helicopterPitchForces}
-for the vertical plane.
-
-\begin{itemize}
-    \item $F_p$ is the force produced by the main rotor causing lift. We will assume that when the helicopter is rising, $F_p$ is positive.
-    \item $F_{p,tail}$ is the coupled force generated by the tail rotor. To visualize this force, think of the torques on the tail rotor. As the tail propeller spins, the propeller is causing torque on the actual motor shaft. This torque is translated to the pitch axis. We assume this coupling force is aiding the main rotor force as in %\cite{Ahmed2010-Sliding}.
-    \item $F_{friction}$ is the friction opposing pitch.
-    \item $F_{gravity}$ is the gravitational force exerted on the main rotor. This force only exists in the vertical plane.
-\end{itemize}
-
-% \begin{figure}
-%   \centering
-%   \includegraphics[width=1\textwidth]{figs/ipe/helicopterYawForces.eps}
-%   \caption{Free body diagram of the 2-DOF helicopter. Only the propeller forces are represented. Measurements are also shown.}
-%   \label{fig:helicopterYawForces}
-% \end{figure}
-
-We can also look at the horizontal plane as seen in~%\autoref{fig:helicopterYawForces}.
-Because we are looking down at the tail rotor, all of the forces are the same except we do not have to consider the gravitational force.
-
-\begin{itemize}
-    \item $F_y$ is the force produced by the tail rotor causing thrust. We will assume that when the helicopter is rotating counter-clockwise, $F_y$ is positive.
-    \item $F_{y,main}$ is the coupled force generated by the main rotor. %Again, we used the directions used in \cite{Ahmed2010-Sliding}.
-    \item $F_{friction}$ is the friction opposing yaw.
-\end{itemize}
-
-Because all of the forces in our two planes are acting at a distance from their corresponding pivot, we can now think in terms of torque. Torque is the tangential component of the force times the distance. %All of the forces shown are tangential except the gravitational force in~\autoref{fig:helicopterPitchForces}.
-%----------------------------------------------------------------------------------------
-\labday{Thursday, 28 September 2017}
-
-
- 
-%----------------------------------------------------------------------------------------
+I emailed Mr. Mattus asking him whether he made any progress on finding a laptop that can be used to demonstrate the installation of BEMOSS.
  
 \end{addmargin}
 
