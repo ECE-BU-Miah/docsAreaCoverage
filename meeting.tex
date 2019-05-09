@@ -1,77 +1,280 @@
-\documentclass[10pt,a4paper,twoside]{mins}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Compact Laboratory Book
+% LaTeX Template
+% Version 1.0 (4/6/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Joan Queralt Gil (http://phobos.xtec.cat/jqueralt) using the labbook class by
+% Frank Kuster (http://www.ctan.org/tex-archive/macros/latex/contrib/labbook/)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Important note:
+% This template requires the labbook.cls file to be in the same directory as the
+% .tex file. The labbook.cls file provides the necessary structure to create the
+% lab book.
+%
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing lab book content.
+%
+% HOW TO USE THIS TEMPLATE 
+% Each day in the lab consists of three main things:
+%
+% 1. LABDAY: The first thing to put is the \labday{} command with a date in 
+% curly brackets, this will make a new section showing that you are working
+% on a new day.
+%
+% 2. EXPERIMENT/SUBEXPERIMENT: Next you need to specify what 
+% experiment(s) and subexperiment(s) you are working on with a 
+% \experiment{} and \subexperiment{} commands with the experiment 
+% shorthand in the curly brackets. The experiment shorthand is defined in the 
+% 'DEFINITION OF EXPERIMENTS' section below, this means you can 
+% say \experiment{pcr} and the actual text written to the PDF will be what 
+% you set the 'pcr' experiment to be. If the experiment is a one off, you can 
+% just write it in the bracket without creating a shorthand. Note: if you don't 
+% want to have an experiment, just leave this out and it won't be printed.
+%
+% 3. CONTENT: Following the experiment is the content, i.e. what progress 
+% you made on the experiment that day.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{enumitem}
-\usepackage{booktabs}
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------                               
+%\UseRawInputEncoding
+\documentclass[fontsize=11pt, % Document font size
+                             paper=letter, % Document paper type
+                             twoside, % Shifts odd pages to the left for easier reading when printed, can be changed to oneside
+                             captions=tableheading,
+                             index=totoc,
+                             hyperref]{labbook}
 
+%\documentclass[idxtotoc,hyperref,openany]{labbook} % 'openany' here removes the
+   
+\usepackage[bottom=10em]{geometry} % Reduces the whitespace at the bottom of the page so more text can fit
 
+\usepackage[english]{babel} % English language
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 
-\setcommittee{BEMOSS Research Project}
-\setshortcommittee{Committee Short}
-\setmembers{
-	\role{Dr. Miah}{},
-    \role{Brian Lauer}{}
-}
+\usepackage[utf8]{inputenc} % Uses the utf8 input encoding
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 
-\setdate{\today, 3:00 pm}
+\usepackage[osf]{mathpazo} % Palatino as the main font
+\linespread{1.05}\selectfont % Palatino needs some extra spacing, here 5% extra
+\usepackage[scaled=.88]{beramono} % Bera-Monospace
+\usepackage[scaled=.86]{berasans} % Bera Sans-Serif
 
-\apologies{} %If no-one gives apologies, leave blank and will be dropped
-\absent{} %If no-one is absent, leave blank, and it will be dropped
-\alsopresent{} %If no-one is a visitor, leave blank and it will be dropped
+\usepackage{booktabs,array} % Packages for tables
 
-\setisAgenda{}%leave as blank for regular minutes. Set to True if agenda.
+\usepackage{amsmath} % For typesetting math
+\usepackage{graphicx} % Required for including images
+\usepackage{etoolbox}
+\usepackage[norule]{footmisc} % Removes the horizontal rule from footnotes
+\usepackage{lastpage} % Counts the number of pages of the document
+
+\usepackage[dvipsnames]{xcolor}  % Allows the definition of hex colors
+\definecolor{titleblue}{rgb}{0.16,0.24,0.64} % Custom color for the title on the title page
+\definecolor{linkcolor}{rgb}{0,0,0.42} % Custom color for links - dark blue at the moment
+
+\addtokomafont{title}{\Huge\color{titleblue}} % Titles in custom blue color
+\addtokomafont{chapter}{\color{OliveGreen}} % Lab dates in olive green
+\addtokomafont{section}{\color{Sepia}} % Sections in sepia
+\addtokomafont{pagehead}{\normalfont\sffamily\color{gray}} % Header text in gray and sans serif
+\addtokomafont{caption}{\footnotesize\itshape} % Small italic font size for captions
+\addtokomafont{captionlabel}{\upshape\bfseries} % Bold for caption labels
+\addtokomafont{descriptionlabel}{\rmfamily}
+\setcapwidth[r]{10cm} % Right align caption text
+\setkomafont{footnote}{\sffamily} % Footnotes in sans serif
+
+\deffootnote[4cm]{4cm}{1em}{\textsuperscript{\thefootnotemark}} % Indent footnotes to line up with text
+
+\DeclareFixedFont{\textcap}{T1}{phv}{bx}{n}{1.5cm} % Font for main title: Helvetica 1.5 cm
+\DeclareFixedFont{\textaut}{T1}{phv}{bx}{n}{0.8cm} % Font for author name: Helvetica 0.8 cm
+
+\usepackage[nouppercase,headsepline]{scrpage2} % Provides headers and footers configuration
+\pagestyle{scrheadings} % Print the headers and footers on all pages
+\clearscrheadfoot % Clean old definitions if they exist
+
+\automark[chapter]{chapter}
+\ohead{\headmark} % Prints outer header
+
+\setlength{\headheight}{25pt} % Makes the header take up a bit of extra space for aesthetics
+\setheadsepline{.4pt} % Creates a thin rule under the header
+\addtokomafont{headsepline}{\color{lightgray}} % Colors the rule under the header light gray
+
+\ofoot[\normalfont\normalcolor{\thepage\ |\  \pageref{LastPage}}]{\normalfont\normalcolor{\thepage\ |\  \pageref{LastPage}}} % Creates an outer footer of: "current page | total pages"
+
+% These lines make it so each new lab day directly follows the previous one i.e. does not start on a new page - comment them out to separate lab days on new pages
+\makeatletter
+\patchcmd{\addchap}{\if@openright\cleardoublepage\else\clearpage\fi}{\par}{}{}
+\makeatother
+\renewcommand*{\chapterpagestyle}{scrheadings}
+
+% These lines make it so every figure and equation in the document is numbered consecutively rather than restarting at 1 for each lab day - comment them out to remove this behavior
+\usepackage{chngcntr}
+\counterwithout{figure}{labday}
+\counterwithout{equation}{labday}
+
+% Hyperlink configuration
+\usepackage[
+    pdfauthor={}, % Your name for the author field in the PDF
+    pdftitle={Laboratory Journal}, % PDF title
+    pdfsubject={}, % PDF subject
+    bookmarksopen=true,
+    linktocpage=true,
+    urlcolor=linkcolor, % Color of URLs
+    citecolor=linkcolor, % Color of citations
+    linkcolor=linkcolor, % Color of links to other pages/figures
+    backref=page,
+    pdfpagelabels=true,
+    plainpages=false,
+    colorlinks=true, % Turn off all coloring by changing this to false
+    bookmarks=true,
+    pdfview=FitB]{hyperref}
+
+\usepackage[stretch=10]{microtype} % Slightly tweak font spacing for aesthetics
+
+%\setlength\parindent{0pt} % Uncomment to remove all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DEFINITION OF EXPERIMENTS
+%----------------------------------------------------------------------------------------
+
+% Template: \newexperiment{<abbrev>}[<short form>]{<long form>}
+% <abbrev> is the reference to use later in the .tex file in \experiment{}, the <short form> is only used in the table of contents and running title - it is optional, <long form> is what is printed in the lab book itself
+
+\newexperiment{example}[Example experiment]{This is an example experiment}
+\newexperiment{example2}[Example experiment 2]{This is another example experiment}
+\newexperiment{example3}[Example experiment 3]{This is yet another example experiment}
+
+\newsubexperiment{subexp_example}[Example sub-experiment]{This is an example sub-experiment}
+\newsubexperiment{subexp_example2}[Example sub-experiment 2]{This is another example sub-experiment}
+\newsubexperiment{subexp_example3}[Example sub-experiment 3]{This is yet another example sub-experiment}
+
+%----------------------------------------------------------------------------------------
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Command to make the lines in the title page
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
 
 \begin{document}
-\begin{minutes}
-\begin{center}\emph{Meeting Opened at [3:31pm]}\end{center}
-\begin{business}
-\item Bob and I met for around 20 minutes to discuss 
 
-\item  Scholarship discussion
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+%\frontmatter % Use Roman numerals for page numbers
+
+%\begin{center}
+
+%
+
+\title{
+\begin{center}
+\href{http://www.bradley.edu}{\includegraphics[height=0.5in]{figs/logoBU1-Print}}
+\vskip10pt
+\HRule \\[0.4cm]
+{\Huge \bfseries Meeting Minutes \\[0.5cm] \Large BEMOSS and Its Enhanced Applications}\\[0.4cm] % Degree
+\HRule \\[1.5cm]
+\end{center}
+}
+\author{\Huge Brian Lauer \\ \\ \LARGE blauer@mail.bradley.edu \\[2cm]} % Your name and email address
+\date{Beginning April 26, 2019} % Beginning date
+\maketitle
+
+%\maketitle % Title page
+
+\printindex
+\tableofcontents % Table of contents
+\newpage % Start lab look on a new page
+
+\begin{addmargin}[0cm]{0cm} % Makes the text width much shorter for a compact look
+
+\pagestyle{scrheadings} % Begin using headers
+
+%----------------------------------------------------------------------------------------
+%	LAB BOOK CONTENTS
+%----------------------------------------------------------------------------------------
+
+\labday{Friday, March 13, 2018}
+
+\experiment{Notation}
+%% Added by Dr. Miah 
+Throughout this document, the vectors (matrices) will be denoted by lowercase (uppercase) bold letters while the lowercase non-bold letters will denote scalar quantities. Sets will be denoted by calligraphic letters. For positive integers $m,n>0,$ $\mathbb{R}^n(\mathbb{R}^{m\times n})$ denotes $n$--dimensional column vector ($m\times n$--dimensional matrix) with entries taken from a set of real numbers $\mathbb{R}.$ $(\cdot)^T$ denotes the transposition of quantity $(\cdot).$ The standard Euclidean norm of the vector  $\mathbf{x}\in\mathbb{R}^n$ and the matrix $\mathbf{A}$ are given by $\Vert x \Vert = \left(\sum_{i=1}^n\lvert x_i\rvert^2\right)^{1/2}$ and $\Vert \mathbf{A} \Vert = \left(\sum_{i=1}^m\sum_{j=1}^n\lvert a_{ij}\rvert^2\right)^{1/2}$  with $x_i,a_{ij}$ being the entries of $\mathbf{x}$ and $\mathbf{A},$ respectively. The scalar products of quantities $\mathbf{x},
+\mathbf{y}\in\mathbb{R}^n$ and $\mathbf{A}, \mathbf{B}\in\mathbb{R}^{m\times n},$ are given by %
+%
+\begin{align*}
+  \mathbf{x}^T\mathbf{y} = \sum_{i=1}^nx_iy_i~~\mathrm{and}~~\mathbf{A}\cdot \mathbf{B} =\mathrm{Tr}\left(\mathbf{A}^T\mathbf{B}\right) = \mathrm{Tr}\left(\mathbf{A}\mathbf{B}^T\right),
+\end{align*}
+%
+respectively, where $\mathrm{Tr}(\cdot)$ is the trace of matrix $(\cdot).$ Clearly, $\mathrm{Tr}(\mathbf{A}^T\mathbf{A}) = \Vert \mathbf{A}\Vert^2.$ %
+%
+% ----------------------------------------------------------------------------------------
+
+Example of citing a paper. ``Authors in~\cite{Martinelli2015-Robot} $\ldots$''
 
 
-
-\item Grant proposal
-
-Research grant proposal under BEMOSS May 3
-\item Github repository
-All documentation will be maintained in a github repository.
-Create Github account and send username to Dr. Miah. A Google Drive with the same name as the Github repository will be created. 
-It is named docsBemoss. 
-
-\item
-Talk to Mr. Mattus about getting a laptop for research. It must be installed with Ubuntu administrative privileges. 
-
+%----------------------------------------------------------------------------------------
+%	LAB BOOK CONTENTS
+%----------------------------------------------------------------------------------------
+\labday{Friday, April 26, 2019}
+%----------------------------------------------------------------------------------------
+\noindent
+Dr. Miah will write a research grant proposal under BEMOSS and is due May 3.
+\bigbreak\noindent
+All documentation will be maintained in a github repository for this project.
+I need to create a Github account and send my username to Dr. Miah. A Google Drive with the same name as the Github repository will be created name DocsBEMOSS.
+\bigbreak\noindent
+I need to talk to Mr. Mattus about getting a laptop for research. It must be installed with Ubuntu administrative privileges. 
+\bigbreak\noindent
 Send him an email:
-
+\bigbreak\noindent
 Hello Mr. Mattus, I will be working on a project with Dr. Miah. For that we would like to request a laptop available in the department if possible so that we can install Ubuntu operating system. 
-
+\bigbreak\noindent
 Try to go see him in the afternoon.
-\item Learn Github Bash terminal commands:
-
+\bigbreak\noindent
+I need to learn the following Github Bash terminal commands:
+\begin{verbatim}
 Git add
 Git commit -m adding files
 Git remote add origin 'url'
+\end{verbatim}
+To get a better undestanding of what is going on I need to go through Github tutorials.
 
-Go through Github tutorials.
+%\item Upload latex file to Drive
+ 
+\end{addmargin}
 
-\item Upload latex file to Drive
-
-\end{business};
-\begin{center}\emph{Meeting Closed at [4:32pm]}\end{center}
-\end{minutes}
-\nextmeeting{[Some Date], [Some Time], [Some Place]}
-\newpage
-\begin{minutes}
-    \begin{business}
-        \item Email Mr. Mattus again on Monday, May 6.
-        \item Need to get a laptop 
-        
-    \end{business}
-\end{minutes}
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
 
 
+\bibliographystyle{plain}
+\bibliography{bib/seniorProject2017.bib}
 
 
+% \begin{thebibliography}{9}
+
+% \bibitem{lamport94}
+% Leslie Lamport,
+% \emph{\LaTeX: A Document Preparation System}.
+% Addison Wesley, Massachusetts,
+% 2nd Edition,
+% 1994.
+
+% \end{thebibliography}
+
+%----------------------------------------------------------------------------------------
 
 \end{document}
 
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
