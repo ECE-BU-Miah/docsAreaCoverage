@@ -1,9 +1,9 @@
-# BEMOSS Project
+# Area coverage optimization project
 
-# Title: BEMOSS and Its Enhanced Applications
+# Title: Multi-Robot Area Coverage 
 
 
-## Authors: Brian Lauer and Dr. Suruz Miah
+## Authors: Amr Elhussein and Dr. Suruz Miah
 
 
 This is a test
