@@ -82,27 +82,43 @@
 %\IEEEpeerreviewmaketitle
 
 %%%%%%%%%%%%%%%%%%%%%%
-\section{Slide 1: Outine}
+\section{Slide 2: Outine}
 Hi every one my name is Amr Elhussein, mechanical enginering graduate student, i've been interested in working in robotics for four years now and i want to thank Dr. Miah to give me the chance to finally work in the field. 
 In today's presentaion we will be talking about ROS, we will talk a litle bit about its origin, how was things done before ros, what ROS exactly is and some applications. 
 We will also walk through major concepts in ROS, how to install it and an overview on the future of ROS.
-\section{Slide 2: Historiccal Background}
+\section{Slide 3: Historiccal Background}
 ROS started in 2007 as an outgrowth of Stanford AI robot (STAIR) and lately sponsored by willow grage a robotics incubator. 
 Ros is Currently extensively used in academia and industry. Currenlty ROS is supported by what is known as open source robotics foundation. 
-\section{Slide 3: Robot programming before ROS}
+\section{Slide 4: Robot programming before ROS}
 Before ROS developing robots was very time consuming because there were no common platform for doing so. instead developers built every thing from scratch and implement algorithms on their own. 
-\section{Slide 4: ROS is } 
+\section{Slide 5: ROS is } 
 A flexible framework for writing robot software. It is a collection of tools,
 libraries, and conventions that aim to simplify the task of creating complex
 and robust robot behavior across a wide variety of robotic platforms.
-\section{Slide 5: ROS Equation}
+\section{Slide 6: ROS Equation}
 To get more understanding of ROS, we can say that ROS is a combination of plumbing which are used to connect different parts of the robot, tools that are used in visualisation and other tasks one example of those tools is Gazebo which is a 3D visulisation tool used to simulate real world enviroments, Capabilities such as of the shelf algorithms that are ready to reuse and Ecosystem and community support which is an essential component of ROS.
-\section{Slide 6: Applications}
+\section{Slide 7: Applications}
 As we mentioned earlier ROS is widely used in so many areas that includes : autonomus vehicles , warehouses and industrial applications. ROS also has been used to train robotics teams in First Robotics high school competion.
-\section{Slide 7: ROS Concepts, File System }
-When using ROS there are three levels of concepts one must deeply understand, the first level is the filesystem which consists of:
+\section{Slide 8: ROS Concepts, File System }
+When using ROS there are three levels of concepts one must deeply understand, the first level is the filesystem which consists of
 \\Packages: the atomic unit of ROS which contains executable and supporting files that serve a specific purpose. 
 \\metapackages : which serves to represent a group pf related other packages.  
+\section{Slide 9: ROS Conceopts, Comutaion Graph}
+Computaion Graph is the peer to peer network processes that ROS perform on data. it contains \\nodes which are the codes files. and the master which is a node that ovesees the rest of the nodes and must be launched before other nodes. and those nodes exchange data either through messages and topics or through services. it also contains parameter server which allows data to be stored in a central location in addition to bags which is a format to store and playback data such as sensors data.
+\section{Slide 10 and 11, Master and nodes}
+this figures illustrates the relationship between the master and the other nodes and it shows that nodes don't exchange messages with the master. 
+\\next is an example for a camera application where you will be having three nodes on for the camera , one for processing the image and last one to display the image on your device. 
+\section{Slide 12: ROS Concepts, Community level}
+as we said the community level that support ROS contains an enclopydia , blogs , ROS answers and alot of other recources that help you to get things done. 
+\section{Slide 13 and 14: Installation }
+ROS is supported in debian based distributions such as ubuntu and its also supported in mac os but they say that its not stable. ROS is also supported in many robots. 
+\\there are two current supported distributions: kinetic kame and melodic morenia. 
+\\the installtion procedure is very simple and you can just follow the instruction on wiki.org which are basically configuring the repositories, setup sources list, set keys and install by sudo apt get install. 
+\section{Slide 15: ROS Future}
+when the founders of ROS were asked about the future of ROS there answer was around three points. \\security: currently ROS 1 doesn't have any security which they want to inherit it in ROS2. \\critical mission and safety rather than R and D. \\increasing distributed processes. 
+\section{ Slide 16: Thanks}
+ROS is a very complicated platform yet very useful , and you cannot fully understand it unless you get your hands dirty and do some actual work. I'll be pleased to answer any questions of yours. 
+
 
 \end{document}
 
