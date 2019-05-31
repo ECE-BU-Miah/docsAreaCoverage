@@ -56,8 +56,9 @@
 
 \title[Intro to ROS]{Introduction to Robot Operating System (ROS)}
 
+
 % % A subtitle is optional and this may be deleted
-% \subtitle{Product Proposal}
+\subtitle{Application to mobile robots}
 
 \author[A.Elhussein]{Amr~Elhussein  \\\and
 Advisor: Dr. Suruz Miah}
@@ -130,7 +131,7 @@ Used Worlwide in Research and Industry.
     Currently supported by the Open Source Robotics Foundation.
   \end{itemize}
   \begin{figure}
-  \includegraphics[scale=0.2]{figs/stair_small}
+  \includegraphics[scale=0.2]{figs/img/stair_small}
   \caption{Stair}
   \end{figure}
   
@@ -139,29 +140,42 @@ Used Worlwide in Research and Industry.
 \begin{frame}{Intrduction}{Robot Programming Before ROS}
 \begin{itemize}
   \item
-There was no common platform for develeoping robotics and it took ages !
+No common platform for develeoping robotics
   \item
-The developed software for a robot couldn't be used in any other robot.
+Build every thing from scratch 
   \item
-  Developers had to implement algorithms on their own.
+  Algorithm implementation 
   \end{itemize}
   
 \end{frame}
 \subsection{ROS is ..}
 \begin{frame}{Intrduction}{ROS is ..}
-A flexible framework for writing robot software. It is a collection of tools, libraries, and conventions that aim to simplify the task of creating complex and robust robot behavior across a wide variety of robotic platforms.
-  
+\begin{block}{}
+ A flexible framework for writing robot software. It is a collection of tools, libraries, and conventions that aim to simplify the task of creating complex and robust robot behavior across a wide variety of robotic platforms.
+\end{block}
+
 \end{frame}
+%----------------------------------
 \subsection{ROS Equation}
 \begin{frame}{Intrduction}{Ros Equation}
 \begin{figure}
 \centering
-\includegraphics[scale=1.4]{figs/ros_equation}
+\includegraphics[scale=1.4]{figs/img/ros_equation}
 \end{figure}
-
-  
 \end{frame}
 %----------------------------------
+\subsection{Applications}
+\begin{frame}{Intrduction}{Applications}
+\begin{figure}
+\includegraphics[scale=0.05]{figs/img/selfdrivcar}
+\includegraphics[scale=0.4]{figs/img/warehouse}
+\includegraphics[scale=0.083]{figs/img/industrial}
+\end{figure}
+
+\end{frame}
+%----------------------------------  
+
+
 
 \section{ROS Concepts}
 
@@ -170,7 +184,7 @@ A flexible framework for writing robot software. It is a collection of tools, li
 \begin{frame}{ROS Concepts}{Filesystem}
 \begin{figure}
 \centering
-\includegraphics[scale=0.4]{figs/filesystem}
+\includegraphics[scale=0.4]{figs/img/filesystem}
 \end{figure}
   
 \end{frame}
@@ -182,7 +196,7 @@ A flexible framework for writing robot software. It is a collection of tools, li
 \begin{frame}{ROS Concepts}{Computation Graph}
 \begin{figure}
 \centering
-\includegraphics[scale=2]{figs/computaiongraph}
+\includegraphics[scale=2]{figs/img/computaiongraph}
 \end{figure}
   
 \end{frame}
@@ -190,7 +204,7 @@ A flexible framework for writing robot software. It is a collection of tools, li
 \begin{frame}{ROS Concepts}{Computation Graph: Master}
 \begin{figure}
 \centering
-\includegraphics[scale=0.35]{figs/master}
+\includegraphics[scale=0.35]{figs/img/master}
 \end{figure}
 
 \end{frame}
@@ -198,7 +212,7 @@ A flexible framework for writing robot software. It is a collection of tools, li
 \begin{frame}{ROS Concepts}{Computation Graph: Master}
 \begin{figure}
 \centering
-\includegraphics[scale=0.3]{figs/nodeseg}
+\includegraphics[scale=0.3]{figs/img/nodeseg}
 \end{figure}
 \end{frame}
 %----------------------------------
@@ -209,7 +223,7 @@ A flexible framework for writing robot software. It is a collection of tools, li
 \begin{frame}{ROS Concepts}{Community level}
 \begin{figure}
 \centering
-\includegraphics[scale=0.5]{figs/community}
+\includegraphics[scale=0.5]{figs/img/community}
 \end{figure}
   
 \end{frame}
@@ -217,19 +231,12 @@ A flexible framework for writing robot software. It is a collection of tools, li
 %----------------------------------
 
 \section{ROS installation}
-
-% put a slide with three dimensional system architecture drawing using ipe
-% another slide with explanation
-
-% put a slide with system block diagram
-
-%\subsection{Block Diagram}
-
+	
 \begin{frame}{Installation}
 
 \begin{itemize}
-\item Supported for debian-based distributions such as Ubuntu.
-\item Supported by many robots.
+\item Debian-based distributions such as Ubuntu.
+\item Many robots.
 \item Current supported distributions
 \begin{itemize}
 \item ROS Kinetic Kame, Released May, 2016.
@@ -242,12 +249,12 @@ A flexible framework for writing robot software. It is a collection of tools, li
 %----------------------------------
 \begin{frame}{Installation}
 
-After choosing the distribution follow the instruction on ROS wiki which start by:
+After choosing the distribution follow the instruction on ROS Wiki which start by:
 \begin{itemize}
 \item Configure your Ubuntu repositories.
 \item Setup your sources.list.
-\item Set keys
-\item Install with "sudo apt-get install ros-kinetic-desktop-full"
+\item Set keys.
+\item Install with "sudo apt-get install ros-kinetic-desktop-full".
 \end{itemize}
 
 \end{frame}
@@ -258,7 +265,17 @@ After choosing the distribution follow the instruction on ROS wiki which start b
 
 
 \begin{frame}{Future of ROS}
-  
+
+\begin{itemize}
+\item Security
+\item Critical Missions
+\item Distributed Processing
+\end{itemize}
+
+\begin{figure}
+\includegraphics[scale=0.2]{figs/img/ros2}
+\end{figure}  
+
 \end{frame}
 
 %----------------------------------
@@ -310,61 +327,12 @@ After choosing the distribution follow the instruction on ROS wiki which start b
 
 % Placing a * after \section means it will not show in the
 % outline or table of contents.
-\section*{Summary}
-
-\begin{frame}{Summary}
-  \begin{itemize}
-  \item
-    The \alert{first main message} of your talk in one or two lines.
-  \item
-    The \alert{second main message} of your talk in one or two lines.
-  \item
-    Perhaps a \alert{third message}, but not more than that.
-  \end{itemize}
-  
-  \begin{itemize}
-  \item
-    Outlook
-    \begin{itemize}
-    \item
-      Something you haven't solved.
-    \item
-      Something else you haven't solved.
-    \end{itemize}
-  \end{itemize}
+\section*{Questions}
+\begin{frame}{}
+  \centering \Huge
+  \emph{Thanks !}
 \end{frame}
 
-
-
-% All of the following is optional and typically not needed. 
-\appendix
-\section<presentation>*{\appendixname}
-\subsection<presentation>*{For Further Reading}
-
-\begin{frame}[allowframebreaks]
-  \frametitle<presentation>{For Further Reading}
-    
-  \begin{thebibliography}{10}
-    
-  \beamertemplatebookbibitems
-  % Start with overview books.
-
-  \bibitem{Author1990}
-    A.~Author.
-    \newblock {\em Handbook of Everything}.
-    \newblock Some Press, 1990.
- 
-    
-  \beamertemplatearticlebibitems
-  % Followed by interesting articles. Keep the list short. 
-
-  \bibitem{Someone2000}
-    S.~Someone.
-    \newblock On this and that.
-    \newblock {\em Journal of This and That}, 2(1):50--100,
-    2000.
-  \end{thebibliography}
-\end{frame}
 
 \end{document}
 
