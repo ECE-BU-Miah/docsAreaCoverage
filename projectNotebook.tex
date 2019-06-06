@@ -57,6 +57,7 @@
 
 %\documentclass[idxtotoc,hyperref,openany]{labbook} % 'openany' here removes the
    
+%\usepackage[hyperref]
 \usepackage[bottom=10em]{geometry} % Reduces the whitespace at the bottom of the page so more text can fit
 
 \usepackage[english]{babel} % English language
@@ -79,6 +80,7 @@
 \usepackage{lastpage} % Counts the number of pages of the document
 
 \usepackage[dvipsnames]{xcolor}  % Allows the definition of hex colors
+
 \definecolor{titleblue}{rgb}{0.16,0.24,0.64} % Custom color for the title on the title page
 \definecolor{linkcolor}{rgb}{0,0,0.42} % Custom color for links - dark blue at the moment
 
@@ -178,12 +180,12 @@
 \href{http://www.bradley.edu}{\includegraphics[height=0.5in]{figs/logoBU1-Print}}
 \vskip10pt
 \HRule \\[0.4cm]
-{\Huge \bfseries Meeting Minutes \\[0.5cm] \Large BEMOSS and Its Enhanced Applications}\\[0.4cm] % Degree
+{\Huge \bfseries Project Notebook \\[0.5cm] \Large Area Coverage Optimization}\\[0.4cm] % Degree
 \HRule \\[1.5cm]
 \end{center}
 }
-\author{\Huge Brian Lauer \\ \\ \LARGE blauer@mail.bradley.edu \\[2cm]} % Your name and email address
-\date{Beginning April 2019} % Beginning date
+\author{\Huge Amr Elhussein \\ \\ \LARGE aelhussein@mail.bradley.edu \\[2cm]} % Your name and email address
+\date{Beginning May 2019} % Beginning date
 \maketitle
 
 %\maketitle % Title page
@@ -196,65 +198,126 @@
 
 \pagestyle{scrheadings} % Begin using headers
 
-%----------------------------------------------------------------------------------------
-%	LAB BOOK CONTENTS
-%----------------------------------------------------------------------------------------
+ %----------------------------------------------------------------------------------------
 
-\labday{Friday, March 13, 2018}
 
-\experiment{Notation}
-%% Added by Dr. Miah 
-Throughout this document, the vectors (matrices) will be denoted by lowercase (uppercase) bold letters while the lowercase non-bold letters will denote scalar quantities. Sets will be denoted by calligraphic letters. For positive integers $m,n>0,$ $\mathbb{R}^n(\mathbb{R}^{m\times n})$ denotes $n$--dimensional column vector ($m\times n$--dimensional matrix) with entries taken from a set of real numbers $\mathbb{R}.$ $(\cdot)^T$ denotes the transposition of quantity $(\cdot).$ The standard Euclidean norm of the vector  $\mathbf{x}\in\mathbb{R}^n$ and the matrix $\mathbf{A}$ are given by $\Vert x \Vert = \left(\sum_{i=1}^n\lvert x_i\rvert^2\right)^{1/2}$ and $\Vert \mathbf{A} \Vert = \left(\sum_{i=1}^m\sum_{j=1}^n\lvert a_{ij}\rvert^2\right)^{1/2}$  with $x_i,a_{ij}$ being the entries of $\mathbf{x}$ and $\mathbf{A},$ respectively. The scalar products of quantities $\mathbf{x},
-\mathbf{y}\in\mathbb{R}^n$ and $\mathbf{A}, \mathbf{B}\in\mathbb{R}^{m\times n},$ are given by %
-%
-\begin{align*}
-  \mathbf{x}^T\mathbf{y} = \sum_{i=1}^nx_iy_i~~\mathrm{and}~~\mathbf{A}\cdot \mathbf{B} =\mathrm{Tr}\left(\mathbf{A}^T\mathbf{B}\right) = \mathrm{Tr}\left(\mathbf{A}\mathbf{B}^T\right),
-\end{align*}
-%
-respectively, where $\mathrm{Tr}(\cdot)$ is the trace of matrix $(\cdot).$ Clearly, $\mathrm{Tr}(\mathbf{A}^T\mathbf{A}) = \Vert \mathbf{A}\Vert^2.$ %
-%
-% ----------------------------------------------------------------------------------------
-
-Example of citing a paper. ``Authors in~\cite{Martinelli2015-Robot} $\ldots$''
 
 
 %----------------------------------------------------------------------------------------
 %	LAB BOOK CONTENTS
 %----------------------------------------------------------------------------------------
-\labday{Friday, April 26, 2019}
+\labday{Wednesday, May 08, 2019}
 %----------------------------------------------------------------------------------------
-Dr. Miah will write a research grant proposal under BEMOSS and is due May 3.
-\bigbreak\noindent
-All documentation will be maintained in a github repository for this project.
-I need to create a Github account and send my username to Dr. Miah. A Google Drive with the same name as the Github repository will be created name DocsBEMOSS.
-\bigbreak\noindent
-I need to talk to Mr. Mattus about getting a laptop for research. It must be installed with Ubuntu administrative privileges. 
-\bigbreak\noindent
-Send him an email:
-\bigbreak\noindent
-Hello Mr. Mattus, I will be working on a project with Dr. Miah. For that we would like to request a laptop available in the department if possible so that we can install Ubuntu operating system. 
-\bigbreak\noindent
-Try to go see him in the afternoon.
-\bigbreak\noindent
-I need to learn the following Github Bash terminal commands:
-\begin{verbatim}
-Git add
-Git commit -m "message"
-Git remote add origin 'url'
-\end{verbatim}
-To get a better undestanding of what is going on I need to go through Github tutorials.
+Dr. Miah gave me an introduction to the project and what's has been done so far. he walked me through the senior project presentation and documentation.  
+%\bigbreak\noindent
+
+%\bigbreak\noindent
+ 
+%\bigbreak\noindent
+
+%\bigbreak\noindent
+
+%\bigbreak\noindent
+
+%\bigbreak\noindent
+%I need to learn the following Github Bash terminal commands:
+%\begin{verbatim}
+%Git add
+%Git commit -m "message"
+%Git remote add origin 'url'
+%\end{verbatim}
+%To get a better undestanding of what is going on I need to go through Github tutorials.
 
 %\item Upload latex file to Drive
-\labday{Thursday, May 02, 2019}
-I met with Reece Bachman, Jordan Ingram, and Robert O'Malley in the lab with the intention of filming a video of the BEMOSS installation from start to finish. However, I misinterpreted Dr. Miah's email and thought we were going to install on the current laptop they have in the lab. Instead, I was expected to have received one from Mr. Mattus with Ubuntu installed. Robert showed me the motor setup with the Zigbee module, L298N dual H bridge module, and buck-boost converter. Later, Jordan demonstrated his work with the HVAC controller.
-
-\labday{Friday, May 03, 2019}
-I still am in need of a laptop, so I must email Mr. Mattus once again on Monday, May 6.
+\labday{Thursday, May 09, 2019}
+We had a short meeting with Dakota and Eric and we discussed the prerequisites for the area coverage project and we agreed to meet again to go over the simulation and the implementation of the project.
 \bigbreak\noindent
-Dr. Miah showed me some of the Github commands to upload tex and pdf files to the Github repo. We added the meeting minutes files \texttt{meeting.tex} and \texttt{meeting.pdf}.
+I have to setup the following on my laptop:
+\begin{itemize}
+\item Ubuntu
+\item ROS Kinetic
+\item Putty
+\item Winscp
+\item VRep
+\item Matlab robotics toolbox (on the lab's pc)
+\end{itemize}
+
 
 \labday{Friday, May 10, 2019}
-Today, I met with Bob and Jordan to film the installation of BEMOSS on my borrowed laptop. After Bob attempted to install BEMOSS twice, he came to the conclusion that I installed the wrong version of Ubuntu on my machine. BEMOSS requires 16.04.5 not 16.04.6 that I had installed before the first installation. After another attempt at installing the software on Ubuntu 16.04.5, the same issue persisted involving three python modules not installing.
+I met Eric and Dakota in the robotics lab to transfer the project work. 
+\bigbreak\noindent
+They walked me through the basics of the project and a quick hadwaving on the simulation and physical implementation. 
+\bigbreak\noindent
+Dr. Miah wanted me to run at least on Demo on my laptop. However we figured out in order to do that i will need two machines one with ROS and other with matlab toolbox on it. 
+\labday{Wed, May 22, 2019}
+I met Dr. Miah Regarding the computer lab access and he sent to following email to Mr. Mattus the lab director:
+\bigbreak\noindent
+Dear Chris,
+
+Amr Elhussein is an ME graduate student and is currently working on a 
+robotics project under my direction. He needs access to a computer in 
+the robotics lab (JOB 254). I'd appreciate if you could please give him 
+access to one of the computers in JOBST 254 as soon as possible. He 
+needs to run some simulations immediately.
+
+I know it's moving time but he will be out of the lab before moving starts.
+
+Thanks,
+\bigbreak\noindent
+The project documentation will be using Latex, and we also set the github account to put all the project material on. 
+\bigbreak\noindent
+We also set up a weekly presentation session to update the Robotics and mechatronics research group on the progress of the project. 
+\bigbreak\noindent
+The first two presentations will be :
+\begin{itemize}
+\item an introduction to ROS. 
+\item Matlab Robotics toolbox.
+\end{itemize} 
+%----------------------------------
+\labday{Tue, May 28, 2019}
+We had a Skype meeting to discuss the content of my presentation. Dr. Miah reviewed the presentation and he ponted out some remarks which i edited immediatley. 
+\labday {Fri, May 7, 2019}
+We had our first RAM group meeting, Caleb and Dylan gave a presentation on Mobile Robot Localization using Trilateration, Brian gave a presentation on BEMOSS and its enhanced applications and i gave the presentation on ROS. 
+\labday{Tuesday, June 6, 2019}
+We had a skype meeting on which we decided to install trial version of matlab on my laptop and use one of the other laptops available in the lab to run v-rep on. 
+\bigbreak\noindent
+Dr. Miah also wanted me to create a list of available programable quadcopters that we can purchase for our project. 
+\bigbreak\noindent
+Currently the official ROS website contains the following quadcopters:
+\begin{itemize}
+\item AscTec Pelican and Hummingbird quadrotors: cuurently unavailable. 
+
+\item Berkeley’s STARMAC: unavailable commercially developed by Berkeley. 
+\item Bitcraze Crazyflie: costs around 205.00 
+\\
+\url {https://www.amazon.com/Seeed-Studio-Crazyflie-V2-1-Quadcopters/dp/B07QLVRXN9/ref=asc_df_B07QLVRXN9/?tag=hyprod-20&linkCode=df0&hvadid=343224652930&hvpos=1o1&hvnetw=g&hvrand=13584647834092143486&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1016766&hvtargid=pla-757568426634&psc=1&tag=&ref=&adgrpid=71764766791&hvpone=&hvptwo=&hvadid=343224652930&hvpos=1o1&hvnetw=g&hvrand=13584647834092143486&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1016766&hvtargid=pla-757568426634
+}
+\item DJI Matrice 100 Onboard SDK ROS support: mainly for developers but it's very expensive around 3K.
+\\
+\url {https://www.dji.com/matrice100}
+\item Erle-copter: didn't find a commercial one for purchasing. 
+\\
+\url {http://docs.erlerobotics.com/erle_robots/erle_copter}
+
+\item ETH sFly: commercially unavailable, developeed by ETH zurich Autonomus sytems labs. 
+\item Lily CameraQuadrotor : currently unavailable, the project was shut down. 
+\item Parrot AR.Drone
+Costs around 174.00 
+\\
+\url{
+https://www.amazon.com/Parrot-AR-Drone-Quadricopter-Power/dp/B00D8UP6I0/ref=asc_df_B00D8UP6I0/?tag=hyprod-20&linkCode=df0&hvadid=343187928718&hvpos=1o1&hvnetw=g&hvrand=2299143640651648665&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1016766&hvtargid=pla-523888688318&psc=1&tag=&ref=&adgrpid=71716366209&hvpone=&hvptwo=&hvadid=343187928718&hvpos=1o1&hvnetw=g&hvrand=2299143640651648665&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1016766&hvtargid=pla-523888688318
+}
+\item Parrot Bebop: costs around 169.99
+\\
+\url{https://www.amazon.com/dp/B00OOR9060/ref=dp_cr_wdg_tit_nw_mr} 
+
+\item Penn’s AscTec Hummingbird Quadrotors
+
+
+\end{itemize}
+
+For DJI drones the only ones that are supported by ROS are quite expensive. so we either have to choose from the list or build our own drone. 
+
 \end{addmargin}
 
 %----------------------------------------------------------------------------------------
@@ -286,3 +349,4 @@ Today, I met with Bob and Jordan to film the installation of BEMOSS on my borrow
 %%% mode: latex
 %%% TeX-master: t
 %%% End:
+\grid
