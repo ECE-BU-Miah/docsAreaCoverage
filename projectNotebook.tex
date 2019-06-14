@@ -276,9 +276,11 @@ The first two presentations will be :
 %----------------------------------
 \labday{Tue, May 28, 2019}
 We had a Skype meeting to discuss the content of my presentation. Dr. Miah reviewed the presentation and he ponted out some remarks which i edited immediatley. 
+%------------------------------------------------------------
 \labday {Fri, May 7, 2019}
 We had our first RAM group meeting, Caleb and Dylan gave a presentation on Mobile Robot Localization using Trilateration, Brian gave a presentation on BEMOSS and its enhanced applications and i gave the presentation on ROS. 
-\labday{Tuesday, June 6, 2019}
+%--------------------------------------------------------
+\labday{Tuesday, June 4, 2019}
 We had a skype meeting on which we decided to install trial version of matlab on my laptop and use one of the other laptops available in the lab to run v-rep on. 
 \bigbreak\noindent
 Dr. Miah also wanted me to create a list of available programable quadcopters that we can purchase for our project. 
@@ -317,6 +319,31 @@ https://www.amazon.com/Parrot-AR-Drone-Quadricopter-Power/dp/B00D8UP6I0/ref=asc_
 \end{itemize}
 
 For DJI drones the only ones that are supported by ROS are quite expensive. so we either have to choose from the list or build our own drone. 
+%---------------------------------------------------
+\labday{Wed, Jun 5, 2019}
+I contacted Mathworks.com to get a free trial for matlab robotics system toolbox and i got it installed on ubuntu 16.04 along with ROS. 
+\\ The next challenge was to figure out a way to connect matlab robotics toolbox and ROS connected on the same machine as all the tutorials on mathworks website talks about connecting Matlab and ROS on different machines.
+
+%-------------------------------------------`
+\labday{Fri, Jun 7, 2019}
+We had our Robotics and Mechatronics Reseach Group (RAM) meeting in which Caleb presented a brief introduction on Multi robot loclization using trieleration. Then I presented a brief introduction on Matlab Robotics Toolbox and its intergration with ROS and the challenges that needs to be tackled. 
+%-------------------------
+\labday{Tue, June 11, 2019}
+I solved the problem of integrating Matlab Robotics Toolbox and ROS on the same machine. it appeared that you need to intilize ROS master in the terminal and then in matlab if you typed  :
+\\ \begin{verbatim}
+rosinit
+\end{verbatim} 
+ it will connects to that existing ROS master node. 
+ %---------------------------------- 
+ \labday{Thu, June 13, 2019}
+ I followed turtlebot 3 tutorials on mathworks.com to verify the connection between Matlab and ROS. 
+ %---------------------------------------------
+ \labday{Fri, June 14, 2019}
+ We had our weekly meeting via Skype, we discussed my recent progress and we agreed on the next step which is implementing the three demos on my laptop. 
+ \\ We set our weekly meetings back to 3:00 pm if no presentation sessions are required. 
+ \\ in the Upcoming weeks I'll spend more time in the lab working with the actual robots.
+\\Dr. Miah expressed his intent in writing a proposal grant to fund the project in which I'll be part of. 
+\\Dr. Miah asked me to check the pricing of the Matlab robotics toolbox for students which i discoverd later was around 100 USD including simulink. 
 
 \end{addmargin}
 
