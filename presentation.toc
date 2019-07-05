@@ -16,3 +16,11 @@
 \beamer@subsectionintoc {7}{1}{Desktop prototyping}{22}{2}{6}
 \beamer@subsectionintoc {7}{2}{Standalone ROS Nodes}{24}{2}{6}
 \beamer@sectionintoc {8}{Examples}{26}{2}{7}
+\beamer@sectionintoc {9}{Introduction to V-REP}{29}{3}{8}
+\beamer@sectionintoc {10}{Interfacing Matlab and ROS on the same Machine}{30}{3}{9}
+\beamer@sectionintoc {11}{Line following simulation}{31}{3}{10}
+\beamer@sectionintoc {12}{Leader follower simulation}{32}{3}{11}
+\beamer@sectionintoc {13}{Area Coverage simulation}{33}{3}{12}
+\beamer@sectionintoc {14}{Future Work}{34}{3}{13}
+\beamer@sectionintoc {16}{Objectives}{38}{4}{14}
+\beamer@sectionintoc {17}{Refining Simulation}{39}{4}{15}

@@ -45,7 +45,8 @@
 %\usetheme{Szeged}
 %\usetheme{Warsaw}
 
-
+\usepackage{ragged2e}
+\usepackage{tikz}
 % Customize Warsaw color 
 \setbeamercolor*{palette primary}{use=structure,fg=white,bg=red!50!black}
 \setbeamercolor*{palette secondary}{use=structure,fg=white,bg=red!60!black}
@@ -351,7 +352,7 @@ After choosing the distribution follow the instruction on ROS Wiki which start b
 %-----------------
 \section{Introduction}
 \begin{frame}{Introduction}
-\begin{block}{}
+\begin{block}{According to mathworks.com}
 Robotics System Toolbox provides algorithms and hardware connectivity for developing
 autonomous robotics applications for aerial and ground vehicles, manipulators, and
 humanoid robots. Toolbox algorithms include path planning and path following for
@@ -404,7 +405,8 @@ kinematic constraints, and dynamics using a rigid body tree representation.
 \caption{Access to ROS standalone node, courtsey of mathworks.com}
 \end{figure}
 \end{frame}
-%-----------------------------
+
+%---------------
 \section{Examples}
 \begin{frame}{Examples}
 \begin{figure}
@@ -412,6 +414,144 @@ kinematic constraints, and dynamics using a rigid body tree representation.
 \caption{Turtle bot example, courtsey of mathworks.com}
 \end{figure}
 \end{frame}
+%---------------------------------
+%New Slides
+\part{part 3}
+\title{Area Coverage Optimization}
+\subtitle{Progress Report}
+\date[June~21,~2019]{Friday, June~21,~2019}
+%\author{Main Author and others}
+\begin{frame}
+\maketitle
+\end{frame}
+%---------------------
+\begin{frame}{Outline}
+  \tableofcontents
+  % You might wish to add the option [pausesections]
+\end{frame}
+%-----------------
+\section{Introduction to V-REP}
+\begin{frame}{V-REP}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+General purpose robot simulator with integrated development environment "coppeliarobotics.com".
+\end{column}
+\begin{column}{0.5\textwidth}  %%<--- here
+    \begin{center}
+     \includegraphics[width=0.5\textwidth]{figs/img/vrep.png}
+     \end{center}
+\end{column}
+\end{columns}
+\end{frame}
+%-------------------------
+\section{Interfacing Matlab and ROS on the same Machine}
+\begin{frame}{Interfacing}
+\begin{figure}
+\includegraphics[scale=0.2]{figs/img/interface.jpg}
+\caption{ROS, Matlab and V-REP interface}
+\end{figure}
+\end{frame}
+%---------------------------------------
+\section{Line following simulation}
+\begin{frame}{Line Following}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.25]{figs/img/line.png}
+\caption{Line Following Scene}
+\end{figure}
+\end{center}
+
+\end{frame}
+
+%---------------------------------------
+\section{Leader follower simulation}
+\begin{frame}{Leader Following}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.25]{figs/img/leader.png}
+\caption{Leader Follower Scene}
+\end{figure}
+\end{center}
+
+\end{frame}
+%--------------------------------------
+\section{Area Coverage simulation}
+\begin{frame}{Area Coverage}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.25]{figs/img/area.png}
+\caption{Area Coverage Scence}
+\end{figure}
+\end{center}
+\end{frame}
+%--------------
+\section{Future Work}
+\begin{frame}{Future Work}
+\begin{itemize}
+\item Expiremental Validation.
+\item Refining simulation results. 
+\end{itemize}
+\end{frame}
+%----------------------------------
+\section*{Questions}
+\begin{frame}
+\begin{LARGE}
+\begin{center}
+Questions?
+\end{center}
+\end{LARGE}
+\end{frame}
+%---------------------------
+%New Slides
+\part{part 4}
+\title{Area Coverage Optimization}
+\subtitle{Progress Report}
+\date[July~5,~2019]{Friday, July~5,~2019}
+%\author{Main Author and others}
+\begin{frame}
+\maketitle
+\end{frame}
+%---------------------
+\begin{frame}{Outline}
+  \tableofcontents
+  \end{frame}
+%----------------------
+\section{Objectives}
+\begin{frame}{Objectives}
+\begin{itemize}
+\item Refining Simulation
+\item Expiremental Validation
+\end{itemize}
+\end{frame}
+%----------------------
+\section{Refining Simulation}
+\begin{frame}{Refining Simulation}{Modeling}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.3]{figs/img/solidworks.JPG}
+\caption{eduMOD Solidworks model}
+\end{figure}
+\end{center}
+\end{frame}
+%-------------
+\begin{frame}{Refining Simulation}{importing to V-rep}
+\begin{center}
+\begin{itemize}
+\item Universal Robotic Description Format
+\item From Solidworks to URDF
+\end{itemize}
+\end{center}
+\end{frame}
+%-------------------------
+\section*{Questions}
+\begin{frame}
+\begin{LARGE}
+\begin{center}
+Questions?
+\end{center}
+\end{LARGE}
+\end{frame}
+%-----------------
 \end{document}
 
 
