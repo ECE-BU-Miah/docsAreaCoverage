@@ -113,168 +113,181 @@ Advisor: Dr. Suruz Miah}
 
 \begin{frame}{Outline}
   \tableofcontents
+  \setcounter{tocdepth}{1}
   % You might wish to add the option [pausesections]
 \end{frame}
 
 % Section and subsections will appear in the presentation overview
 % and table of contents.
 \section{Introduction}
-\subsection{Historical Background}
-\begin{frame}{Intrduction}{History and Legacy}
+\subsection{What is Localization?}
+\begin{frame}{Introduction}{What is Localization?}
   
 \begin{itemize}
   \item
-   Started in 2007 by researches from Stanford AI Robot (Stair) and the Personal Robots (PR) Program and was sponsored by Willow Garage a visionary robotics incubator.
-  \item
-Used Worlwide in Research and Industry.
-  \item
-    Currently supported by the Open Source Robotics Foundation.
+   For robot navigation, it is important to have a means of determining the location of the robot. Localization allows for accurate determination of a robots position in an In-Door or Out-Door environment.
+   \item
+    The main focus of this project is using In-Door Localization to determine the position of the robot. This will be accomplished by using the position of three beacons with known positions to the robot and the line of sight distance from each beacon to the robot.
   \end{itemize}
   \begin{figure}
-  \includegraphics[scale=0.2]{figs/img/stair_small}
-  \caption{Stair}
+  \includegraphics[scale=0.2]{figs/img/Lu_Images/locationIcon}
+  \caption{Location Markers}
   \end{figure}
   
 \end{frame}
-\subsection{Robot Programming Before ROS}
-\begin{frame}{Intrduction}{Robot Programming Before ROS}
+
+%----------------------------------
+\subsection{How In-Door Localization is Executed}
+\begin{frame}{Introduction}{In-Door Localization}
 \begin{itemize}
-  \item
-No common platform for develeoping robotics
-  \item
-Build every thing from scratch 
-  \item
-  Algorithm implementation 
-  \end{itemize}
-  
-\end{frame}
-\subsection{ROS is ..}
-\begin{frame}{Intrduction}{ROS is ..}
-\begin{block}{}
- A flexible framework for writing robot software. It is a collection of tools, libraries, and conventions that aim to simplify the task of creating complex and robust robot behavior across a wide variety of robotic platforms.
-\end{block}
-
-\end{frame}
-%----------------------------------
-\subsection{ROS Equation}
-\begin{frame}{Intrduction}{Ros Equation}
+\item
+ The goal for In-Door Localization, in this case, is to use Radio Frequency IDentification (RFID) system to determine the Radio Signal Strength (RSS). By using the RSS and the RFID system, the line of sight distance can be determined. 
+ \item
+ By using the method of trilateration, the known position of the beacons, and the line of sight distance; the position of the robot can be determined.
+\end{itemize}
 \begin{figure}
 \centering
-\includegraphics[scale=1.4]{figs/img/ros_equation}
+\includegraphics[scale=0.2]{figs/img/Lu_Images/indoorIcon}
 \end{figure}
 \end{frame}
 %----------------------------------
-\subsection{Applications}
-\begin{frame}{Intrduction}{Applications}
-\begin{figure}
-\includegraphics[scale=0.05]{figs/img/selfdrivcar}
-\includegraphics[scale=0.4]{figs/img/warehouse}
-\includegraphics[scale=0.083]{figs/img/industrial}
-\end{figure}
-
-\end{frame}
-%----------------------------------  
 
 
+\section{Sensors}
 
-\section{ROS Concepts}
+\subsection{Interoceptive Sensors}
 
-\subsection{Filesystem}
+\begin{frame}{Sensor Types}{Interoceptive Sensors}
+Interoceptive Sensors are sensors that pertain to the robot's on-board functional components. Example of Interoceptive Sensors would be:
 
-\begin{frame}{ROS Concepts}{Filesystem}
+\begin{itemize}
+\item Wheel Encoders
+\item Heading Angle
+\item Battery Status
+\end{itemize}
+
 \begin{figure}
 \centering
-\includegraphics[scale=0.4]{figs/img/filesystem}
-\end{figure}
-  
-\end{frame}
-
-%----------------------------------
-
-\subsection{Computation Graph}
-
-\begin{frame}{ROS Concepts}{Computation Graph}
-\begin{figure}
-\centering
-\includegraphics[scale=2]{figs/img/computaiongraph}
+\includegraphics[scale=0.5]{figs/img/Lu_Images/batteryStatus}
 \end{figure}
   
 \end{frame}
 %----------------------------------
-\begin{frame}{ROS Concepts}{Computation Graph: Master}
+
+\subsection{Exteroceptive Sensors}
+
+\begin{frame}{Sensor Types}{Exteroceptive Sensors}
+Exteroceptive Sensors are sensors that read data from the robot's work space/environment. Examples of Exteroceptive Sensors would be:
+\begin{itemize}
+\item Range measurement to object
+\item Light intensity
+\item Images captured by camera
+\item Microphone Data
+\end{itemize}
 \begin{figure}
 \centering
-\includegraphics[scale=0.35]{figs/img/master}
-\end{figure}
-
-\end{frame}
-%----------------------------------
-\begin{frame}{ROS Concepts}{Computation Graph: Master}
-\begin{figure}
-\centering
-\includegraphics[scale=0.3]{figs/img/nodeseg}
-\end{figure}
-\end{frame}
-%----------------------------------
-
-
-\subsection{Community level}
-
-\begin{frame}{ROS Concepts}{Community level}
-\begin{figure}
-\centering
-\includegraphics[scale=0.5]{figs/img/community}
+\includegraphics[scale=0.4]{figs/img/Lu_Images/microphone}
 \end{figure}
   
 \end{frame}
 
 %----------------------------------
+\subsection{Sensors in Localization}
+\begin{frame}{Sensors in Localization}
+\begin{itemize}
+\item
+Mainly exteroceptive sensors will be used for localization. RSS will be used to determine line of sight distance.
+\item
+Interoceptive sensors will be used to help determine where the robot moves based on the position determined from localization.
+\end{itemize}
 
-\section{ROS installation}
+
+\end{frame}
+
+%----------------------------------
+
+\section{Other Popular Localization Techniques}
 	
-\begin{frame}{Installation}
+\begin{frame}{Other Localization Techniques}
 
 \begin{itemize}
-\item Debian-based distributions such as Ubuntu.
-\item Many robots.
-\item Current supported distributions
-\begin{itemize}
-\item ROS Kinetic Kame, Released May, 2016.
-\item ROS Melodic Morenia, Released May, 2018
-%put pics%
-\end{itemize}
+\item External Kalmen Filter (EFK)
+
+\item Unscented Kalmen Filter (UFK)
+
 \end{itemize}
 
 \end{frame}
 %----------------------------------
-\begin{frame}{Installation}
-
-After choosing the distribution follow the instruction on ROS Wiki which start by:
-\begin{itemize}
-\item Configure your Ubuntu repositories.
-\item Setup your sources.list.
-\item Set keys.
-\item Install with "sudo apt-get install ros-kinetic-desktop-full".
-\end{itemize}
-
-\end{frame}
-
-%----------------------------------
-
-\section{Future of ROS}
 
 
-\begin{frame}{Future of ROS}
+\section{Caley-Meger Determinant}
 
-\begin{itemize}
-\item Security
-\item Critical Missions
-\item Distributed Processing
-\end{itemize}
+
+\begin{frame}{Localization through Trilateration}
+Trilateration is the method of determining position by using the known positions of three beacons and the line of sight distance to each beacon.
 
 \begin{figure}
-\includegraphics[scale=0.2]{figs/img/ros2}
+\includegraphics[scale=0.7]{figs/img/Lu_images/robotTrilaterationDiagram}
+\caption{Trilateration Diagram}
 \end{figure}  
+
+\end{frame}
+
+%----------------------------------
+\begin{frame}{What is the Caley-Meger Determinant?}
+For trilateration, the equation found for the robot is:
+
+\begin{figure}
+\includegraphics[scale=0.6]{figs/img/Lu_Images/caleyMegerEquations1}
+\end{figure}  
+
+\end{frame}
+
+%----------------------------------
+\begin{frame}{What is the Caley-Meger Determinant?}
+\begin{figure}
+\includegraphics[scale=0.6]{figs/img/Lu_Images/caleyMegerEquations2}
+\end{figure}  
+
+\end{frame}
+
+%----------------------------------
+\begin{frame}{What is the Caley-Meger Determinant?}
+\begin{figure}
+\centering
+\includegraphics[scale=0.8]{figs/img/Lu_Images/caleyMegerEquations3}
+\end{figure}  
+
+\end{frame}
+
+%----------------------------------
+
+
+
+\section{Caley-Meger Determinant Example}
+
+
+\begin{frame}{Caley-Meger Determinant Example}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.6]{figs/img/Lu_images/cmExample}
+\end{figure}  
+
+\end{frame}
+
+%----------------------------------
+
+\section{Future Plans - Incoming Week}
+
+
+\begin{frame}{Future Plans - Incoming Week}
+
+\begin{itemize}
+\item To be determined
+\end{itemize}
+
 
 \end{frame}
 
@@ -330,7 +343,7 @@ After choosing the distribution follow the instruction on ROS Wiki which start b
 \section*{Questions}
 \begin{frame}{}
   \centering \Huge
-  \emph{Thanks !}
+  \emph{Questions?}
 \end{frame}
 
 
