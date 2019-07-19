@@ -24,3 +24,5 @@
 \beamer@sectionintoc {14}{Future Work}{34}{3}{13}
 \beamer@sectionintoc {16}{Objectives}{38}{4}{14}
 \beamer@sectionintoc {17}{Refining Simulation}{39}{4}{15}
+\beamer@sectionintoc {19}{V-rep simulation}{44}{5}{16}
+\beamer@sectionintoc {20}{Implementation}{45}{5}{17}

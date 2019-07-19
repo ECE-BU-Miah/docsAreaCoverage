@@ -161,8 +161,31 @@
 \headcommand {\beamer@subsectionpages {39}{40}}
 \headcommand {\slideentry {18}{0}{1}{41/41}{}{4}}
 \headcommand {\beamer@framepages {41}{41}}
+\headcommand {\partentry {part 4}{5}}
 \headcommand {\beamer@partpages {36}{41}}
-\headcommand {\beamer@subsectionpages {41}{41}}
 \headcommand {\beamer@sectionpages {41}{41}}
-\headcommand {\beamer@documentpages {41}}
-\headcommand {\def \inserttotalframenumber {41}}
+\headcommand {\beamer@subsectionpages {41}{41}}
+\headcommand {\slideentry {18}{0}{2}{42/42}{}{5}}
+\headcommand {\beamer@framepages {42}{42}}
+\headcommand {\slideentry {18}{0}{3}{43/43}{}{5}}
+\headcommand {\beamer@framepages {43}{43}}
+\headcommand {\sectionentry {19}{V-rep simulation}{44}{V-rep simulation}{5}}
+\headcommand {\beamer@sectionpages {42}{43}}
+\headcommand {\beamer@subsectionpages {42}{43}}
+\headcommand {\slideentry {19}{0}{1}{44/44}{}{5}}
+\headcommand {\beamer@framepages {44}{44}}
+\headcommand {\sectionentry {20}{Implementation}{45}{Implementation}{5}}
+\headcommand {\beamer@sectionpages {44}{44}}
+\headcommand {\beamer@subsectionpages {44}{44}}
+\headcommand {\slideentry {20}{0}{1}{45/45}{}{5}}
+\headcommand {\beamer@framepages {45}{45}}
+\headcommand {\sectionentry {21}{Questions}{46}{Questions}{5}}
+\headcommand {\beamer@sectionpages {45}{45}}
+\headcommand {\beamer@subsectionpages {45}{45}}
+\headcommand {\slideentry {21}{0}{1}{46/46}{}{5}}
+\headcommand {\beamer@framepages {46}{46}}
+\headcommand {\beamer@partpages {42}{46}}
+\headcommand {\beamer@subsectionpages {46}{46}}
+\headcommand {\beamer@sectionpages {46}{46}}
+\headcommand {\beamer@documentpages {46}}
+\headcommand {\def \inserttotalframenumber {46}}
