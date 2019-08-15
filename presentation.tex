@@ -47,6 +47,7 @@
 
 \usepackage{ragged2e}
 \usepackage{tikz}
+%\usepackage{media9}
 % Customize Warsaw color 
 \setbeamercolor*{palette primary}{use=structure,fg=white,bg=red!50!black}
 \setbeamercolor*{palette secondary}{use=structure,fg=white,bg=red!60!black}
@@ -337,7 +338,7 @@ After choosing the distribution follow the instruction on ROS Wiki which start b
 \end{frame}
 %------------------
 %New Slides
-\part{part 2}
+\part {part 2}
 \title{Matlab Robotics Systems Toolbox}
 \date[June~4,~2019]{Friday, June~4,~2019}
 %\author{Main Author and others}
@@ -598,7 +599,66 @@ Questions?
 \end{LARGE}
 \end{frame}
 %-------------------------------------------
+\part{part 5}
+\title{Area Coverage Optimization}
+\subtitle{Progress Report}
+\date[July~19,~2019]{Friday, August~02,~2019}
+%\author{Main Author and others}
+\begin{frame}
+\maketitle
+\end{frame}
+%----------------------------
+\begin{frame}{Outline}
+  \tableofcontents
+  \end{frame}
+%----------------------------
+\section{Milestones}
+\begin{frame}{Milestones}
+\begin{center}
+\begin{itemize}
+ \item Understand ROS, Matlab robotics Tool box, Vrep,and their interfacing 
+ \item Run the simulation demos using pioneer robot and then refining the simulation to get better results 
+ \item Understand how to navigate beaglboneblue through ssh
+ \item Implement the area coverage algorithm with eduMIP robot
+\end{itemize}
+\end{center}
+\end{frame}
+%-------------------------------
+\section{Refining simulation}
+\begin{frame}{eduMIP urdf}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.25]{figs/img/rviz.png}
+\caption{eduMIP rviz}
+\end{figure}
+\end{center}
+\end{frame}
+%--------------------------------
+\section{Implementation}
+\begin{frame}{Implementation}{line following}
+%\includegraphics[scale=0.5]{figs/vids/trajectoryLineFollower.eps}
+\end{frame}
+%----------------------
+\begin{frame}{Implementation}{leader follower}
+%\includegraphics[scale=•]{•}
+\end{frame}
+%---------------------
+\begin{frame}{Implementation}{area coverage}
+\begin{itemize}
+\item error in orientation calculation.
+\end{itemize}
+%\includegraphics[scale=•]{•}
+\end{frame}
 %-----------------
+\section*{Questions}
+\begin{frame}
+\begin{LARGE}
+\begin{center}
+Questions?
+\end{center}
+\end{LARGE}
+\end{frame}
+%---------------------
 \end{document}
 
 
