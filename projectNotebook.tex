@@ -377,7 +377,20 @@ we had our progress presentation sesssion , Brian, Caleb and I presented our wor
 I met with Dr. Miah and we discussed the progress of the project, we agreed to give the priority to understanding the actor critic network and its implementation on the area coverage project. 
 \\ During the lab hours i worked on modifying the area coverage simulation code to suite implementation purposes, i modified the publishers and subscribes names and data type and i sucesssfully sent data between the three robots and the robotic toolbox, however the robot didn't act as the they should, they kept rotating around them self i am suspecting that is due to some errors in specifying the intial positions of the robots or maybe in updating those values. 
 \\while working with robot No.2 i experienced some issues, when first attempting to connect through ssh the beaglbone only had bin and it indicated that this image was from 2017, upon trying multiple times it worked but i probably need to back up the image and then resotre it again. 
-
+%--------------------------------
+\labday{Fri, Aug 2, 2019}
+I presented my progress in our group meeting and i demonstrated the line follower and line following implementation and i discussed with Dr. Miah and Eric the problem i'm facing with the area coverage algorithm not working sucessfully. 
+\\Eric and I head to the lab afterwards to look into the problem more closely and we discovered that the distance between the two wheels is set to the pioneer and also the left and right wheel were flipped in the matlab code, we also edited the gain values and the algorithm worked sucessfully. 
+%--------------------------------------
+\labday{Fri, Aug 9, 2019}
+Dr. Miah ordered a new laptop for the project so i went ahead and edited the codes to work with the new laptop. Unforunatley there was a problem configuring the new laptop with our framework so i called it off that day. 
+%-----------------
+\labday{Tue, Aug 12, 2019}
+I found out that the problem was from the firewall on the new laptop so i asked Dr. Miah to disable the Firewall using adminstrative login and that solved the problem.
+\\Before implementing the area coverage algorithm i had a problem with the Beaglebone No.1 which it's SD card suddenly stopped responding which resulted in me not being able to ssh the beaglebone, I backed up the beaglbone No.2 and then restored it on the first one, i changed the topics names and then built the package and then it worked sucessfully. 
+%---------------------------------
+\labday{Wed, Aug 13, 2019}
+I implemented the area coverage algorithm and i took videos for the presentation, I noticed that the plotting function is not updating the positions of the robot and it's stuck in the intial positions so I'll look into it. 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------

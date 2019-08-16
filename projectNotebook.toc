@@ -1,0 +1,25 @@
+\select@language {english}
+\contentsline {chapter}{\nonumberline Wednesday, May 08, 2019}{5}{chapter*.2}
+\contentsline {chapter}{\nonumberline Thursday, May 09, 2019}{7}{chapter*.3}
+\contentsline {chapter}{\nonumberline Friday, May 10, 2019}{9}{chapter*.4}
+\contentsline {chapter}{\nonumberline Wed, May 22, 2019}{11}{chapter*.5}
+\contentsline {chapter}{\nonumberline Tue, May 28, 2019}{13}{chapter*.6}
+\contentsline {chapter}{\nonumberline Fri, May 7, 2019}{15}{chapter*.7}
+\contentsline {chapter}{\nonumberline Tuesday, June 4, 2019}{17}{chapter*.8}
+\contentsline {chapter}{\nonumberline Wed, Jun 5, 2019}{19}{chapter*.9}
+\contentsline {chapter}{\nonumberline Fri, Jun 7, 2019}{21}{chapter*.10}
+\contentsline {chapter}{\nonumberline Tue, June 11, 2019}{23}{chapter*.11}
+\contentsline {chapter}{\nonumberline Thu, June 13, 2019}{25}{chapter*.12}
+\contentsline {chapter}{\nonumberline Fri, June 14, 2019}{27}{chapter*.13}
+\contentsline {chapter}{\nonumberline Fri, June 21, 2019}{29}{chapter*.14}
+\contentsline {chapter}{\nonumberline Fri, June 28, 2019}{31}{chapter*.15}
+\contentsline {chapter}{\nonumberline Tuesday, July 2, 2019}{33}{chapter*.16}
+\contentsline {chapter}{\nonumberline Fri, July 5, 2019}{35}{chapter*.17}
+\contentsline {chapter}{\nonumberline Fri, July 12,2019}{37}{chapter*.18}
+\contentsline {chapter}{\nonumberline Tuesday, July 16,2019}{39}{chapter*.19}
+\contentsline {chapter}{\nonumberline Fri, July 19,2019}{41}{chapter*.20}
+\contentsline {chapter}{\nonumberline FRI, July 26,2019}{43}{chapter*.21}
+\contentsline {chapter}{\nonumberline Fri, Aug 2, 2019}{45}{chapter*.22}
+\contentsline {chapter}{\nonumberline Fri, Aug 9, 2019}{47}{chapter*.23}
+\contentsline {chapter}{\nonumberline Tue, Aug 12, 2019}{49}{chapter*.24}
+\contentsline {chapter}{\nonumberline Wed, Aug 13, 2019}{51}{chapter*.25}
