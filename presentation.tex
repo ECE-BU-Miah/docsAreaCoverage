@@ -45,9 +45,11 @@
 %\usetheme{Szeged}
 %\usetheme{Warsaw}
 
+\usepackage{media9}
 \usepackage{ragged2e}
 \usepackage{tikz}
-%\usepackage{media9}
+\usepackage{epstopdf}
+
 % Customize Warsaw color 
 \setbeamercolor*{palette primary}{use=structure,fg=white,bg=red!50!black}
 \setbeamercolor*{palette secondary}{use=structure,fg=white,bg=red!60!black}
@@ -636,7 +638,17 @@ Questions?
 %--------------------------------
 \section{Implementation}
 \begin{frame}{Implementation}{line following}
-%\includegraphics[scale=0.5]{figs/vids/trajectoryLineFollower.eps}
+\includemedia[
+  width=0.4\linewidth,
+  totalheight=0.225\linewidth,
+  activate=pageopen,
+  passcontext,  %show VPlayer's right-click menu
+  addresource=figs/vids/trajectoryLeader_follower.mp4,
+  flashvars={
+    %important: same path as in `addresource'
+    source=figs/vids/trajectoryLeader_follower.mp4
+  }
+]{\fbox{Click!}}{VPlayer.swf}
 \end{frame}
 %----------------------
 \begin{frame}{Implementation}{leader follower}
@@ -650,6 +662,139 @@ Questions?
 %\includegraphics[scale=•]{•}
 \end{frame}
 %-----------------
+
+%---------------------------------------------
+\part{part 5}
+\title{Area Coverage Optimization}
+\subtitle{Progress Report}
+\date[July~19,~2019]{Friday, August~30,~2019}
+%\author{Main Author and others}
+\begin{frame}
+\maketitle
+\end{frame}
+%------------------------------
+\begin{frame}{Outline}
+  \tableofcontents
+  \end{frame}
+%----------------------------
+\section{eduMip and eduMod}
+\begin{frame}{EduMip}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{block}{}
+\begin{itemize}
+\item low cost open platform for learning purposes developed by university of california San Diego.
+\item Comatible with ROS, Python, Simulink and Labview.
+\end{itemize}
+\end{block}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.25]{figs/img/eduMip.jpeg}
+\caption{Edu Mip}
+\end{figure}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+%--------------------------
+\begin{frame}{EduMod}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{block}{}
+\begin{itemize}
+\item Edu Mip was customized at Bradley university to act as a three wheeled robot instead of the inverse pendulum configuration to achieve more stability.
+\end{itemize}
+\end{block}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.25]{figs/img/eduMod.png}
+\caption{Edu Mod}
+\end{figure}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+%--------------------------
+\section{Area Coverage optimization algorithm}
+\begin{frame}{Area Coverage Algorithm}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.3]{figs/img/voroni.png}
+\caption{Voroni regions}
+\end{figure}
+\end{center}
+\end{frame}
+%---------------------
+\begin{frame}{Area Coverage Algorithm}{Implementation}
+\includemedia[
+  width=0.4\linewidth,
+  totalheight=0.225\linewidth,
+  addresource=matlabImplementation.mp4,
+  transparent,
+  activate=pagevisible,
+  flashvars={
+    %important: same path as in `addresource'
+    source=matlabImplementation.mp4
+    &autoplay=true
+    &loop=false
+  }
+  ]{}{VPlayer.swf}
+\end{frame}
+%----------------------------------
+\section{Deep reinforcement learning}
+\begin{frame}{Deep Reinfrocement Learning}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{block}{According to Wikipedia}
+Reinforcement learning (RL) is an area of machine learning concerned with how software agents ought to take actions in an environment so as to maximize some notion of cumulative reward
+\end{block}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{center}
+
+\begin{figure}
+
+\includegraphics[scale=0.3]{figs/img/reinforcementLearning.png}
+\caption{Typical framing of reinforcement learning, "wikipedia"}
+\end{figure}
+\end{center}
+
+\end{column}
+
+\end{columns}
+
+\end{frame}
+%-----------------------------------
+\begin{frame}{Deep Reinfocement Learning}
+\begin{block}{Enviroment}
+A physical space that robots with each other on.
+\end{block}
+\begin{block}{Agents}
+The two robots, leader and follower.
+\end{block}
+\begin{block}{Action}
+Robots movement
+\end{block}
+\begin{block}{Reward}
+follower robot will obtain if error is minimized.
+\end{block}
+\end{frame}
+
+%---------------------------
+\begin{frame}{Deep reinforcement learning}{Problem setup}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.8]{figs/img/LF-Setup.eps}
+\caption{Leader Follower Problem setup}
+\end{figure}
+\end{center}
+\end{frame}
+%-----------------------------------------
 \section*{Questions}
 \begin{frame}
 \begin{LARGE}
@@ -658,6 +803,7 @@ Questions?
 \end{center}
 \end{LARGE}
 \end{frame}
+
 %---------------------
 \end{document}
 

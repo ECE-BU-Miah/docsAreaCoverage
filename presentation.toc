@@ -29,3 +29,6 @@
 \beamer@sectionintoc {22}{Milestones}{49}{6}{18}
 \beamer@sectionintoc {23}{Refining simulation}{50}{6}{19}
 \beamer@sectionintoc {24}{Implementation}{51}{6}{20}
+\beamer@sectionintoc {25}{eduMip and eduMod}{56}{7}{21}
+\beamer@sectionintoc {26}{Area Coverage optimization algorithm}{58}{7}{22}
+\beamer@sectionintoc {27}{Deep reinforcement learning}{60}{7}{23}

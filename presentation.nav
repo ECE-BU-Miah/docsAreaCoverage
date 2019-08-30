@@ -211,13 +211,44 @@
 \headcommand {\beamer@framepages {52}{52}}
 \headcommand {\slideentry {24}{0}{3}{53/53}{}{6}}
 \headcommand {\beamer@framepages {53}{53}}
-\headcommand {\sectionentry {25}{Questions}{54}{Questions}{6}}
+\headcommand {\partentry {part 5}{7}}
+\headcommand {\beamer@partpages {47}{53}}
 \headcommand {\beamer@sectionpages {51}{53}}
 \headcommand {\beamer@subsectionpages {51}{53}}
-\headcommand {\slideentry {25}{0}{1}{54/54}{}{6}}
+\headcommand {\slideentry {24}{0}{4}{54/54}{}{7}}
 \headcommand {\beamer@framepages {54}{54}}
-\headcommand {\beamer@partpages {47}{54}}
-\headcommand {\beamer@subsectionpages {54}{54}}
-\headcommand {\beamer@sectionpages {54}{54}}
-\headcommand {\beamer@documentpages {54}}
-\headcommand {\def \inserttotalframenumber {54}}
+\headcommand {\slideentry {24}{0}{5}{55/55}{}{7}}
+\headcommand {\beamer@framepages {55}{55}}
+\headcommand {\sectionentry {25}{eduMip and eduMod}{56}{eduMip and eduMod}{7}}
+\headcommand {\beamer@sectionpages {54}{55}}
+\headcommand {\beamer@subsectionpages {54}{55}}
+\headcommand {\slideentry {25}{0}{1}{56/56}{}{7}}
+\headcommand {\beamer@framepages {56}{56}}
+\headcommand {\slideentry {25}{0}{2}{57/57}{}{7}}
+\headcommand {\beamer@framepages {57}{57}}
+\headcommand {\sectionentry {26}{Area Coverage optimization algorithm}{58}{Area Coverage optimization algorithm}{7}}
+\headcommand {\beamer@sectionpages {56}{57}}
+\headcommand {\beamer@subsectionpages {56}{57}}
+\headcommand {\slideentry {26}{0}{1}{58/58}{}{7}}
+\headcommand {\beamer@framepages {58}{58}}
+\headcommand {\slideentry {26}{0}{2}{59/59}{}{7}}
+\headcommand {\beamer@framepages {59}{59}}
+\headcommand {\sectionentry {27}{Deep reinforcement learning}{60}{Deep reinforcement learning}{7}}
+\headcommand {\beamer@sectionpages {58}{59}}
+\headcommand {\beamer@subsectionpages {58}{59}}
+\headcommand {\slideentry {27}{0}{1}{60/60}{}{7}}
+\headcommand {\beamer@framepages {60}{60}}
+\headcommand {\slideentry {27}{0}{2}{61/61}{}{7}}
+\headcommand {\beamer@framepages {61}{61}}
+\headcommand {\slideentry {27}{0}{3}{62/62}{}{7}}
+\headcommand {\beamer@framepages {62}{62}}
+\headcommand {\sectionentry {28}{Questions}{63}{Questions}{7}}
+\headcommand {\beamer@sectionpages {60}{62}}
+\headcommand {\beamer@subsectionpages {60}{62}}
+\headcommand {\slideentry {28}{0}{1}{63/63}{}{7}}
+\headcommand {\beamer@framepages {63}{63}}
+\headcommand {\beamer@partpages {54}{63}}
+\headcommand {\beamer@subsectionpages {63}{63}}
+\headcommand {\beamer@sectionpages {63}{63}}
+\headcommand {\beamer@documentpages {63}}
+\headcommand {\def \inserttotalframenumber {63}}
