@@ -803,7 +803,72 @@ Questions?
 \end{center}
 \end{LARGE}
 \end{frame}
+%-----------------------
+\part{6}
+\title{Area Coverage Optimization}
+\subtitle{Progress Report}
+\date[Sep~13,~2019]{Friday, September~13,~2019}
+%\author{Main Author and others}
+\begin{frame}
+\maketitle
+\end{frame}
+%------------------------------
+\begin{frame}{Outline}
+  \tableofcontents
+  \end{frame}
+%------------------------------
+\section{Problem Setup}
+\begin{frame}{Problem setup}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.8]{figs/img/LF-Setup.eps}
+\caption{Leader Follower Problem setup}
+\end{figure}
+\end{center}
+\end{frame}
+%------------------------------
+\section{Model Free Reinforcement Learning Algorithm} 
+\begin{frame}{Important equations}
+\begin{equation}
+\mathbf{e}_k = \begin{bmatrix}
+     x_k^{[\ell]} - x_k - d\cos\theta_k^{'},
+    y_k^{[\ell]} - y_k - d\sin\theta_k^{'},
+    \theta_k^{'} - \theta_k
+  \end{bmatrix}
+\end{equation} 
+\begin{equation}
+\mathbf{u}_k^*  = - \mathbf{P}_{uu}^{-1}\mathbf{P}_{ue}*\mathbf{e}_k
+\end{equation}
 
+\end{frame}
+%-----------------------------
+\section{Results}
+\begin{frame}{Results}
+\begin{itemize}
+\item the wheights start to diverge after a short period of time.
+\item wheight matrices are not stable.
+\end{itemize}
+\end{frame}
+
+%-------------------------
+\section{Future work}
+\begin{frame}{Future Work}
+\begin{itemize}
+\item Iterating different initial conditions.
+\item adding sections in the matlab code to prevent the wheights from diverging.
+\item verify matrices stability.
+\end{itemize}
+\end{frame}
+
+%--------------------
+\section*{Questions}
+\begin{frame}
+\begin{LARGE}
+\begin{center}
+Questions?
+\end{center}
+\end{LARGE}
+\end{frame}
 %---------------------
 \end{document}
 

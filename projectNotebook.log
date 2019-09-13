@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.8.11)  15 AUG 2019 16:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.8.11)  30 AUG 2019 12:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -797,7 +797,7 @@ Package microtype Info: Loading configuration file microtype.cfg.
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.cfg
 File: microtype.cfg 2013/05/23 v2.5a microtype main configuration file (RS)
 ))
-No file projectNotebook.aux.
+(./projectNotebook.aux)
 \openout1 = `projectNotebook.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 167.
@@ -815,6 +815,7 @@ LaTeX Font Info:    ... okay on input line 167.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 167.
 LaTeX Font Info:    ... okay on input line 167.
 LaTeX Font Info:    Try loading font information for T1+pplj on input line 167.
+
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pplj.fd
 File: t1pplj.fd 2004/09/06 font definitions for T1/pplj.
@@ -898,6 +899,8 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 167.
 LaTeX Info: Redefining \pageref on input line 167.
 LaTeX Info: Redefining \nameref on input line 167.
+
+(./projectNotebook.out) (./projectNotebook.out)
 \@outlinefile=\write4
 \openout4 = `projectNotebook.out'.
 
@@ -939,9 +942,10 @@ LaTeX Font Info:    Font shape `T1/fvs/bx/n' in size <20.74> not available
 LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
 (Font)              scaled to size 17.83641pt on input line 190.
 
-<figs/logoBU1-Print.pdf, id=5, 481.8pt x 160.6pt>
+<figs/logoBU1-Print.pdf, id=101, 481.8pt x 160.6pt>
 File: figs/logoBU1-Print.pdf Graphic file (type pdf)
- <use figs/logoBU1-Print.pdf>
+
+<use figs/logoBU1-Print.pdf>
 Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 190.
 (pdftex.def)             Requested size: 108.40031pt x 36.135pt.
 LaTeX Font Info:    Font shape `T1/fvs/bx/n' in size <14.4> not available
@@ -995,30 +999,19 @@ No file projectNotebook.ind.
 ]
 Package tocbasic Info: character protrusion at toc deactivated on input line 19
 4.
+ (./projectNotebook.toc
+LaTeX Font Info:    Font shape `T1/pplj/m/sl' in size <10.95> not available
+(Font)              Font shape `T1/pplj/m/it' tried instead on input line 23.
+ [3])
 \tf@toc=\write5
 \openout5 = `projectNotebook.toc'.
 
-LaTeX Font Info:    Font shape `T1/pplj/m/sl' in size <10.95> not available
-(Font)              Font shape `T1/pplj/m/it' tried instead on input line 195.
-LaTeX Font Info:    Font shape `T1/pplj/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/pplj/b/n' tried instead on input line 195.
+ [4] [5] [6
 
 
-LaTeX Warning: Reference `LastPage' on page 3 undefined on input line 195.
-
-[3]
-
-LaTeX Warning: Reference `LastPage' on page 4 undefined on input line 209.
-
-[4]
+]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 5 undefined on input line 232.
-
-[5
-
-
-] [6
+[7] [8
 
 
 ]
@@ -1031,42 +1024,27 @@ LaTeX Font Warning: Font shape `OMS/pplj/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
 (Font)              for symbol `textbullet' on input line 237.
 
-
-LaTeX Warning: Reference `LastPage' on page 7 undefined on input line 246.
-
-[7] [8
-
-
-]
-chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 9 undefined on input line 252.
-
 [9] [10
 
 
 ]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 11 undefined on input line 277.
-
 [11] [12
 
 
 ]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 13 undefined on input line 280.
-
 [13] [14
 
 
 ]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 15 undefined on input line 283.
-
 [15] [16
+
+
+]
+chapter without number
+[17] [18
 
 
 ]
@@ -1153,30 +1131,17 @@ Overfull \hbox (26.34708pt too wide) in paragraph at lines 306--312
 dev = c & hvdvcmdl = &hvlocint =
  []
 
-
-LaTeX Warning: Reference `LastPage' on page 17 undefined on input line 312.
-
-[17]
-
-LaTeX Warning: Reference `LastPage' on page 18 undefined on input line 323.
-
-[18]
+[19] [20]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 19 undefined on input line 328.
-
-[19
+[21
 
 
-] [20
+] [22
 
 
 ]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 21 undefined on input line 331.
-
-[21] [22
+[23] [24
 
 
 ]
@@ -1186,133 +1151,100 @@ Underfull \hbox (badness 10000) in paragraph at lines 332--333
 
  []
 
-
-LaTeX Warning: Reference `LastPage' on page 23 undefined on input line 338.
-
-[23] [24
-
-
-]
-chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 25 undefined on input line 341.
-
 [25] [26
 
 
 ]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 27 undefined on input line 349.
-
 [27] [28
 
 
 ]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 29 undefined on input line 352.
-
 [29] [30
 
 
 ]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 31 undefined on input line 356.
-
 [31] [32
 
 
 ]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 33 undefined on input line 359.
-
 [33] [34
 
 
 ]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 35 undefined on input line 362.
-
 [35] [36
 
 
 ]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 37 undefined on input line 365.
-
 [37] [38
 
 
 ]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 39 undefined on input line 369.
-
 [39] [40
 
 
 ]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 41 undefined on input line 376.
-
 [41] [42
 
 
 ]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 43 undefined on input line 381.
-
 [43] [44
 
 
 ]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 45 undefined on input line 385.
-
 [45] [46
 
 
 ]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 47 undefined on input line 388.
-
 [47] [48
 
 
 ]
 chapter without number
-
-LaTeX Warning: Reference `LastPage' on page 49 undefined on input line 392.
-
 [49] [50
+
+
+]
+chapter without number
+[51] [52
+
+
+]
+chapter without number
+[53] [54
+
+
+]
+chapter without number
+[55] [56
+
+
+]
+chapter without number
+[57] [58
 
 
 ]
 chapter without number
 No file projectNotebook.bbl.
 
-Package lastpage Warning: Rerun to get the references right on input line 416.
-
-
 AED: lastpage setting LastPage
-
-LaTeX Warning: Reference `LastPage' on page 51 undefined on input line 416.
-
-[51]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 416.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 416.
+[59]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 425.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 425.
  (./projectNotebook.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 416.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 416.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 425.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 425.
 
 
 Package rerunfilecheck Warning: File `projectNotebook.out' has changed.
@@ -1320,24 +1252,21 @@ Package rerunfilecheck Warning: File `projectNotebook.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `projectNotebook.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  A85738548ABCB030ED478E50D545FB82;1305.
+(rerunfilecheck)             Before: A85738548ABCB030ED478E50D545FB82;1305
+(rerunfilecheck)             After:  41D507CA3C4E83AE84530335D31159D3;1467.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
-
-LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 12567 strings out of 493029
- 189624 string characters out of 6136234
- 500911 words of memory out of 5000000
- 15679 multiletter control sequences out of 15000+600000
- 60689 words of font info for 152 fonts, out of 8000000 for 9000
+ 12610 strings out of 493029
+ 190179 string characters out of 6136234
+ 501044 words of memory out of 5000000
+ 15703 multiletter control sequences out of 15000+600000
+ 59195 words of font info for 149 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  47i,11n,68p,854b,549s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
@@ -1345,12 +1274,11 @@ e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/bera/fvmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 bera/fvsb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/bera/fvsr8a.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on projectNotebook.pdf (51 pages, 111253 bytes).
+fb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
+Output written on projectNotebook.pdf (59 pages, 108283 bytes).
 PDF statistics:
- 349 PDF objects out of 1000 (max. 8388607)
- 284 compressed objects within 3 object streams
- 101 named destinations out of 1000 (max. 500000)
- 24070 words of extra memory for PDF output out of 24883 (max. 10000000)
+ 518 PDF objects out of 1000 (max. 8388607)
+ 444 compressed objects within 5 object streams
+ 115 named destinations out of 1000 (max. 500000)
+ 23750 words of extra memory for PDF output out of 24883 (max. 10000000)
 

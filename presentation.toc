@@ -1,0 +1,38 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Introduction}{3}{1}{1}
+\beamer@subsectionintoc {1}{1}{Historical Background}{3}{1}{1}
+\beamer@subsectionintoc {1}{2}{Robot Programming Before ROS}{4}{1}{1}
+\beamer@subsectionintoc {1}{3}{ROS is ..}{5}{1}{1}
+\beamer@subsectionintoc {1}{4}{ROS Equation}{6}{1}{1}
+\beamer@subsectionintoc {1}{5}{Applications}{7}{1}{1}
+\beamer@sectionintoc {2}{ROS Concepts}{8}{1}{2}
+\beamer@subsectionintoc {2}{1}{Filesystem}{8}{1}{2}
+\beamer@subsectionintoc {2}{2}{Computation Graph}{9}{1}{2}
+\beamer@subsectionintoc {2}{3}{Community level}{12}{1}{2}
+\beamer@sectionintoc {3}{ROS installation}{13}{1}{3}
+\beamer@sectionintoc {4}{Future of ROS}{15}{1}{4}
+\beamer@sectionintoc {6}{Introduction}{19}{2}{5}
+\beamer@sectionintoc {7}{Workflow}{20}{2}{6}
+\beamer@subsectionintoc {7}{1}{Desktop prototyping}{22}{2}{6}
+\beamer@subsectionintoc {7}{2}{Standalone ROS Nodes}{24}{2}{6}
+\beamer@sectionintoc {8}{Examples}{26}{2}{7}
+\beamer@sectionintoc {9}{Introduction to V-REP}{29}{3}{8}
+\beamer@sectionintoc {10}{Interfacing Matlab and ROS on the same Machine}{30}{3}{9}
+\beamer@sectionintoc {11}{Line following simulation}{31}{3}{10}
+\beamer@sectionintoc {12}{Leader follower simulation}{32}{3}{11}
+\beamer@sectionintoc {13}{Area Coverage simulation}{33}{3}{12}
+\beamer@sectionintoc {14}{Future Work}{34}{3}{13}
+\beamer@sectionintoc {16}{Objectives}{38}{4}{14}
+\beamer@sectionintoc {17}{Refining Simulation}{39}{4}{15}
+\beamer@sectionintoc {19}{V-rep simulation}{44}{5}{16}
+\beamer@sectionintoc {20}{Implementation}{45}{5}{17}
+\beamer@sectionintoc {22}{Milestones}{49}{6}{18}
+\beamer@sectionintoc {23}{Refining simulation}{50}{6}{19}
+\beamer@sectionintoc {24}{Implementation}{51}{6}{20}
+\beamer@sectionintoc {25}{eduMip and eduMod}{56}{7}{21}
+\beamer@sectionintoc {26}{Area Coverage optimization algorithm}{58}{7}{22}
+\beamer@sectionintoc {27}{Deep reinforcement learning}{60}{7}{23}
+\beamer@sectionintoc {29}{Problem Setup}{66}{8}{24}
+\beamer@sectionintoc {30}{Model Free Reinforcement Learning Algorithm}{67}{8}{25}
+\beamer@sectionintoc {31}{Results}{68}{8}{26}
+\beamer@sectionintoc {32}{Future work}{69}{8}{27}
