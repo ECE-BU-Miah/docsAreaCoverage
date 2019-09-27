@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.8.11)  13 SEP 2019 11:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.8.11)  27 SEP 2019 11:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1248,7 +1248,7 @@ LaTeX Info: Redefining \selectfont on input line 113.
 LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
 (Font)              size <5> substituted on input line 117.
 
-<figs/logoBU1-Print.pdf, id=177, 481.8pt x 160.6pt>
+<figs/logoBU1-Print.pdf, id=189, 481.8pt x 160.6pt>
 File: figs/logoBU1-Print.pdf Graphic file (type pdf)
 
 <use figs/logoBU1-Print.pdf>
@@ -1266,7 +1266,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 122.
  [2
 
 ]
-<figs/img/stair_small.jpg, id=266, 250.9375pt x 441.65pt>
+<figs/img/stair_small.jpg, id=278, 250.9375pt x 441.65pt>
 File: figs/img/stair_small.jpg Graphic file (type jpg)
 
 <use figs/img/stair_small.jpg>
@@ -1293,7 +1293,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 163.
 
 [5
 
-] <figs/img/ros_equation.png, id=347, 240.9pt x 40.7121pt>
+] <figs/img/ros_equation.png, id=359, 240.9pt x 40.7121pt>
 File: figs/img/ros_equation.png Graphic file (type png)
 
 <use figs/img/ros_equation.png>
@@ -1305,7 +1305,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 171.
 (pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
  [6
 
- <./figs/img/ros_equation.png>] <figs/img/selfdrivcar.jpg, id=376, 2055.68pt x 
+ <./figs/img/ros_equation.png>] <figs/img/selfdrivcar.jpg, id=388, 2055.68pt x 
 1365.1pt>
 File: figs/img/selfdrivcar.jpg Graphic file (type jpg)
 
@@ -1313,14 +1313,14 @@ File: figs/img/selfdrivcar.jpg Graphic file (type jpg)
 Package pdftex.def Info: figs/img/selfdrivcar.jpg used on input line 181.
 (pdftex.def)             Requested size: 102.79001pt x 68.25899pt.
 
-<figs/img/warehouse.jpg, id=377, 246.6816pt x 164.7756pt>
+<figs/img/warehouse.jpg, id=389, 246.6816pt x 164.7756pt>
 File: figs/img/warehouse.jpg Graphic file (type jpg)
 
 <use figs/img/warehouse.jpg>
 Package pdftex.def Info: figs/img/warehouse.jpg used on input line 181.
 (pdftex.def)             Requested size: 98.67088pt x 65.90906pt.
 
-<figs/img/industrial.jpg, id=378, 1204.5pt x 803.0pt>
+<figs/img/industrial.jpg, id=390, 1204.5pt x 803.0pt>
 File: figs/img/industrial.jpg Graphic file (type jpg)
 
 <use figs/img/industrial.jpg>
@@ -1334,7 +1334,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 181.
 
  <./figs/img/selfdrivcar.jpg> <./figs/img/warehouse.jpg> <./figs/img/industrial
 .jpg>]
-<figs/img/filesystem.png, id=406, 668.4975pt x 466.74374pt>
+<figs/img/filesystem.png, id=418, 668.4975pt x 466.74374pt>
 File: figs/img/filesystem.png Graphic file (type png)
 
 <use figs/img/filesystem.png>
@@ -1346,7 +1346,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 196.
 (pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
  [8
 
- <./figs/img/filesystem.png>] <figs/img/computaiongraph.jpg, id=434, 120.45pt x
+ <./figs/img/filesystem.png>] <figs/img/computaiongraph.jpg, id=446, 120.45pt x
  80.4606pt>
 File: figs/img/computaiongraph.jpg Graphic file (type jpg)
 
@@ -1359,7 +1359,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 208.
 (pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
  [9
 
- <./figs/img/computaiongraph.jpg>] <figs/img/master.png, id=463, 856.19875pt x 
+ <./figs/img/computaiongraph.jpg>] <figs/img/master.png, id=475, 856.19875pt x 
 536.0025pt>
 File: figs/img/master.png Graphic file (type png)
 
@@ -1372,7 +1372,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 216.
 (pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
  [10
 
- <./figs/img/master.png>] <figs/img/nodeseg.png, id=491, 968.61874pt x 675.5237
+ <./figs/img/master.png>] <figs/img/nodeseg.png, id=503, 968.61874pt x 675.5237
 4pt>
 File: figs/img/nodeseg.png Graphic file (type png)
 
@@ -1385,7 +1385,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 223.
 (pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
  [11
 
- <./figs/img/nodeseg.png>] <figs/img/community.jpg, id=519, 678.28406pt x 271.7
+ <./figs/img/nodeseg.png>] <figs/img/community.jpg, id=532, 678.28406pt x 271.7
 6532pt>
 File: figs/img/community.jpg Graphic file (type jpg)
 
@@ -1413,7 +1413,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 266.
 
 [14
 
-] <figs/img/ros2.png, id=603, 401.5pt x 401.5pt>
+] <figs/img/ros2.png, id=615, 401.5pt x 401.5pt>
 File: figs/img/ros2.png Graphic file (type png)
  <use figs/img/ros2.png>
 Package pdftex.def Info: figs/img/ros2.png used on input line 285.
@@ -1457,7 +1457,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 367.
  [19
 
 ]
-<figs/img/matlabworkflow.png, id=756, 1027.84pt x 527.9725pt>
+<figs/img/matlabworkflow.png, id=768, 1027.84pt x 527.9725pt>
 File: figs/img/matlabworkflow.png Graphic file (type png)
 
 <use figs/img/matlabworkflow.png>
@@ -1470,7 +1470,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 377.
  [20
 
  <./figs/img/matlabworkflow.png>]
-<figs/img/matlabros.png, id=786, 566.86781pt x 339.51843pt>
+<figs/img/matlabros.png, id=798, 566.86781pt x 339.51843pt>
 File: figs/img/matlabros.png Graphic file (type png)
 
 <use figs/img/matlabros.png>
@@ -1482,7 +1482,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 384.
 (pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
  [21
 
- <./figs/img/matlabros.png>] <figs/img/desktopproto.png, id=814, 652.4375pt x 4
+ <./figs/img/matlabros.png>] <figs/img/desktopproto.png, id=826, 652.4375pt x 4
 89.83pt>
 File: figs/img/desktopproto.png Graphic file (type png)
 
@@ -1496,7 +1496,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 391.
  [22
 
  <./figs/img/desktopproto.png (PNG copy)>]
-<figs/img/desktopproto2.png, id=842, 722.7pt x 404.51125pt>
+<figs/img/desktopproto2.png, id=855, 722.7pt x 404.51125pt>
 File: figs/img/desktopproto2.png Graphic file (type png)
 
 <use figs/img/desktopproto2.png>
@@ -1509,7 +1509,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 397.
  [23
 
  <./figs/img/desktopproto2.png>]
-<figs/img/rosstandalone.png, id=871, 801.99625pt x 268.00125pt>
+<figs/img/rosstandalone.png, id=883, 801.99625pt x 268.00125pt>
 File: figs/img/rosstandalone.png Graphic file (type png)
 
 <use figs/img/rosstandalone.png>
@@ -1522,7 +1522,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 404.
  [24
 
  <./figs/img/rosstandalone.png>]
-<figs/img/rosstandalone2.png, id=899, 642.4pt x 328.22626pt>
+<figs/img/rosstandalone2.png, id=911, 642.4pt x 328.22626pt>
 File: figs/img/rosstandalone2.png Graphic file (type png)
 
 <use figs/img/rosstandalone2.png>
@@ -1534,7 +1534,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 410.
 (pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
  [25
 
- <./figs/img/rosstandalone2.png>] <figs/img/turtlebot.png, id=928, 642.4pt x 36
+ <./figs/img/rosstandalone2.png>] <figs/img/turtlebot.png, id=940, 642.4pt x 36
 1.35pt>
 File: figs/img/turtlebot.png Graphic file (type png)
 
@@ -1580,7 +1580,7 @@ line 448.
 File: ot1mathkerncmss.fd 2013/03/27 Fontinst v1.933 font definitions for OT1/ma
 thkerncmss.
 )
-<figs/img/vrep.png, id=1023, 1167.36125pt x 794.97pt>
+<figs/img/vrep.png, id=1035, 1167.36125pt x 794.97pt>
 File: figs/img/vrep.png Graphic file (type png)
  <use figs/img/vrep.png>
 Package pdftex.def Info: figs/img/vrep.png used on input line 448.
@@ -1593,7 +1593,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 448.
  [29
 
  <./figs/img/vrep.png>]
-<figs/img/interface.jpg, id=1051, 1731.46875pt x 771.88374pt>
+<figs/img/interface.jpg, id=1063, 1731.46875pt x 771.88374pt>
 File: figs/img/interface.jpg Graphic file (type jpg)
 
 <use figs/img/interface.jpg>
@@ -1611,7 +1611,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 456.
  [30
 
  <./figs/img/interface.jpg>]
-<figs/img/line.png, id=1079, 1012.78375pt x 743.77875pt>
+<figs/img/line.png, id=1091, 1012.78375pt x 743.77875pt>
 File: figs/img/line.png Graphic file (type png)
 
 <use figs/img/line.png>
@@ -1623,7 +1623,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 467.
 (pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
  [31
 
- <./figs/img/line.png>] <figs/img/leader.png, id=1107, 840.13875pt x 722.7pt>
+ <./figs/img/line.png>] <figs/img/leader.png, id=1119, 840.13875pt x 722.7pt>
 File: figs/img/leader.png Graphic file (type png)
 
 <use figs/img/leader.png>
@@ -1635,7 +1635,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 479.
 (pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
  [32
 
- <./figs/img/leader.png>] <figs/img/area.png, id=1134, 897.3525pt x 690.58pt>
+ <./figs/img/leader.png>] <figs/img/area.png, id=1146, 897.3525pt x 690.58pt>
 File: figs/img/area.png Graphic file (type png)
 
 <use figs/img/area.png>
@@ -1685,7 +1685,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 528.
  [38
 
 ]
-<figs/img/solidworks.JPG, id=1304, 546.54187pt x 436.63126pt>
+<figs/img/solidworks.JPG, id=1316, 546.54187pt x 436.63126pt>
 File: figs/img/solidworks.JPG Graphic file (type jpg)
 
 <use figs/img/solidworks.JPG>
@@ -1728,7 +1728,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 569.
  [43
 
 ]
-<figs/img/error.png, id=1447, 660.4675pt x 54.2025pt>
+<figs/img/error.png, id=1459, 660.4675pt x 54.2025pt>
 File: figs/img/error.png Graphic file (type png)
  <use figs/img/error.png>
 Package pdftex.def Info: figs/img/error.png used on input line 581.
@@ -1783,7 +1783,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 627.
  [49
 
 ]
-<figs/img/rviz.png, id=1618, 853.1875pt x 749.80125pt>
+<figs/img/rviz.png, id=1630, 853.1875pt x 749.80125pt>
 File: figs/img/rviz.png Graphic file (type png)
  <use figs/img/rviz.png>
 Package pdftex.def Info: figs/img/rviz.png used on input line 637.
@@ -1836,7 +1836,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 678.
  [55
 
 ]
-<figs/img/eduMip.jpeg, id=1812, 430.0065pt x 570.2103pt>
+<figs/img/eduMip.jpeg, id=1824, 430.0065pt x 570.2103pt>
 File: figs/img/eduMip.jpeg Graphic file (type jpg)
 
 <use figs/img/eduMip.jpeg>
@@ -1848,7 +1848,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 700.
 (pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
  [56
 
- <./figs/img/eduMip.jpeg>] <figs/img/eduMod.png, id=1840, 481.8pt x 361.35pt>
+ <./figs/img/eduMip.jpeg>] <figs/img/eduMod.png, id=1852, 481.8pt x 361.35pt>
 File: figs/img/eduMod.png Graphic file (type png)
 
 <use figs/img/eduMod.png>
@@ -1860,7 +1860,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 720.
 (pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
  [57
 
- <./figs/img/eduMod.png>] <figs/img/voroni.png, id=1868, 652.4375pt x 656.4525p
+ <./figs/img/eduMod.png>] <figs/img/voroni.png, id=1880, 652.4375pt x 656.4525p
 t>
 File: figs/img/voroni.png Graphic file (type png)
 
@@ -1885,7 +1885,7 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 746.
  [59
 
 ]
-<figs/img/reinforcementLearning.png, id=1937, 501.875pt x 484.81125pt>
+<figs/img/reinforcementLearning.png, id=1949, 501.875pt x 484.81125pt>
 File: figs/img/reinforcementLearning.png Graphic file (type png)
 
 <use figs/img/reinforcementLearning.png>
@@ -1920,7 +1920,7 @@ Package epstopdf Info: Output file is already uptodate.
 
 pdfTeX warning: pdflatex (file ./figs/img/LF-Setup-eps-converted-to.pdf): PDF i
 nclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<figs/img/LF-Setup-eps-converted-to.pdf, id=1995, 403.5075pt x 227.85126pt>
+<figs/img/LF-Setup-eps-converted-to.pdf, id=2007, 403.5075pt x 227.85126pt>
 File: figs/img/LF-Setup-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figs/img/LF-Setup-eps-converted-to.pdf>
@@ -2004,7 +2004,6 @@ File: figs/logoBU1-Print.pdf Graphic file (type pdf)
 <use figs/logoBU1-Print.pdf>
 Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 861.
 (pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
-Package atenddvi Info: Last page = 69.
  [69
 
 ]
@@ -2013,6 +2012,257 @@ File: figs/logoBU1-Print.pdf Graphic file (type pdf)
 Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 871.
 (pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
  [70
+
+]
+File: figs/logoBU1-Print.pdf Graphic file (type pdf)
+
+<use figs/logoBU1-Print.pdf>
+Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 880.
+(pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
+ [71
+
+] (./presentation.toc)
+File: figs/logoBU1-Print.pdf Graphic file (type pdf)
+
+<use figs/logoBU1-Print.pdf>
+Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 884.
+(pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
+ [72
+
+]
+Package epstopdf Info: Source file: <figs/img/LF-Setup.eps>
+(epstopdf)                    date: 2019-08-30 00:57:53
+(epstopdf)                    size: 144202 bytes
+(epstopdf)             Output file: <figs/img/LF-Setup-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-08-30 00:59:07
+(epstopdf)                    size: 15968 bytes
+(epstopdf)             Command: <repstopdf --outfile=figs/img/LF-Setup-eps-conv
+erted-to.pdf figs/img/LF-Setup.eps>
+(epstopdf)             \includegraphics on input line 894.
+Package epstopdf Info: Output file is already uptodate.
+File: figs/img/LF-Setup-eps-converted-to.pdf Graphic file (type pdf)
+ <use figs/img/LF-Setup-eps-converted-to.pdf>
+Package pdftex.def Info: figs/img/LF-Setup-eps-converted-to.pdf used on input l
+ine 894.
+(pdftex.def)             Requested size: 322.80644pt x 182.28123pt.
+File: figs/logoBU1-Print.pdf Graphic file (type pdf)
+
+<use figs/logoBU1-Print.pdf>
+Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 894.
+(pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
+ [73
+
+]
+<figs/img/algorithm1.png, id=2393, 1214.5375pt x 1411.2725pt>
+File: figs/img/algorithm1.png Graphic file (type png)
+
+<use figs/img/algorithm1.png>
+Package pdftex.def Info: figs/img/algorithm1.png used on input line 904.
+(pdftex.def)             Requested size: 157.89542pt x 183.47186pt.
+File: figs/logoBU1-Print.pdf Graphic file (type pdf)
+ <use figs/logoBU1-Print.pdf>
+Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 904.
+(pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
+ [74
+
+ <./figs/img/algorithm1.png>]
+<figs/img/criticNeuralNetwork.png, id=2421, 1186.4325pt x 1059.96pt>
+File: figs/img/criticNeuralNetwork.png Graphic file (type png)
+
+<use figs/img/criticNeuralNetwork.png>
+Package pdftex.def Info: figs/img/criticNeuralNetwork.png used on input line 91
+4.
+(pdftex.def)             Requested size: 177.9572pt x 158.98714pt.
+File: figs/logoBU1-Print.pdf Graphic file (type pdf)
+ <use figs/logoBU1-Print.pdf>
+Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 914.
+(pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
+ [75
+
+ <./figs/img/criticNeuralNetwork.png>]
+Package epstopdf Info: Source file: <figs/matlab/straightLine/trajectory.eps>
+(epstopdf)                    date: 2019-09-27 10:06:55
+(epstopdf)                    size: 41174 bytes
+(epstopdf)             Output file: <figs/matlab/straightLine/trajectory-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2019-09-27 11:35:45
+(epstopdf)                    size: 9519 bytes
+(epstopdf)             Command: <repstopdf --outfile=figs/matlab/straightLine/t
+rajectory-eps-converted-to.pdf figs/matlab/straightLine/trajectory.eps>
+(epstopdf)             \includegraphics on input line 939.
+Package epstopdf Info: Output file is already uptodate.
+
+
+pdfTeX warning: pdflatex (file ./figs/matlab/straightLine/trajectory-eps-conver
+ted-to.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> 
+allowed
+
+<figs/matlab/straightLine/trajectory-eps-converted-to.pdf, id=2448, 368.37625pt
+ x 307.1475pt>
+File: figs/matlab/straightLine/trajectory-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use figs/matlab/straightLine/trajectory-eps-converted-to.pdf>
+Package pdftex.def Info: figs/matlab/straightLine/trajectory-eps-converted-to.p
+df used on input line 939.
+(pdftex.def)             Requested size: 147.34789pt x 122.85681pt.
+Package epstopdf Info: Source file: <figs/matlab/straightLine/error.eps>
+(epstopdf)                    date: 2019-09-27 10:06:56
+(epstopdf)                    size: 57758 bytes
+(epstopdf)             Output file: <figs/matlab/straightLine/error-eps-convert
+ed-to.pdf>
+(epstopdf)                    date: 2019-09-27 11:34:49
+(epstopdf)                    size: 15503 bytes
+(epstopdf)             Command: <repstopdf --outfile=figs/matlab/straightLine/e
+rror-eps-converted-to.pdf figs/matlab/straightLine/error.eps>
+(epstopdf)             \includegraphics on input line 939.
+Package epstopdf Info: Output file is already uptodate.
+
+
+pdfTeX warning: pdflatex (file ./figs/matlab/straightLine/error-eps-converted-t
+o.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allow
+ed
+
+<figs/matlab/straightLine/error-eps-converted-to.pdf, id=2449, 366.36874pt x 29
+5.1025pt>
+File: figs/matlab/straightLine/error-eps-converted-to.pdf Graphic file (type pd
+f)
+ <use figs/matlab/straightLine/error-eps-converted-to.pdf>
+Package pdftex.def Info: figs/matlab/straightLine/error-eps-converted-to.pdf us
+ed on input line 939.
+(pdftex.def)             Requested size: 146.54489pt x 118.0389pt.
+File: figs/logoBU1-Print.pdf Graphic file (type pdf)
+
+<use figs/logoBU1-Print.pdf>
+Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 939.
+(pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
+ [76
+
+ <./figs/matlab/straightLine/trajectory-eps-converted-to.pdf> <./figs/matlab/st
+raightLine/error-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <figs/matlab/inclinedLine/trajectory.eps>
+(epstopdf)                    date: 2019-09-27 10:05:40
+(epstopdf)                    size: 39255 bytes
+(epstopdf)             Output file: <figs/matlab/inclinedLine/trajectory-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2019-09-27 11:38:18
+(epstopdf)                    size: 15252 bytes
+(epstopdf)             Command: <repstopdf --outfile=figs/matlab/inclinedLine/t
+rajectory-eps-converted-to.pdf figs/matlab/inclinedLine/trajectory.eps>
+(epstopdf)             \includegraphics on input line 963.
+Package epstopdf Info: Output file is already uptodate.
+
+
+pdfTeX warning: pdflatex (file ./figs/matlab/inclinedLine/trajectory-eps-conver
+ted-to.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> 
+allowed
+
+<figs/matlab/inclinedLine/trajectory-eps-converted-to.pdf, id=2490, 364.36125pt
+ x 307.1475pt>
+File: figs/matlab/inclinedLine/trajectory-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use figs/matlab/inclinedLine/trajectory-eps-converted-to.pdf>
+Package pdftex.def Info: figs/matlab/inclinedLine/trajectory-eps-converted-to.p
+df used on input line 963.
+(pdftex.def)             Requested size: 145.74191pt x 122.85681pt.
+Package epstopdf Info: Source file: <figs/matlab/inclinedLine/error.eps>
+(epstopdf)                    date: 2019-09-27 10:05:41
+(epstopdf)                    size: 56570 bytes
+(epstopdf)             Output file: <figs/matlab/inclinedLine/error-eps-convert
+ed-to.pdf>
+(epstopdf)                    date: 2019-09-27 11:38:18
+(epstopdf)                    size: 15873 bytes
+(epstopdf)             Command: <repstopdf --outfile=figs/matlab/inclinedLine/e
+rror-eps-converted-to.pdf figs/matlab/inclinedLine/error.eps>
+(epstopdf)             \includegraphics on input line 963.
+Package epstopdf Info: Output file is already uptodate.
+
+
+pdfTeX warning: pdflatex (file ./figs/matlab/inclinedLine/error-eps-converted-t
+o.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allow
+ed
+
+<figs/matlab/inclinedLine/error-eps-converted-to.pdf, id=2491, 370.38374pt x 29
+6.10625pt>
+File: figs/matlab/inclinedLine/error-eps-converted-to.pdf Graphic file (type pd
+f)
+ <use figs/matlab/inclinedLine/error-eps-converted-to.pdf>
+Package pdftex.def Info: figs/matlab/inclinedLine/error-eps-converted-to.pdf us
+ed on input line 963.
+(pdftex.def)             Requested size: 148.15086pt x 118.44038pt.
+File: figs/logoBU1-Print.pdf Graphic file (type pdf)
+
+<use figs/logoBU1-Print.pdf>
+Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 963.
+(pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
+ [77
+
+ <./figs/matlab/inclinedLine/trajectory-eps-converted-to.pdf> <./figs/matlab/in
+clinedLine/error-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <figs/matlab/rectLinear/trajectory.eps>
+(epstopdf)                    date: 2019-09-27 10:01:37
+(epstopdf)                    size: 39837 bytes
+(epstopdf)             Output file: <figs/matlab/rectLinear/trajectory-eps-conv
+erted-to.pdf>
+(epstopdf)                    date: 2019-09-27 11:40:39
+(epstopdf)                    size: 14789 bytes
+(epstopdf)             Command: <repstopdf --outfile=figs/matlab/rectLinear/tra
+jectory-eps-converted-to.pdf figs/matlab/rectLinear/trajectory.eps>
+(epstopdf)             \includegraphics on input line 986.
+Package epstopdf Info: Output file is already uptodate.
+
+
+pdfTeX warning: pdflatex (file ./figs/matlab/rectLinear/trajectory-eps-converte
+d-to.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> al
+lowed
+
+<figs/matlab/rectLinear/trajectory-eps-converted-to.pdf, id=2528, 368.37625pt x
+ 307.1475pt>
+File: figs/matlab/rectLinear/trajectory-eps-converted-to.pdf Graphic file (type
+ pdf)
+ <use figs/matlab/rectLinear/trajectory-eps-converted-to.pdf>
+Package pdftex.def Info: figs/matlab/rectLinear/trajectory-eps-converted-to.pdf
+ used on input line 986.
+(pdftex.def)             Requested size: 147.34789pt x 122.85681pt.
+Package epstopdf Info: Source file: <figs/matlab/rectLinear/error.eps>
+(epstopdf)                    date: 2019-09-27 10:01:38
+(epstopdf)                    size: 57231 bytes
+(epstopdf)             Output file: <figs/matlab/rectLinear/error-eps-converted
+-to.pdf>
+(epstopdf)                    date: 2019-09-27 11:40:39
+(epstopdf)                    size: 17485 bytes
+(epstopdf)             Command: <repstopdf --outfile=figs/matlab/rectLinear/err
+or-eps-converted-to.pdf figs/matlab/rectLinear/error.eps>
+(epstopdf)             \includegraphics on input line 986.
+Package epstopdf Info: Output file is already uptodate.
+
+
+pdfTeX warning: pdflatex (file ./figs/matlab/rectLinear/error-eps-converted-to.
+pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+<figs/matlab/rectLinear/error-eps-converted-to.pdf, id=2529, 374.39874pt x 298.
+11375pt>
+File: figs/matlab/rectLinear/error-eps-converted-to.pdf Graphic file (type pdf)
+
+ <use figs/matlab/rectLinear/error-eps-converted-to.pdf>
+Package pdftex.def Info: figs/matlab/rectLinear/error-eps-converted-to.pdf used
+ on input line 986.
+(pdftex.def)             Requested size: 149.75684pt x 119.24338pt.
+File: figs/logoBU1-Print.pdf Graphic file (type pdf)
+
+<use figs/logoBU1-Print.pdf>
+Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 986.
+(pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
+ [78
+
+ <./figs/matlab/rectLinear/trajectory-eps-converted-to.pdf> <./figs/matlab/rect
+Linear/error-eps-converted-to.pdf>]
+File: figs/logoBU1-Print.pdf Graphic file (type pdf)
+
+<use figs/logoBU1-Print.pdf>
+Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 995.
+(pdftex.def)             Requested size: 21.33955pt x 7.11151pt.
+ [79
 
 ]
 \tf@nav=\write6
@@ -2024,12 +2274,11 @@ Package pdftex.def Info: figs/logoBU1-Print.pdf used on input line 871.
 \tf@snm=\write8
 \openout8 = `presentation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 873.
-Package atveryend Info: Executing hook `AfterLastShipout' on input line 873.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 997.
+Package atveryend Info: Executing hook `AfterLastShipout' on input line 997.
+ (./presentation.aux
 
-(./presentation.aux
-
-Package atenddvi Warning: Rerun LaTeX, last page has changed.
+Package atenddvi Warning: Rerun LaTeX, last page not yet found.
 
 *************************************************
 * media9 warning: "rerun"
@@ -2037,10 +2286,10 @@ Package atenddvi Warning: Rerun LaTeX, last page has changed.
 * Rerun to get internal references right!
 *************************************************
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 873.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 873.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 997.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 997.
 Package rerunfilecheck Info: File `presentation.out' has not changed.
-(rerunfilecheck)             Checksum: 1C4EDA6E0B611405211E133BB870F166;2435.
+(rerunfilecheck)             Checksum: EE4087C8BDC9C645A862EEDDD40499FE;2613.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -2049,34 +2298,37 @@ LaTeX Font Warning: Size substitutions with differences
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 873.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 997.
  ) 
 Here is how much of TeX's memory you used:
- 29366 strings out of 493029
- 592974 string characters out of 6136234
- 628516 words of memory out of 5000000
- 32130 multiletter control sequences out of 15000+600000
+ 29472 strings out of 493029
+ 595417 string characters out of 6136234
+ 629241 words of memory out of 5000000
+ 32204 multiletter control sequences out of 15000+600000
  13160 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,16n,74p,10374b,932s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmssi17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mssi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on presentation.pdf (70 pages, 11558507 bytes).
+pdfTeX warning (dest): name{Navigation80} has been referenced but does not ex
+ist, replaced by a fixed one
+
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmssi17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+si8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on presentation.pdf (79 pages, 11917682 bytes).
 PDF statistics:
- 2386 PDF objects out of 2487 (max. 8388607)
- 2196 compressed objects within 22 object streams
- 192 named destinations out of 1000 (max. 500000)
- 687 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2692 PDF objects out of 2984 (max. 8388607)
+ 2476 compressed objects within 25 object streams
+ 216 named destinations out of 1000 (max. 500000)
+ 739 words of extra memory for PDF output out of 10000 (max. 10000000)
 

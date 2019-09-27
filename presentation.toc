@@ -36,3 +36,6 @@
 \beamer@sectionintoc {30}{Model Free Reinforcement Learning Algorithm}{67}{8}{25}
 \beamer@sectionintoc {31}{Results}{68}{8}{26}
 \beamer@sectionintoc {32}{Future work}{69}{8}{27}
+\beamer@sectionintoc {34}{Problem Setup}{73}{9}{28}
+\beamer@sectionintoc {35}{Model Free RL Algorithm}{74}{9}{29}
+\beamer@sectionintoc {36}{Results}{76}{9}{30}

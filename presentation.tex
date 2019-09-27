@@ -1,4 +1,4 @@
-% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+	% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
 %
 % In principle, this file can be redistributed and/or modified under
 % the terms of the GNU Public License, version 2.
@@ -869,7 +869,131 @@ Questions?
 \end{center}
 \end{LARGE}
 \end{frame}
-%---------------------
+%------------------
+\part{7}
+\title{Area Coverage Optimization}
+\subtitle{Progress Report}
+\date[Sep~27,~2019]{Friday, September~27,~2019}
+%\author{Main Author and others}
+\begin{frame}
+\maketitle
+\end{frame}
+%---------------------------------
+\begin{frame}{Outline}
+  \tableofcontents
+  \end{frame}
+%-------------------------------
+\section{Problem Setup}
+\begin{frame}{Problem setup}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.8]{figs/img/LF-Setup.eps}
+\caption{Leader Follower Problem setup}
+\end{figure}
+\end{center}
+\end{frame}
+%------------------------------
+\section{Model Free RL Algorithm}
+\begin{frame}{Model Free RL Algorithm}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.13]{figs/img/algorithm1}
+\caption{Model Free Reinforcment Learnging Algorithm}
+\end{figure}
+\end{center}
+\end{frame}
+%-------------------
+
+\begin{frame}{Model Free RL Algorithm}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.15]{figs/img/criticNeuralNetwork}
+\caption{Critic Neural Netowrk Structure}
+\end{figure}
+\end{center}
+\end{frame}
+%----------------------------
+\section{Results}
+\begin{frame}{Results}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\includegraphics[scale=0.4]{figs/matlab/straightLine/trajectory.eps}
+\caption{Trajectory}
+\end{figure}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{center}
+
+\begin{figure}
+\includegraphics[scale=0.4]{figs/matlab/straightLine/error.eps}
+\caption{follower position error}
+\end{figure}
+\end{center}
+
+\end{column}
+
+\end{columns}
+
+\end{frame}
+%-----------------------------------------------
+\begin{frame}{Results}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\includegraphics[scale=0.4]{figs/matlab/inclinedLine/trajectory.eps}
+\caption{Trajectory}
+\end{figure}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{center}
+
+\begin{figure}
+\includegraphics[scale=0.4]{figs/matlab/inclinedLine/error.eps}
+\caption{follower position error}
+\end{figure}
+\end{center}
+
+\end{column}
+
+\end{columns}
+
+\end{frame}
+%----------------------------------
+\begin{frame}{Results}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\includegraphics[scale=0.4]{figs/matlab/rectLinear/trajectory.eps}
+\caption{Trajectory}
+\end{figure}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{center}
+
+\begin{figure}
+\includegraphics[scale=0.4]{figs/matlab/rectLinear/error.eps}
+\caption{follower position error}
+\end{figure}
+\end{center}
+
+\end{column}
+
+\end{columns}
+\end{frame}
+%--------------------
+\section*{Questions}
+\begin{frame}
+\begin{LARGE}
+\begin{center}
+Questions?
+\end{center}
+\end{LARGE}
+\end{frame}
+%------
 \end{document}
 
 
