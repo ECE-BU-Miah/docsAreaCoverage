@@ -54,4 +54,5 @@ Thumbs.db
 
 # Windows generated files #
 ######################
-Icon*
+Icon?
+desktop.ini
