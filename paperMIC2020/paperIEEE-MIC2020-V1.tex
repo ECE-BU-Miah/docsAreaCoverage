@@ -159,7 +159,7 @@ We then define the error vector as:
  \label{eq:costFunctional}
  J = \sum_{k=0}^\infty \frac{1}{2}\left[{\bf e}_k^T \, {\bf Q} \, {\bf e}_k + {\bf u}_k^T \, {\bf R} \, {\bf u_k}\right],
  \end{align}    
- where ${\bf Q}\in\mathbb{R}^{3\times 3}$ and ${\bf R}\in\mathbb{R}^{2\times 2}$ are symmetric positive definite weighting matrices. The objective of the optimization problem, following~\cite{Lewis2013-Reinforcement}, is to find an optimal sequence of control polices $\{\mathbf{u}^*_k\}_{k=0}^\infty$ that minimizes the cost index $J$ along the state-trajectories~\eqref{eq:leaderDT}~and~\eqref{eq:robotModel1-DT}. Motivated by the structure of the convex quadratic cost functional~\eqref{eq:costFunctional}, let the solution of the tracking control problem employ the value function $V({\bf e}_k,{\bf u}_k)$ defined by %
+ where ${\bf Q}\in\mathbb{R}^{2\times 2}$ and ${\bf R}\in\mathbb{R}^{2\times 2}$ are symmetric positive definite weighting matrices. The objective of the optimization problem, following~\cite{Lewis2013-Reinforcement}, is to find an optimal sequence of control polices $\{\mathbf{u}^*_k\}_{k=0}^\infty$ that minimizes the cost index $J$ along the state-trajectories~\eqref{eq:leaderDT}~and~\eqref{eq:robotModel1-DT}. Motivated by the structure of the convex quadratic cost functional~\eqref{eq:costFunctional}, let the solution of the tracking control problem employ the value function $V({\bf e}_k,{\bf u}_k)$ defined by %
  %
  \begin{equation*}
  \label{eq:valueFunction}
@@ -196,8 +196,8 @@ We then define the error vector as:
  \label{eq:valueFunctionEstimated}
  \end{align}
  %
- where $\mathbf{z}_k = \left[\mathbf{e}_k ,\mathbf{u}_k\right]^T\in\mathbb{R}^5,$ $V\left(\mathbf{e}_k,\mathbf{u}_k\right) \approx \hat{V}(\mathbf{z}_k),$  and $\bar{\mathbf{P}}$ is a symmetric block-diagonal matrix formed using $(\mathbf{Q},\mathbf{R}),$~\textit{i.e.,~}$\bar{\mathbf{P}} = \mathrm{blockdiag}(\mathbf{Q},\mathbf{R}).$ %
- The approximation of the solving value function $\hat{V}(\mathbf{z}_k)$ employs a quadratic form so that $\hat{V}(\mathbf{z}_k)=\frac{1}{2}\mathbf{z}_k^T\, \mathbf{P}\, \mathbf{z}_k,$ where $\mathbf{P}\in\mathbb{R}^{5\times 5}$ is a positive definite matrix. Hence, the optimal control strategy $\mathbf{u}_k^*$ can be expressed as follows %
+ where $\mathbf{z}_k = \left[\mathbf{e}_k ,\mathbf{u}_k\right]^T\in\mathbb{R}^4,$ $V\left(\mathbf{e}_k,\mathbf{u}_k\right) \approx \hat{V}(\mathbf{z}_k),$  and $\bar{\mathbf{P}}$ is a symmetric block-diagonal matrix formed using $(\mathbf{Q},\mathbf{R}),$~\textit{i.e.,~}$\bar{\mathbf{P}} = \mathrm{blockdiag}(\mathbf{Q},\mathbf{R}).$ %
+ The approximation of the solving value function $\hat{V}(\mathbf{z}_k)$ employs a quadratic form so that $\hat{V}(\mathbf{z}_k)=\frac{1}{2}\mathbf{z}_k^T\, \mathbf{P}\, \mathbf{z}_k,$ where $\mathbf{P}\in\mathbb{R}^{4\times 4}$ is a positive definite matrix. Hence, the optimal control strategy $\mathbf{u}_k^*$ can be expressed as follows %
  %
  \begin{align}
  \label{eq:modelFreePolicy}    
@@ -315,11 +315,11 @@ We then define the error vector as:
  \mathbf{z}_k^T\, \mathbf{P}\, \mathbf{z}_k - \mathbf{z}_{k+1}^T\, \mathbf{P}\, \mathbf{z}_{k+1} = \mathbf{z}_k^T\, \bar{\mathbf{P}}\, \mathbf{z}_k. 
  \end{equation}
  %
- This equation is utilized repeatedly in order to evaluate a certain policy during at least $\eta\ge \bar n, \bar n= (3+2)(3+2+1)/2$ evaluation steps (i.e., the lowest evaluation interval spans $k$ to $k+\bar n$ calculation samples) in order to update the critic weights vector  $\boldsymbol{\omega}=\mathrm{vec}(\mathbf{P}),$ which consists of connection weights between the neurons of the hidden layer and the output layer of the critic neural network shown in Fig.~\eqref{fig:nnCritic}. The operator $\mathrm{vec}(\mathbf{P})$ forms the columns of the $\mathbf{P}$ matrix into a column vector $\mathbf{\omega}$ of dimension $\bar{n}=15$ since the matrix $\mathbf{P}$ is a symmetric matrix. The left hand side of~\eqref{eq:const} is expressed using the following critic approximation form %
+ This equation is utilized repeatedly in order to evaluate a certain policy during at least $\eta\ge \bar n, \bar n= (2+2)(2+2+1)/2$ evaluation steps (i.e., the lowest evaluation interval spans $k$ to $k+\bar n$ calculation samples) in order to update the critic weights vector  $\boldsymbol{\omega}=\mathrm{vec}(\mathbf{P}),$ which consists of connection weights between the neurons of the hidden layer and the output layer of the critic neural network shown in Fig.~\eqref{fig:nnCritic}. The operator $\mathrm{vec}(\mathbf{P})$ forms the columns of the $\mathbf{P}$ matrix into a column vector $\mathbf{\omega}$ of dimension $\bar{n}=15$ since the matrix $\mathbf{P}$ is a symmetric matrix. The left hand side of~\eqref{eq:const} is expressed using the following critic approximation form %
  %
  $$\hat{V}(\mathbf{z}_k)-\hat{V}(\mathbf{z}_{k+1})=\boldsymbol{\omega}^T\tilde{\bm{\rho}}(\mathbf{z}_{k,k+1}),$$
  %
- where $\tilde{\bm{\rho}}(\mathbf{z}_{k,k+1})=\bm{\rho}(\mathbf{z}_k)-\bm{\rho}(\mathbf{z}_{k+1}) \in \mathbb{R}^{15 \times 1}, \, \bm{\rho}(\mathbf{z}_k)=\left(\mathbf{z}^q_k\otimes\mathbf{z}^h_k\right)$ $(q=1,\dots, 5, \,\, h=q,\dots,5),$ and $\boldsymbol{\omega}^T = [0.5 \, P^{11},P^{12},P^{13},P^{14}, P^{15}, \, 0.5 \, P^{22}, P^{23},P^{24},P^{25},$ $\,0.5 \, P^{33}, P^{34},P^{35},\,0.5 \, P^{44},P^{45}, \,0.5 \, P^{55}]^T \in \mathbb{R}^{1\times 15}$ ($P^{ij}$ is the $ij^{th}$ entry of matrix $\mathbf{P}$). %
+ where $\tilde{\bm{\rho}}(\mathbf{z}_{k,k+1})=\bm{\rho}(\mathbf{z}_k)-\bm{\rho}(\mathbf{z}_{k+1}) \in \mathbb{R}^{10 \times 1}, \, \bm{\rho}(\mathbf{z}_k)=\left(\mathbf{z}^q_k\otimes\mathbf{z}^h_k\right)$ $(q=1,\dots, 5, \,\, h=q,\dots,5),$ and $\boldsymbol{\omega}^T = [0.5 \, P^{11},P^{12},P^{13},P^{14},  \, 0.5 \, P^{22}, P^{23},P^{24},$ $\,0.5 \, P^{33}, P^{34},\,0.5 \ P^{44}, ]^T \in \mathbb{R}^{1\times 15}$ ($P^{ij}$ is the $ij^{th}$ entry of matrix $\mathbf{P}$). %
  %
  The critic weights $\boldsymbol{\omega}$ are updated using a gradient descent approach, where the tuning error $\varepsilon_k$ at each computational instance $k$ follows $\varepsilon_k =\boldsymbol{\omega}^T\tilde{\bm{\rho}}(\mathbf{z}_{k,k+1})-{v}_k,$ where $v_\kappa = \frac{1}{2}\mathbf{z}_{k}^T \, \bar{\mathbf{P}} \, \mathbf{z}_{k}$. As detailed earlier, it is required to perform at least $\eta \ge \bar n$ evaluation steps before updating the critic weights $\boldsymbol{\omega}$ (i.e., finding the new improved policy). Hence, it is required to minimize the sum of square errors such that %
  %
@@ -341,18 +341,31 @@ We then define the error vector as:
  %
  \begin{center}
  ${\bf P}=\begin{bmatrix} 
- 2\,\omega^{1}    & \omega^{2}      & \omega^{3}       & \omega^{4}       & \omega^{5} \\ 
- \omega^{2}       &2\, \omega^{6}   & \omega^{7}       & \omega^{8}       & \omega^{9} \\
- \omega^{3}       & \omega^{7}      &2\, \omega^{10}   & \omega^{11}      & \omega^{12} \\
- \omega^{4}       & \omega^{8}      & \omega^{11}      & 2\,\omega^{13}   & \omega^{14} \\
- \omega^{5}       & \omega^{9}      & \omega^{12}      & \omega^{14}      & 2\,\omega^{15}   
- \end{bmatrix}\in \mathbb{R}^{5\times 5},$
+ 2\,\omega^{1}    & \omega^{2}      & \omega^{3}       & \omega^{4}        \\ 
+ \omega^{2}       &2\, \omega^{5}   & \omega^{6}       & \omega^{7}        \\
+ \omega^{3}       & \omega^{6}      &2\, \omega^{8}   & \omega^{9}   \\   
+ \omega^{4}       & \omega^{7}      & \omega^{9}      & 2\,\omega^{10}      
+ \end{bmatrix}\in \mathbb{R}^{4\times 4},$
  \end{center}
  %
- where $\omega^{i}$ is the $i^{th}$ entry of the weight vector $\bm{\omega}.$ The complete policy iteration solution process for the leader-follower problem is detailed out in Algorithm \ref{alg:ModelFreeTracking}. %
+ where $\omega^{i}$ is the $i^{th}$ entry of the weight vector $\bm{\omega}.$ 
+ \todo[inline]{merge the actor weights discussion with the rest}
+ The critic wegihts are then used to update the actor weights which maps the state error to the desired ploicy (control actions) at every time step $t$ with the following equation:
+ \begin{align}
+ \label{eq:actorWeightsPolicy}    
+ \mathbf{u}_k  =  \mathbf{\omega_a^{T}} \mathbf{e}_k
+ \end{align}   
+ Applying a similar gradient descent approach as with the critic weights the actor weights are updated as follows:
+\begin{align}
+   \bm{\omega_a}^{[r+1]} = \bm{\omega}^{[r]} - \ell_a(\mathbf{u}_k-\mathbf{u}_k^*)\mathbf{e}_k, 
+ \label{eq:actorWeights}
+ \end{align}
+ where $\ell$ is the actor learning rate. 
+ \\
+ The complete policy iteration solution process for the leader-follower problem is detailed out in Algorithm \ref{alg:ModelFreeTracking}. %
  %
  \begin{algorithm2e}
-     \caption{\label{alg:ModelFreeTracking} Model-free reinforcement learning using the policy iteration solution.}
+     \caption{\label{alg:ModelFreeTracking} Model-free actor-critic reinforcement learning using the policy iteration solution.}
      \DontPrintSemicolon
      \KwIn{Sampling-time $T_s,$ $\mathbf{Q},~\text{and}~\mathbf{R}$ }
      \KwOut{Error trajectory $\mathbf{e}_k,$ for $k=0,1,\ldots$}
@@ -364,17 +377,18 @@ We then define the error vector as:
          Initialize $\mathbf{P}^{[0]}$ \tcc*[h]{Positive definite}\;
                  Set offset distance $d$\;
                  Given approximate initial poses of leader and follower, compute $\mathbf{e}_0$ using error model~\eqref{eq:stateError}\;
-                 Compute follower's input $\mathbf{u}_0^{[0]}$ using policy~\eqref{eq:modelFreePolicy}\;
+                 Compute follower's input $\mathbf{u}_0^{[0]}$ using policy~\eqref{eq:actorWeightsPolicy}\;
          \Repeat(\tcc*[h]{Main timing loop}){Tracking errors are zero}
          {
              Find $\mathbf{e}_{k+1}$ using~\eqref{eq:stateError}\;
-             Compute policy $\mathbf{u}_{k+1}^{[r]}$ using~\eqref{eq:modelFreePolicy}\;
+             Compute policy $\mathbf{u}_{k+1}^{[r]}$ using~\eqref{eq:actorWeightsPolicy}\;
              %Evaluate and record Equation~\eqref{eq:modelFreeMatrixSolution}\;
              \If{[$(k+1)~\mathrm{modulo}~\eta]==0$ }
              {
-                 $r\leftarrow r+1$\tcc*[h]{Evaluate policy}\;
-                 Solve for the critic-weights $\bm{\omega}$ using~\eqref{eq:criticWeights}\;
-                 Construct matrix $\mathbf{P}^{[r]}$ using vector $\bm{\omega}$\;
+                 $r\leftarrow r+1$\tcc*[h]{Evaluate policy}using~\eqref{eq:modelFreePolicy}\;
+                 Solve for the critic-weights $\bm{\omega_c}$ using~\eqref{eq:criticWeights}\;
+                 Solve for the actor-weights $\bm{\omega_a}$ using ~\eqref{eq:actorWeights}\;\;
+                 Construct matrix $\mathbf{P}^{[r]}$ using vector $\bm{\omega_c}$\;
  %                \eIf{$\|\mathbf{P}^{[r]} - \mathbf{P}^{[r+1]}\|<\varepsilon$}{Set $\mathbf{u}_{k+1}^*\leftarrow\mathbf{u}_{k+1}^{[r]}$}{$k\leftarrow k+1$ }
              }
  %        {
