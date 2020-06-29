@@ -45,7 +45,7 @@ M = 2;  % input vector dimension
 
 
 % Leader's initial position
-pLeaderInit = [1;1]+rand(2,1); %[m]
+pLeaderInit = [-5;1]+rand(2,1); %[m]
 pLeaderTheta= 0; %[rad]
 
 QD(1,:) = [pLeaderInit' pLeaderTheta];
@@ -75,7 +75,7 @@ P = [1.0  0.0   0.5   0.2;
        0.0   1.0   0.2  0.5;
        0.5   0.2   1.0   0.0;
        0.2   0.5   0.0   1.0];
- P = 2*P+5*rand;
+ P = P+2*rand;
 % P = eye(4);
 %    P = [1.0  0.0   1.0   0.2;
 %        0.0   1.0   0.2  1.0;
@@ -97,7 +97,7 @@ lc = 0.0001; %learnging rate
 la= 0.01; %actor learning rate
 
 %initlize actor weights
-Wa=0.2*rand(2,2);
+Wa=0.1*rand(2,2);
 
 %reconstruct the P matrix to get the wheights matrix
  w(1,1) = 0.5 * P(1,1);
@@ -136,10 +136,10 @@ msg_1.Z = 0;
 send(vpub_1,msg_1);
 
 %limit control inputs 
-u(1,1) = sign(u(1,1))*min(vMax,abs(u(1,1)));%limiting the linear speed 
-if u(1,2)<80*pi/180 | u(1,2)<-80*pi/180 
-    u(1,2) = sign(u(1,2))*min(80*(pi/180),abs(u(1,2)));%limiting the steering angle
-end
+% u(1,1) = sign(u(1,1))*min(vMax,abs(u(1,1)));%limiting the linear speed 
+% if u(1,2)<80*pi/180 | u(1,2)<-80*pi/180 
+%     u(1,2) = sign(u(1,2))*min(80*(pi/180),abs(u(1,2)));%limiting the steering angle
+% end
 
 uk = u(1,:)';
 z(1,:) = [trackingError(1,:) u(1,:)];    
@@ -160,15 +160,59 @@ end
 kappa = 1;  % data collection index 
 indexWeight= 1;
 for k = 1:tsteps    % Main timing loop, k = time index
-   %Receiving robot_1's current pose
+   
+    %Receiving robot_1's current pose
     posedata_1 = receive(posesub_1,10);
     qInit=[posedata_1.X,posedata_1.Y,posedata_1.Z];
 
-    %generating random path for the leader
-    pLeaderTheta=0;
-    pKPlus1 =  pk + T*[vLeader*cos(pLeaderTheta);vLeader*sin(pLeaderTheta)];
-    QD(k+1,:) = [pKPlus1' pLeaderTheta];    
-    pk = pKPlus1;
+    
+   %generating random path for the leader
+    if k == 1
+         pLeaderTheta = pi2pi(pLeaderTheta + 0.1*rand);
+    end
+    if k == tsteps/4  % change orientation of the leader
+        
+         pLeaderTheta = pi2pi(pLeaderTheta-0.1*rand);
+%         figure 
+%         plot(dt(1:k),trackingError(:,1))
+%         hold on
+%         plot(dt(1:k),trackingError(:,2))
+%         hold on
+%         plot(dt(1:k),trackingError(:,3))
+%         tt =1;
+        
+    end
+   
+    if k == tsteps/2 % change orientation of the leader
+    
+         pLeaderTheta = pLeaderTheta+0.1*rand;
+%           figure 
+%         plot(dt(1:k),trackingError(:,1))
+%         hold on
+%         plot(dt(1:k),trackingError(:,2))
+%         hold on
+%         plot(dt(1:k),trackingError(:,3))
+%         tt = 1 ;
+    end
+    
+    
+        if k ==3* tsteps/4 % change orientation of the leader
+            pLeaderTheta = pLeaderTheta-0.1*rand;
+%             figure 
+%             plot(dt(1:k),trackingError(:,1))
+%             hold on
+%             plot(dt(1:k),trackingError(:,2))
+%             hold on
+%             plot(dt(1:k),trackingError(:,3))
+%             tt=1;
+        end
+%     pLeaderTheta=0;
+    uLeader=[vLeader pLeaderTheta];
+    QD(k+1,:)=DDMR_modelEuler(uLeader,QDinit',T);
+    QDinit = QD(k+1,:);
+%     pKPlus1 =  pk + T*[vLeader*cos(pLeaderTheta);vLeader*sin(pLeaderTheta)];
+%     QD(k+1,:) = [pKPlus1' pLeaderTheta];    
+%     pk = pKPlus1;
 %     uLeader=[vLeader pi/4];
     
     %update leader/target's position
@@ -183,8 +227,8 @@ for k = 1:tsteps    % Main timing loop, k = time index
     trackingError(k+1,:) = [sqrt(ex^2+ey^2), pi2pi(thetaPrime(k+1,:)-q(k+1,3))] ;
     u(k+1,:) = Wa*trackingError(k+1,:)';%finding the policy
     %limit control inputs 
-    u(k+1,1) = sign(u(k+1,1))*min(vMax,abs(u(k+1,1)));%limiting the linear speed 
-    u(k+1,2) = sign(u(k+1,2))*min(80*(pi/180),abs(u(k+1,2)));%limiting the steering angle
+%     u(k+1,1) = sign(u(k+1,1))*min(vMax,abs(u(k+1,1)));%limiting the linear speed 
+%     u(k+1,2) = sign(u(k+1,2))*min(80*(pi/180),abs(u(k+1,2)));%limiting the steering angle
     uk = u(k+1,:)';
     %CALCULATE WHEEL SPEED
     gammak=u(k+1,2);
@@ -317,7 +361,7 @@ print('-depsc2', '-r300', [savefilename, '.eps']);
 % Plot system's performance (trajectory, state error, control inputs)
 Pinit
 P
-generatePlots(length(dt), dt(1:k,:), followerPose(1:k,:) , leaderPose(1:k,:), poseError(1:k,:), u(1:k,:));
+generatePlots(length(dt), dt(1:k,:), followerPose(1:k,:) , leaderPose(1:k,:), poseError(1:k,:), u(1:k,:),trackingError(1:k,:));
 disp('... done.');
 
 
@@ -366,7 +410,7 @@ angle(i)=angle(i)-2*pi;
 i=find(angle<-pi);
 angle(i)=angle(i)+2*pi;
 
-function generatePlots(Tn, t, actualStates, desiredStates, error, u)    
+function generatePlots(Tn, t, actualStates, desiredStates, error, u,trackingError)    
     %close all; % close all opened figures
     % Tn = number of discrete time/path parameter points 
     % t = time/path parameter history, dimension = Tn x 1 
@@ -401,10 +445,10 @@ function generatePlots(Tn, t, actualStates, desiredStates, error, u)
     ymax = max(max(actualStates(:,2),desiredStates(:,2)));
     ymin = min(min(actualStates(:,2),desiredStates(:,2)));
           
-    vid = VideoWriter('OUT/trajectoryRectilinear.avi');
+%     vid = VideoWriter('OUT/trajectoryRectilinear.avi');
     vid.Quality = 100;
     vid.FrameRate = 5;
-    open(vid)
+%     open(vid)
     
     fig=figure;
     clf reset;    
@@ -432,7 +476,7 @@ function generatePlots(Tn, t, actualStates, desiredStates, error, u)
         xlabel('x [m]');
         ylabel('y [m]');
         F = getframe(fig);
-        writeVideo(vid,F);          
+%         writeVideo(vid,F);          
     end
     [Xa,Ya] = plot_DDMR(actualStates(1,:),axis(gca)); % DDMR => Differential drive mobile robot
     grid on
@@ -469,8 +513,19 @@ function generatePlots(Tn, t, actualStates, desiredStates, error, u)
     ylabel('\theta_e [rad]');
     grid on
     
-
+    %plot euclidean distance rho_e
+    
     savefilename = ['OUT/stateErrorRandomPathDistance'];
+    saveas(gcf, savefilename, 'fig');
+    print('-depsc2', '-r300', [savefilename, '.eps']);
+    
+    
+    figure
+    plot(t,trackingError(:,1), 'k-','LineWidth', 1.5);   
+    xlabel('Time [s]');
+    ylabel('\rho_e');        
+    grid on
+    savefilename = ['OUT/euclideanDistance'];
     saveas(gcf, savefilename, 'fig');
     print('-depsc2', '-r300', [savefilename, '.eps']);
     
