@@ -317,7 +317,7 @@ print('-depsc2', '-r300', [savefilename, '.eps']);
 % Plot system's performance (trajectory, state error, control inputs)
 Pinit
 P
-generatePlots(length(dt), dt(1:k,:), followerPose(1:k,:) , leaderPose(1:k,:), poseError(1:k,:), u(1:k,:));
+generatePlots(length(dt), dt(1:k,:), followerPose(1:k,:) , leaderPose(1:k,:), poseError(1:k,:), u(1:k,:),trackingError(1:k,:));
 disp('... done.');
 
 
@@ -366,7 +366,7 @@ angle(i)=angle(i)-2*pi;
 i=find(angle<-pi);
 angle(i)=angle(i)+2*pi;
 
-function generatePlots(Tn, t, actualStates, desiredStates, error, u)    
+function generatePlots(Tn, t, actualStates, desiredStates, error, u,trackingError)    
     %close all; % close all opened figures
     % Tn = number of discrete time/path parameter points 
     % t = time/path parameter history, dimension = Tn x 1 
@@ -401,10 +401,10 @@ function generatePlots(Tn, t, actualStates, desiredStates, error, u)
     ymax = max(max(actualStates(:,2),desiredStates(:,2)));
     ymin = min(min(actualStates(:,2),desiredStates(:,2)));
           
-    vid = VideoWriter('OUT/trajectoryRectilinear.avi');
+%     vid = VideoWriter('OUT/trajectoryRectilinear.avi');
     vid.Quality = 100;
     vid.FrameRate = 5;
-    open(vid)
+%     open(vid)
     
     fig=figure;
     clf reset;    
@@ -432,7 +432,7 @@ function generatePlots(Tn, t, actualStates, desiredStates, error, u)
         xlabel('x [m]');
         ylabel('y [m]');
         F = getframe(fig);
-        writeVideo(vid,F);          
+%         writeVideo(vid,F);          
     end
     [Xa,Ya] = plot_DDMR(actualStates(1,:),axis(gca)); % DDMR => Differential drive mobile robot
     grid on
@@ -469,8 +469,19 @@ function generatePlots(Tn, t, actualStates, desiredStates, error, u)
     ylabel('\theta_e [rad]');
     grid on
     
-
+    %plot euclidean distance rho_e
+    
     savefilename = ['OUT/stateErrorRandomPathDistance'];
+    saveas(gcf, savefilename, 'fig');
+    print('-depsc2', '-r300', [savefilename, '.eps']);
+    
+    
+    figure
+    plot(t,trackingError(:,1), 'k-','LineWidth', 1.5);   
+    xlabel('Time [s]');
+    ylabel('\rho_e');        
+    grid on
+    savefilename = ['OUT/euclideanDistance'];
     saveas(gcf, savefilename, 'fig');
     print('-depsc2', '-r300', [savefilename, '.eps']);
     

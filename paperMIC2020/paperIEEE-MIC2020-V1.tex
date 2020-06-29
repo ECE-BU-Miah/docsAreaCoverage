@@ -364,7 +364,7 @@ We then define the error vector as:
  \\
  The complete policy iteration solution process for the leader-follower problem is detailed out in Algorithm \ref{alg:ModelFreeTracking}. %
  %
- \begin{algorithm2e}
+ \begin{algorithm2e}{
      \caption{\label{alg:ModelFreeTracking} Model-free actor-critic reinforcement learning using the policy iteration solution.}
      \DontPrintSemicolon
      \KwIn{Sampling-time $T_s,$ $\mathbf{Q},~\text{and}~\mathbf{R}$ }
@@ -386,7 +386,7 @@ We then define the error vector as:
              \If{[$(k+1)~\mathrm{modulo}~\eta]==0$ }
              {
                  $r\leftarrow r+1$\tcc*[h]{Evaluate policy}using~\eqref{eq:modelFreePolicy}\;
-                 Solve for the critic-weights $\bm{\omega_c}$ using~\eqref{eq:criticWeights}\;
+                 Solve for the critic-weights $\bm{\omega_c}$ using~\eqref{eq:criticWeights}eights}\;
                  Solve for the actor-weights $\bm{\omega_a}$ using ~\eqref{eq:actorWeights}\;\;
                  Construct matrix $\mathbf{P}^{[r]}$ using vector $\bm{\omega_c}$\;
  %                \eIf{$\|\mathbf{P}^{[r]} - \mathbf{P}^{[r+1]}\|<\varepsilon$}{Set $\mathbf{u}_{k+1}^*\leftarrow\mathbf{u}_{k+1}^{[r]}$}{$k\leftarrow k+1$ }
@@ -432,16 +432,21 @@ We then define the error vector as:
  \subfigure[][]{%
     \label{fig:trajectoryRandom}%
     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/trajectoryRandomPathDistance.eps} }
+	\subfigure[][]{%    
+    \label{fig:euclideanDistance}%
+    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/euclideanDistance.eps} }
 \subfigure[][]{%
     \label{fig:stateErrorRandom}%
     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/stateErrorRandomPathDistance.eps} }
-\\
  \subfigure[][]{%
     \label{fig:controlInputsRandom}%
     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/controlInputRandomPathDistance.eps} }
  \subfigure[][]{%
     \label{fig:weightRandomDistance}%
     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/weightRandomPathDistance.eps} }
+     \subfigure[][]{%
+    \label{fig:actorWeightRandomDistance}%
+    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/weightActor.eps} }
 \caption[Leader-follower performance for random trajectory.]{Performance in tracking random trajectory: 
   \subref{fig:trajectoryRandom} leader-follower trajectories,~\subref{fig:stateErrorRandom} state error,~\subref{fig:controlInputsRandom} linear speed and steering angle of the follower; and    \subref{fig:weightRandomDistance} learning weights.}%
   \label{fig:peformanceRandomTrajectory}%
