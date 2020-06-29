@@ -35,7 +35,7 @@
 \IEEEauthorblockN{Amr Elhussein and Md Suruz Miah}
 \IEEEauthorblockA{\textit{Electrical \& Computer Eng.} \\
 \textit{Bradley University}, Peoria, Illinois, USA \\
-smiah@bradley.edu  and aelhussein@mail.bradley.edu}
+E-mails: aelhussein@mail.bradley.edu and smiah@bradley.edu}
 % \and
 % \IEEEauthorblockN{Fazel Keshtkar}
 % \IEEEauthorblockA{\textit{Div. of Computer Science, Math. and Science} \\
@@ -53,9 +53,11 @@ smiah@bradley.edu  and aelhussein@mail.bradley.edu}
 
 \begin{abstract}
   %
+  Addressing the trajectory tracking problem of a mobile robot in tracking a dynamic target is still one of the challenging problems in the field of robotics. In this paper, we address the position tracking problem of a mobile robot where it is supposed to track the position of an mobile target whose dynamics is unknown a priori. This problem is even more challenging when the dynamics of the mobile robot is also assumed to be unknown, which is a basically a realistic assumption. Most of trajectory tracking problems proposed in the literature in the field of mobile robotics are either focused on algorithms that rely on mathematical models of the robots or driven by a  overwhelming degree of computational complexity. This paper proposes a model-free actor-critic reinforcement learning strategy to determine appropriate actuator commands for the robot to track the position trajectory (unknown a priori) of the target. We emphasize that mathematical models of both mobile robot and the target are not required in the current approach. Moreover, Bellman's principle of optimality is utilized to minimize the energy required for the robot to track the target. The performance of the proposed actor-critic reinforcement learning approach  is backed by a set of computer simulations with various complexities using a virtual circular-shaped mobile robot and a point target  modeled by an integrator. 
 
-\comment{This paper advances the previous work done by authors by validating a model-free actor-critic reinforcement learning approach to solve dynamic target tracking problem for a car-like mobile robot. The learning approach generates the linear velocity and steering angle of the robot and it does not require any prior knowledge of the dynamic model of the moving target. Policy iteration approach is employed through Bellman's principle of optimality to assess the cost of the control actions derived by the proposed learning method. The algorithm is tested by coducting a set of computer expeeriments for complex secnarios using virtual robot expirementation platform widely known as CoppeliaSim.        
-}{Need to be rewritten}  
+%   It is even more challenging 
+% This paper advances the previous work done by authors by validating a model-free actor-critic reinforcement learning approach to solve dynamic target tracking problem for a car-like mobile robot. The learning approach generates the linear velocity and steering angle of the robot and it does not require any prior knowledge of the dynamic model of the moving target. Policy iteration approach is employed through Bellman's principle of optimality to assess the cost of the control actions derived by the proposed learning method. The algorithm is tested by coducting a set of computer expeeriments for complex secnarios using virtual robot expirementation platform widely known as CoppeliaSim.        
+% }{Need to be rewritten}  
 %
 \end{abstract}
 
@@ -88,8 +90,10 @@ Over the past years mobile robots has been used in several applications in comme
 
  
 
-%\textit{\todo[inline]{Take some references from the following paragraphs}
-%The task of localization and mapping in the context of leader-follower problems is very challenging. Such a task is becoming a ubiquitous  facet of modern life due to its promising application in addressing not only the leader-follower problem but also applicable in industry industry with heavy equipment trucks, in agriculture with autonomous crop maintenance, in home life with the autonomous vacuuming robot, along with research and design as seen in~\cite{Roberts2007,Durmus2015,Elara2014,HevrdejsKnoll2017-Indoor}.  In most leader-follower problem addressed in the literature to date, it is assumed that leader/target's position/state is known \textit{a priori}, which may not be the case in many applications such as tracking a mobile point source~\cite{Xu2013}. Furthermore, the localization and mapping task is of a paramount importance in addressing the problem of mobile target tracking, which has a number of promising applications, such as robotic navigation, search and rescue mission, wildlife monitoring, autonomous surveillance, to name a few. A large body of research has been conducted in the literature to address the localization and mapping problem. Relatively few papers have addressed the localization and mapping problem in the context of leader-follower tasks, where either (i) a static leader/target is used~\cite{Fernando2015}, (ii) the leader/target's location is predetermined, or (iii) expensive hardware platforms are used to implement the mobile target tracking strategy (see the work presented in~\cite{Yang2014}, for example). 
+\todo[inline]{Take some references from the following paragraphs}
+
+  Need to be rewritten some parts of~\cite{Mi2018-c1}
+  % The task of localization and mapping in the context of leader-follower problems is very challenging. Such a task is becoming a ubiquitous  facet of modern life due to its promising application in addressing not only the leader-follower problem but also applicable in industry industry with heavy equipment trucks, in agriculture with autonomous crop maintenance, in home life with the autonomous vacuuming robot, along with research and design as seen in~\cite{Roberts2007,Durmus2015,Elara2014,HevrdejsKnoll2017-Indoor}.  In most leader-follower problem addressed in the literature to date, it is assumed that leader/target's position/state is known \textit{a priori}, which may not be the case in many applications such as tracking a mobile point source~\cite{Xu2013}. Furthermore, the localization and mapping task is of a paramount importance in addressing the problem of mobile target tracking, which has a number of promising applications, such as robotic navigation, search and rescue mission, wildlife monitoring, autonomous surveillance, to name a few. A large body of research has been conducted in the literature to address the localization and mapping problem. Relatively few papers have addressed the localization and mapping problem in the context of leader-follower tasks, where either (i) a static leader/target is used~\cite{Fernando2015}, (ii) the leader/target's location is predetermined, or (iii) expensive hardware platforms are used to implement the mobile target tracking strategy (see the work presented in~\cite{Yang2014}, for example). 
 %
 %The work done in this paper addresses some of the aforementioned issues by carrying out a cost-effective and easy-to-implement localization and mapping algorithm in the context of a leader--follower problem, a wheeled mobile robot is employed as a follower and a target moving on a two-dimensional (2D) plane is used as a leader. We emphasize that the position of the  leader is unknown to the follower robot \emph{a priori.} Therefore, the position and orientation of the follower robot and the position of the leader are to be simultaneously estimated while building the map of the environment of the robot using a set of networked wireless radio sensors placed on the ground. It is assumed that a radio sensor is mounted on the leader. The follower robot receives range measurements [herein the received signal strength indicator (RSSI) from radio sensors] from all radio sensors in its operating range. These measurements are then used to estimate the position and orientation of the follower robot, the 2D position of the leader, and the 2D positions of radio sensors placed in the robot's environment. Once the follower robot estimates its states (position and orientation) and the position of the leader, it moves towards the leader using the motion controller running onboard the follower robot. The design and implementation of the current work are based on the preliminary work of the robot navigation and mapping strategy conducted by the authors in~\cite{HevrdejsKnoll2017-Indoor,KnHeMi2017-c1,HeKnMi2017-c1}. Therefore, the main objective is to advance the work in~\cite{HevrdejsKnoll2017-Indoor,KnHeMi2017-c1,HeKnMi2017-c1} for a more general case, where a mobile robot is to follow a leader  whose position is unknown \emph{a priori.}   
 %n}
@@ -205,104 +209,103 @@ We then define the error vector as:
  %
  where $\mathbf{P}_{uu}$ and $\mathbf{P}_{ue}$ are sub-blocks of symmetric matrix $\mathbf{P}.$ %   
  %
-
-% A two-step solution mechanism that is based on policy iteration is employed to solve the temporal difference equation~\eqref{eq:valueFunctionEstimated} using the policy~\eqref{eq:modelFreePolicy}. First, the adaptive critics are used to approximate the solving value function $\hat V(\cdot)$ using a multi-layer critic neural network as shown in Fig.~\ref{fig:nnCritic}. %
- %
-% \begin{figure}
-%     \centering
-%     \fcolorbox{blue}{gray!5}{
-%         \begin{adjustbox}{max width = 0.45\textwidth}
-%             \tikzset{%
-%                 input neuron/.style={
-%                     circle,
-%                     fill=green!50,
-%                     minimum size=0.7cm
-%                 },
-%                 neuron missing/.style={
-%                     draw=none, 
-%                     scale=1,
-%                     fill=white,
-%                     text height=0.01cm,
-%                     execute at begin node=\color{black}$\vdots$
-%                 },
-%             }
-%            
-%%             \tikzset{%
-%                 hidden neuron/.style={
-%                     circle,
-%                     fill=blue!50,
-%                     minimum size=0.7cm
-%                 },
-%                 neuron missing/.style={
-%                     draw=none, 
-%                     scale=1,
-%                     fill=white,
-%                     text height=0.01cm,
-%                     execute at begin node=\color{black}$\vdots$
-%                 },
-%
-%             }
-%            
-%%             \tikzset{%
-%                 output neuron/.style={
-%                     circle,
-%                     fill=red!50,
-%                     minimum size=0.7cm
-%                 },
-%                 neuron missing/.style={
-%                     draw=none, 
-%                     scale=1,
-%                     fill=white,
-%                     text height=0.01cm,
-%                     execute at begin node=\color{black}$\vdots$
-%                 },
-%             }
-%            
-%%             \begin{tikzpicture}[x=1.5cm, y=1.5cm]
-%            
-%%             \foreach \m/\l [count=\y] in {1,2,missing,3}
-%             \node [input neuron/.try, neuron \m/.try] (input-\m) at (0,2.5-\y) {};
-%            
-%%             \foreach \m [count=\y] in {1,2,3,missing,4}
-%             \node [hidden neuron/.try, neuron \m/.try ] (hidden-\m) at (2,2.5-\y*1.1) {};
-%            
-%%             \foreach \m [count=\y] in {1}
-%             \node [output neuron/.try, neuron \m/.try] (output-\m) at (4,2.5-\y*2.8) {};
-%            
-%%             \foreach \l [count=\i] in {1,2,n+m}
-%             \draw [<-] (input-\i) -- ++(-1,0)
-%             node [above, midway] {$\mathbf{z}_{k,\l}$};
-%            
-%%             \foreach \l [count=\i] in {1,2,3,~\mbox{$\bar{n}$}}
-%             \node [above] at (hidden-\i.north) {$\rho_{\l}$};
-%            
-%%             \foreach \l [count=\i] in {1}
-%             \draw [->] (output-\i) -- ++(1,0)
-%             node [above, midway] {$\hat{V}(\mathbf{z}_{k})$};
-%             % node [above, midway] {$\hat{V}_\l$};
-%            
-%%             \foreach \i in {1,...,3}
-%             \foreach \j in {1,...,4}
-%             \draw [->] (input-\i) -- (hidden-\j);
-%            
-%%             \foreach \i in {1,...,4}
-%             \foreach \j in {1}
-%             \draw [->] (hidden-\i) -- (output-\j);
-%            
-%            
-%            
-%%             \foreach \l [count=\x from 0] in {Input, Hidden, Output}
-%             \node [align=center, above] at (\x*2,1.9) {\l \\ layer};
-%            
-%%             \node [align=center, below] at (3,-2.5) {Weights \\ $\boldsymbol{\omega}$};
-%             \draw[->,ultra thick](3,-2.5) -- (3,1.4);
-%            
-%%             \end{tikzpicture}
-%         \end{adjustbox}      
-%     }
-%     \caption{Critic neural network structure for approximating value function.}
-%     \label{fig:nnCritic}
-%       \end{figure}
+ \todo[inline]{The following paragraph and the NN structure needs to be rewritten}
+A two-step solution mechanism that is based on policy iteration is employed to solve the temporal difference equation~\eqref{eq:valueFunctionEstimated} using the policy~\eqref{eq:modelFreePolicy}. First, the adaptive critics are used to approximate the solving value function $\hat V(\cdot)$ using a multi-layer critic neural network as shown in Fig.~\ref{fig:nnCritic}. %
+ 
+\begin{figure}
+    \centering
+    \fcolorbox{blue}{gray!5}{
+        \begin{adjustbox}{max width = 0.45\textwidth}
+            \tikzset{%
+                input neuron/.style={
+                    circle,
+                    fill=green!50,
+                    minimum size=0.7cm
+                },
+                neuron missing/.style={
+                    draw=none, 
+                    scale=1,
+                    fill=white,
+                    text height=0.01cm,
+                    execute at begin node=\color{black}$\vdots$
+                },
+            }
+           
+            \tikzset{%
+                hidden neuron/.style={
+                    circle,
+                    fill=blue!50,
+                    minimum size=0.7cm
+                },
+                neuron missing/.style={
+                    draw=none, 
+                    scale=1,
+                    fill=white,
+                    text height=0.01cm,
+                    execute at begin node=\color{black}$\vdots$
+                },
+            }
+           
+            \tikzset{%
+                output neuron/.style={
+                    circle,
+                    fill=red!50,
+                    minimum size=0.7cm
+                },
+                neuron missing/.style={
+                    draw=none, 
+                    scale=1,
+                    fill=white,
+                    text height=0.01cm,
+                    execute at begin node=\color{black}$\vdots$
+                },
+            }
+           
+            \begin{tikzpicture}[x=1.5cm, y=1.5cm]
+           
+            \foreach \m/\l [count=\y] in {1,2,missing,3}
+            \node [input neuron/.try, neuron \m/.try] (input-\m) at (0,2.5-\y) {};
+           
+            \foreach \m [count=\y] in {1,2,3,missing,4}
+            \node [hidden neuron/.try, neuron \m/.try ] (hidden-\m) at (2,2.5-\y*1.1) {};
+           
+            \foreach \m [count=\y] in {1}
+            \node [output neuron/.try, neuron \m/.try] (output-\m) at (4,2.5-\y*2.8) {};
+           
+            \foreach \l [count=\i] in {1,2,n+m}
+            \draw [<-] (input-\i) -- ++(-1,0)
+            node [above, midway] {$\mathbf{z}_{k,\l}$};
+           
+            \foreach \l [count=\i] in {1,2,3,~\mbox{$\bar{n}$}}
+            \node [above] at (hidden-\i.north) {$\rho_{\l}$};
+           
+            \foreach \l [count=\i] in {1}
+            \draw [->] (output-\i) -- ++(1,0)
+            node [above, midway] {$\hat{V}(\mathbf{z}_{k})$};
+            % node [above, midway] {$\hat{V}_\l$};
+           
+            \foreach \i in {1,...,3}
+            \foreach \j in {1,...,4}
+            \draw [->] (input-\i) -- (hidden-\j);
+           
+            \foreach \i in {1,...,4}
+            \foreach \j in {1}
+            \draw [->] (hidden-\i) -- (output-\j);
+           
+           
+           
+            \foreach \l [count=\x from 0] in {Input, Hidden, Output}
+            \node [align=center, above] at (\x*2,1.9) {\l \\ layer};
+           
+            \node [align=center, below] at (3,-2.5) {Weights \\ $\boldsymbol{\omega}$};
+            \draw[->,ultra thick](3,-2.5) -- (3,1.4);
+           
+            \end{tikzpicture}
+        \end{adjustbox}      
+    }
+    \caption{Critic neural network structure for approximating value function.}
+    \label{fig:nnCritic}
+      \end{figure}
  %      
  Second, the policy evaluation step of this process updates the critic weights $\bm{\omega}$ in real-time without acquiring any formation about the dynamics of the leader or follower dynamical systems  (the calculation mechanism of the critic weighs $\boldsymbol{\omega}$ is explained later on). This is done to search for a strictly better policy. %
  %
@@ -569,7 +572,8 @@ We then define the error vector as:
 
 
  \bibliographystyle{IEEEtran}
-\bibliography{bib/refsSuruzWeb,bib/refsMultiAgent,bib/refsRoboticsJournals,bib/refsRoboticsConferences,bib/refsGenericControl,bib/refsBooksTRTheses,bib/refsReinforcementLearningADP,bib/refsRL-Keshtkar}
+ \bibliography{bib/refsSuruzWeb,bib/refsBooksTRTheses,bib/refsReinforcementLearningADP}
+% \bibliography{bib/refsSuruzWeb,bib/refsMultiAgent,bib/refsRoboticsJournals,bib/refsRoboticsConferences,bib/refsGenericControl,bib/refsBooksTRTheses,bib/refsReinforcementLearningADP,bib/refsRL-Keshtkar}
 \end{document}
 
 %%% Local Variables:
