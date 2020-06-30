@@ -1,3 +1,6 @@
+# Ignore paper.pdf #
+####################
+paper*.pdf
 # TeX auxiliary files #
 #######################
 *.aux
