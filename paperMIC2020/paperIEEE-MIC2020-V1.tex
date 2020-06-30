@@ -78,7 +78,7 @@ Leader-follower formation, mobile robots, reinforcement learning, policy iterati
 \todo[inline]{Need to discuss in details the limitations of previous work, we
   can also add RL applications to robotics navigation}
 
-Tracking a random moving target using a mobile robot, for instance, is a challenging task. This is mainly due to their inherent complex nonlinear dynamics dynamics. Most of the target tracking algorithms proposed in the literature either rely on A) complex mathematical models, B) simplified mathematical models, and C) nonlinear control techniques or driven by large amount of mostly offline data that leads to an overwhelming degree of computational complexity.
+Tracking a random moving target using a mobile robot, for instance, is a challenging task. This is mainly due to their inherent complex nonlinear dynamics. Most of the target tracking algorithms proposed in the literature either rely on A) complex mathematical models, B) simplified mathematical models, and C) nonlinear control techniques or driven by large amount of mostly offline data that leads to an overwhelming degree of computational complexity.
 
 
 Over the past years mobile robots has been used in several applications in commercial and military sectors such as surveillance, search and rescue missions,coverage optimization, cooperative localization and dynamic target tracking tasks. In all of these mentioned applications a fleet of robot i.e agents interact with each other to achieve a certain goal. Leader-Follower or dynamic target tracking problem has recieved an extensive amount of study and research in the world of cooperative control theory due to it's wide promising applications such as search and rescure missions, wildlife monitoring and survillance to name a few . In a typical leader follower formation a number of robots referred to as followers apply local control actions to follow leader's robots in a specific predefined path such as \hl {cyclic, circular motion and time varying communication topologies.} \hl {limitations of other methods} many control methods were proposed however they have had the following limitations:
@@ -99,17 +99,26 @@ Over the past years mobile robots has been used in several applications in comme
 %n}
 
 
-\section{Dynamic target tracking and problem setting} 
-\todo[inline]{review}
- \label{sec:problemSetup}
+\section{Problem Setting} 
+\label{sec:problemSetting}
 
-Suppose that a wheeled mobile robot (follower) with coordinate $(x,y)$ and orientation $\theta\in[-\pi,\pi)~\si{\radian}$ with respect to the global X-Y coordinate has a linear speed $\nu$ and steering angle $\gamma$ which are considered as the two control actions. Let the posistion and orientation (pose) of the target i.e leader be ${\bf q}_k\equiv[x_k,y_k,\theta_k]$. The robot and the target are deployed in a 2D configuration in which the Follower is to follow the target trajectory defined by  $(\mathbf{p}_k^{[d]})^T=[x_k^{[d]},y_k^{[d]}(t)]$ at time $t\ge 0$ with $t=k \, T_s,$ $k\in\mathbb{N}_0,$ and $T_s>0$ being the sampling time. Note that this trajectory is completley random. The target motion is modeled by the following discrete-time system:
+Fig.~\ref{fig:leaderFollowerSetup} shows the setup of the problem that we address in this manuscript. The robot is characterized by its 2D position $(x_k,y_k)$ and orientation $\theta_k\in[-\pi,\pi)$ with respect to global coordinate frame X-Y at discrete time index $k=0,1,\ldots,$ where time $t=kT$ with $T>0$ being the sampling time. The time-varying position of the target is denoted by ${\bf p}_k^{[d]}= [x_k^{[d]},y_k^{[d]}]^T\in\mathbb{R}^2.$  Let the position and orientation (pose) of the robot is denoted by the vector  ${\bf q}_k^T\equiv[x_k,y_k,\theta_k]\in\mathbb{R}^2\times\mathbb{S}^1.$ Without loss of generality, assume that the robot tracks the target's trajectory while maintaining line-of-sight distance (also known as safe distance between the robot and the target) $d>0.$ We emphasize that the mathematical models of both robot and the target are not required in the proposed control technology. For illustration, let us assume that the robot (rear-wheel drive) follows the discrete-time kinematic model described by %
+%
+\begin{subequations}
+  \begin{align}
+    \label{eq:robotModelDT}
+    x_{k+1} &= x_k +T\nu_k\cos\theta_k\\
+    y_{k+1} &= y_k +T\nu_k\sin\theta_k\\
+    \theta_{k+1} &= \theta_k + T\frac{\nu_k}{L}\tan\gamma_k
+  \end{align}
+\end{subequations}
+%
+where $\gamma_k\in(-\frac{\pi}{2},\frac{\pi}{2})$ is the steering angle of the font castor of the robot (see Fig.~\ref{fig:leaderFollowerSetup}), and $\nu_k\in\mathbb{R}$ is the linear speed. Without loss of generality, this work considers a target modeled by an integrator and its discrete-time kinematic model is described by 
  \begin{align}
    \label{eq:leaderDT}
    \mathbf{p}_{k+1}^{[d]} = \mathbf{p}_k^{[d]} + T_s \, \mathbf{u}_k^{[d]},
  \end{align}  
-with $\mathbf{u}_k^{[\ell]}\in\mathbb{R}^2$ being the control inputs of the target movment. 
-\\ The follower robot is to maintain a constant safe-distance $d>0$ from target. The dynamic car-like model of the follower robot is defined as follows:
+with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocity) that defines the trajectory (considered random in this work) of the target.  In case, the robot modeled by~\eqref{eq:robotModelDT} is described by a differential drive mobile robot, then its left-wheel velocity $\nu_{L,k}$ and right-wheel velocity $(\nu_{R,k})$ are related as 
   \begin{figure}
    \centering
    \fcolorbox{gray!10}{gray!5}{
@@ -120,29 +129,25 @@ with $\mathbf{u}_k^{[\ell]}\in\mathbb{R}^2$ being the control inputs of the targ
  \end{figure}
  \begin{subequations}
    \begin{align}
-   	 	\nu_{k}(t) = \frac{1}{l}(\nu_{R,k} + \nu_{l,k}),\\ 
-   	 	\omega_{k}(t)=\frac{\nu_{k}(t)}{l}tan(\gamma(t)) 	
+     \nu_{k} &= \frac{1}{2}(\nu_{R,k} + \nu_{L,k}),\\
+     \omega_{k} &= \frac{1}{\ell}(\nu_{R,k} - \nu_{L,k}) = \frac{\nu_{k}}{L}\tan(\gamma_k) 	
    \end{align}
  \label{eq:robotModel1-DT}
  \end{subequations}
- \\
-where $\omega(t)$ and $\nu_k(t)$ is the angular and linear velocity, $\gamma_k\in(-\frac{\pi}{2},\frac{\pi}{2})$ is the steering angle with respect to the robot's orientation $\theta_k\in[-\pi,\pi)$ ,$l$ is the distance between the drive wheels of the robot.
-\\
-We then define the error vector as:
+ %
+ where $\omega_k = \frac{\nu_k}{L}\tan\gamma_k$ is the angular velocity of the robot's center $(x_k,y_k).$ Let us define the error vector as 
  \begin{multline}
      \label{eq:stateError}
-   \mathbf {e}_k^T = [\rho_e,\theta_e]^T =
-   [\sqrt{x_e^2+y_e^2},\theta_e]^T = \\
+   \mathbf{e}_k = [\rho_k,\tilde\theta_k]^T =
+   % [\sqrt{x_e^2+y_e^2},\tilde{\theta_k}]^T = \\
    \begin{bmatrix}
      \sqrt{(x_k^{[d]} - x_k - d\cos\theta_k^{'})^2+
      (y_k^{[d]} - y_k - d\sin\theta_k^{'})^2},
      \theta_k^{'} - \theta_k
    \end{bmatrix},
  \end{multline}
- 
- where $\theta_k^{'} = \mathrm{atan2}\left(y_k^{[d]}-y_k, x_k^{[d]}-x_k\right).$ and ${\rho_e}$ being the euclidean distance. 
-\\
-\hl{The control problem can then be formally stated as follows}: Find $\nu_k$ and $\gamma_k$ such that ${\bf e}_k\to {\bf 0}$ as  $k\to\infty$ subject to~\eqref{eq:leaderDT}~\text{and}~\eqref{eq:robotModel1-DT}.
+% 
+ where $\theta_k^{'} = \mathrm{atan2}\left(y_k^{[d]}-y_k, x_k^{[d]}-x_k\right)$ and ${\rho_k}$ the Euclidean distance at time instant $k$ as shown in Fig.~\ref{fig:leaderFollowerSetup}. The control problem can then be formally stated as follows: Find $\nu_k$ and $\gamma_k$ such that ${\bf e}_k\to {\bf 0}$ as  $k\to\infty$ subject to~\eqref{eq:robotModelDT}~and~\eqref{eq:leaderDT}.
 
 %
 %
@@ -468,8 +473,7 @@ A two-step solution mechanism that is based on policy iteration is employed to s
  
 
  \bibliographystyle{IEEEtran}
- \bibliography{bib/refsSuruzWeb,bib/refsBooksTRTheses,bib/refsReinforcementLearningADP}
-\bibliography{bib/refsSuruzWeb,bib/refsMultiAgent,bib/refsRoboticsJournals,bib/refsRoboticsConferences,bib/refsGenericControl,bib/refsBooksTRTheses,bib/refsReinforcementLearningADP,bib/refsRL-Keshtkar}
+\bibliography{bib/refsSuruzWeb,bib/refsMultiAgent,bib/refsRoboticsJournals,bib/refsRoboticsConferences,bib/refsBooksTRTheses,bib/refsReinforcementLearningADP,bib/refsRL-Keshtkar}
 \end{document}
 
 %%% Local Variables:
