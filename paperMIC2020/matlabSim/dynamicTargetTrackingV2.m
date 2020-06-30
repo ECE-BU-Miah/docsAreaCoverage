@@ -17,7 +17,7 @@ disp('Please wait while the simulation runs ...');
 % ---------------------
 
 % Simulation time
-t0 = 0; tf = 10; % initial and final simulation time [s]
+t0 = 0; tf = 20; % initial and final simulation time [s]
 T = 0.001;  % Sampling time [s]
 tsteps = ceil((tf-t0)/T); % number of time steps
 dt = T*(0:tsteps)'; % Discrete time vector (include time t0 to plot initial state too)
@@ -70,17 +70,12 @@ Q(1,:) = qInit;
 q(1,:) = qInit';
 pk = pLeaderInit;
 
-% %initiating matrices
+% % %initiating matrices
 P = [1.0  0.0   0.5   0.2;
        0.0   1.0   0.2  0.5;
        0.5   0.2   1.0   0.0;
        0.2   0.5   0.0   1.0];
  P = P+2*rand;
-% P = eye(4);
-%    P = [1.0  0.0   1.0   0.2;
-%        0.0   1.0   0.2  1.0;
-%        1.0   0.2   1.0   0.0;
-%        0.2   1.0   0.0   1.0];
 
 
 eig(P)
