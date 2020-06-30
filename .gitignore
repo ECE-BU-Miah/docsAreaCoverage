@@ -1,8 +1,6 @@
-# Ignore paper.pdf #
-####################
-paper*.pdf
 # TeX auxiliary files #
 #######################
+paper*.pdf
 *.aux
 *.idx
 *.ilg

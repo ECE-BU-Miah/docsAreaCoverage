@@ -126,18 +126,18 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
  \end{subequations}
  %
  where $\omega_k = \frac{\nu_k}{L}\tan\gamma_k$ is the angular velocity of the robot's center $(x_k,y_k).$ Let us define the error vector as 
- \begin{multline}
+ \begin{align}
      \label{eq:stateError}
-   \mathbf{e}_k = [\rho_k,\tilde\theta_k]^T =
-   % [\sqrt{x_e^2+y_e^2},\tilde{\theta_k}]^T = \\
-   \begin{bmatrix}
-     \sqrt{(x_k^{[d]} - x_k - d\cos\theta_k^{'})^2+
-     (y_k^{[d]} - y_k - d\sin\theta_k^{'})^2},
-     \theta_k^{'} - \theta_k
-   \end{bmatrix},
- \end{multline}
+   \mathbf{e}_k = [\rho_k,\tilde\theta_k]^T=[\sqrt{\tilde{x}_k^2+\tilde{y}_k^2},\tilde{\theta_k}]^T% = \\
+   % \begin{bmatrix}
+   %   \sqrt{(x_k^{[d]} - x_k - d\cos\theta_k^{'})^2+
+   %   (y_k^{[d]} - y_k - d\sin\theta_k^{'})^2},
+   %   \theta_k^{'} - \theta_k
+   % \end{bmatrix},
+ \end{align}
 % 
- where $\theta_k^{'} = \mathrm{atan2}\left(y_k^{[d]}-y_k, x_k^{[d]}-x_k\right)$ and ${\rho_k}$ the Euclidean distance at time instant $k$ as shown in Fig.~\ref{fig:leaderFollowerSetup}. The control problem can then be formally stated as follows: Find $\nu_k$ and $\gamma_k$ such that ${\bf e}_k\to {\bf 0}$ as  $k\to\infty$ subject to~\eqref{eq:robotModelDT}~and~\eqref{eq:leaderDT}.
+ where $\theta_k^{'} = \mathrm{atan2}\left(y_k^{[d]}-y_k, x_k^{[d]}-x_k\right)$
+ and ${\rho_k} =\sqrt{\tilde{x}_k^2+\tilde{y}_k^2} $ is the Euclidean distance at time instant $k$ as shown in Fig.~\ref{fig:leaderFollowerSetup} with $\tilde{x}_k = x_k^{[d]} - x_k - d\cos\theta_k^{'},$ $\tilde{y}_k = y_k^{[d]} - y_k - d\sin\theta_k^{'},$ and $\tilde{\theta}_k = \theta_k^{'} - \theta_k.$ The control problem can then be formally stated as follows: Find $\nu_k$ and $\gamma_k$ such that ${\bf e}_k\to {\bf 0}$ as  $k\to\infty$ subject to~\eqref{eq:robotModelDT}~and~\eqref{eq:leaderDT}.
 
 %
 %
