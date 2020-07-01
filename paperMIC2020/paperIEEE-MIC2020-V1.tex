@@ -147,14 +147,12 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
 
 
 \section{Model-Free Reinforcement Learning Approach}
-\todo[inline]{Needs to be rewritten}
  \label{sec:RLSolution}
 
- 
  Reinforcement learning is a promising  machine learning technique that is widely used in solving problems of many cyber-physical systems that pertain to the goal-directed learning from interaction~\cite{sutton2020reinforcement}. In this paper, tracking a mobile target using a wheeled mobile robot is formulated as a reinforcement learning problem, where the goal of the robot is to track the trajectory of the target while maintaining the safe-distance $d>0.$ The RL solution employed in the current problem leverages Bellman's principle of optimality to decide on the appropriate control actions (actuator commands) for the robot to track the position trajectory of the target. The relative importance of the states in the error vector ${\bf e}_k$ and the control decisions (linear velocity $\nu_k$ and steering angle $\gamma_k$) of the robot are evaluated using the  performance (cost) index: %
  \begin{align}
  \label{eq:costFunctional}
- J = \sum_{k=0}^\infty \frac{1}{2}\left[{\bf e}_k^T \, {\bf Q} \, {\bf e}_k + {\bf u}_k^T \, {\bf R} \, {\bf u_k}\right],
+   J = \sum_{k=0}^\infty \frac{1}{2}\left[{\bf e}_k^T \, {\bf Q} \, {\bf e}_k + {\bf u}_k^T \, {\bf R} \, {\bf u_k}\right],
  \end{align}    
  where ${\bf Q}\in\mathbb{R}^{2\times 2}$ and ${\bf R}\in\mathbb{R}^{2\times 2}$ are symmetric positive definite weighting matrices, and ${\bf u}_k^T = [\nu_k,\gamma_k]$ is the control input vector.  The objective of the optimization problem, following~\cite{Lewis2013-Reinforcement}, is to find an optimal sequence of control polices $\{\mathbf{u}^*_k\}_{k=0}^\infty$ that minimizes the cost index $J$ along the state-trajectories~\eqref{eq:leaderDT}~and~\eqref{eq:robotModelDT}. Motivated by the structure of the convex quadratic cost functional~\eqref{eq:costFunctional}, let the solution of the tracking control problem employ the value function $V({\bf e}_k,{\bf u}_k)$ defined by %
  %
@@ -169,7 +167,7 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
  V({\bf e}_k,{\bf u}_k)= \frac{1}{2}\left[{\bf e}_k^T\, {\bf Q}\, {\bf e}_k + {\bf u}_k^T\, {\bf R}\, {\bf u_k}\right] +V({\bf e}_{k+1},{\bf u}_{k+1}).
  \end{equation*}
  %
- Applying Bellman's optimality principle yields the optimal control policies ${\bf u}_k^*,~k\ge 0,$ such that~\cite{Lewis2012} %
+ Following Bellman's optimality principle yields the optimal control policies ${\bf u}_k^*,~k\ge 0,$ such that~\cite{Lewis2012} %
  %
  \begin{align*}
  {\bf u}^*_k = \argmin_{{\bf u}_k}\left[\frac{1}{2}\left[{\bf e}^T_k\,  {\bf Q}\, {\bf e}_k +{\bf u}^T_k\,  {\bf R} \,  {\bf u}_k\right]   +
@@ -178,7 +176,7 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
  \end{align*}
  %
  Alternatively, this optimal  policy form is equivalent to ${\bf u}^*_k = \argmin_{{\bf u}_k}\left[
- V({\bf e}_{k},{\bf u}_{k})\right].$
+ V({\bf e}_{k},{\bf u}_{k})\right].$ 
  Therefore, the underlying Bellman optimality equation follows %
  %
  \begin{equation*}
@@ -253,7 +251,7 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
            
             \begin{tikzpicture}[x=1.5cm, y=1.5cm]
            
-            \foreach \m/\l [count=\y] in {1,2,missing,3}
+            \foreach \m/\l [count=\y] in {1,2,3,4}
             \node [input neuron/.try, neuron \m/.try] (input-\m) at (0,2.5-\y) {};
            
             \foreach \m [count=\y] in {1,2,3,missing,4}
@@ -262,7 +260,7 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
             \foreach \m [count=\y] in {1}
             \node [output neuron/.try, neuron \m/.try] (output-\m) at (4,2.5-\y*2.8) {};
            
-            \foreach \l [count=\i] in {1,2,n+m}
+            \foreach \l [count=\i] in {1,2,3,4}
             \draw [<-] (input-\i) -- ++(-1,0)
             node [above, midway] {$\mathbf{z}_{k,\l}$};
            
@@ -274,7 +272,7 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
             node [above, midway] {$\hat{V}(\mathbf{z}_{k})$};
             % node [above, midway] {$\hat{V}_\l$};
            
-            \foreach \i in {1,...,3}
+            \foreach \i in {1,...,4}
             \foreach \j in {1,...,4}
             \draw [->] (input-\i) -- (hidden-\j);
            
@@ -287,66 +285,64 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
             \foreach \l [count=\x from 0] in {Input, Hidden, Output}
             \node [align=center, above] at (\x*2,1.9) {\l \\ layer};
            
-            \node [align=center, below] at (3,-2.5) {Weights \\ $\boldsymbol{\omega}$};
-            \draw[->,ultra thick](3,-2.5) -- (3,1.4);
+            \node [align=center, below] at (3,-2.5) {Weights \\ $\boldsymbol{\omega}_c$};
+            \draw[-stealth,ultra thick](3,-2.5) to[bend left] (3,1.4);
            
             \end{tikzpicture}
         \end{adjustbox}      
     }
-    \caption{Critic neural network structure for approximating value function.}
+    \caption{Multi-layer critic neural network for approximating value function $V({\bf z}_k).$}
     \label{fig:nnCritic}
       \end{figure}
  %      
- Second, the policy evaluation step of this process updates the critic weights $\bm{\omega}$ in real-time without acquiring any formation about the dynamics of the leader or follower dynamical systems  (the calculation mechanism of the critic weighs $\boldsymbol{\omega}$ is explained later on). This is done to search for a strictly better policy. %
- %
-
-% Note that, the policy iteration computational setup rearranges the temporal difference expression~\eqref{eq:valueFunctionEstimated} such that %
+ Second, the policy evaluation step that follows is utilized to update the critic weights $\bm{\omega}_c$ in real-time regardless of the mathematical models of the robot and the target. This step is aimed to search for a strictly better policy using the updated critic weights $\bm{\omega}_c.$ Note that $\hat V({\bf z}_k)$ can also be written using temporal difference form as $\hat V({\bf z}_k) = \mathbf{z}_k^T\, \bar{\mathbf{P}}\, \mathbf{z}_k + \hat V({\bf z}_{k+1}),$ which is described by 
  %
  \begin{equation}
  \label{eq:const}
  \mathbf{z}_k^T\, \mathbf{P}\, \mathbf{z}_k - \mathbf{z}_{k+1}^T\, \mathbf{P}\, \mathbf{z}_{k+1} = \mathbf{z}_k^T\, \bar{\mathbf{P}}\, \mathbf{z}_k. 
  \end{equation}
  %
- This equation is utilized repeatedly in order to evaluate a certain policy during at least $\eta\ge \bar n, \bar n= (2+2)(2+2+1)/2$ evaluation steps (i.e., the lowest evaluation interval spans $k$ to $k+\bar n$ calculation samples) in order to update the critic weights vector  $\boldsymbol{\omega}=\mathrm{vec}(\mathbf{P}),$ which consists of connection weights between the neurons of the hidden layer and the output layer of the critic neural network shown in Fig.~\eqref{fig:nnCritic}. The operator $\mathrm{vec}(\mathbf{P})$ forms the columns of the $\mathbf{P}$ matrix into a column vector $\mathbf{\omega}$ of dimension $\bar{n}=15$ since the matrix $\mathbf{P}$ is a symmetric matrix. The left hand side of~\eqref{eq:const} is expressed using the following critic approximation form %
+ Equation~\eqref{eq:const} is evaluated repeatedly to collect data online for at least $\eta\ge \bar n, \bar n= (2+2)(2+2+1)/2 = 10$ evaluation steps due to the fact that the matrix ${\bf P}$ is positive definite and symmetric. The strictly better policy ${\bf P},$ is determined every $\eta$ time/evaluation steps. To find the better policy in terms of matrix ${\bf P},$ let us define the vector $\boldsymbol{\omega}=\mathrm{vec}(\mathbf{P})\in\mathbb{R}^{16},$ which is formed by stacking columns of ${\bf P}$ matrix.  However, since ${\bf P}$ is symmetric, we only need determine the weight $\bm{\omega}_c\in\mathbb{R}^{\bar n}$ using the critic neural network shown in Fig.~\eqref{fig:nnCritic}. The left hand side of~\eqref{eq:const} is expressed using the following critic approximation form %
  %
- $$\hat{V}(\mathbf{z}_k)-\hat{V}(\mathbf{z}_{k+1})=\boldsymbol{\omega}^T\tilde{\bm{\rho}}(\mathbf{z}_{k,k+1}),$$
+ $$\hat{V}(\mathbf{z}_k)-\hat{V}(\mathbf{z}_{k+1})=\boldsymbol{\omega}_c^T\tilde{\bm{\rho}}(\mathbf{z}_{k,k+1}),$$
  %
- where $\tilde{\bm{\rho}}(\mathbf{z}_{k,k+1})=\bm{\rho}(\mathbf{z}_k)-\bm{\rho}(\mathbf{z}_{k+1}) \in \mathbb{R}^{10 \times 1}, \, \bm{\rho}(\mathbf{z}_k)=\left(\mathbf{z}^q_k\otimes\mathbf{z}^h_k\right)$ $(q=1,\dots, 5, \,\, h=q,\dots,5),$ and $\boldsymbol{\omega}^T = [0.5 \, P^{11},P^{12},P^{13},P^{14},  \, 0.5 \, P^{22}, P^{23},P^{24},$ $\,0.5 \, P^{33}, P^{34},\,0.5 \ P^{44}, ]^T \in \mathbb{R}^{1\times 15}$ ($P^{ij}$ is the $ij^{th}$ entry of matrix $\mathbf{P}$). %
+ where $\tilde{\bm{\rho}}(\mathbf{z}_{k,k+1})=\bm{\rho}(\mathbf{z}_k)-\bm{\rho}(\mathbf{z}_{k+1}) \in \mathbb{R}^{10 \times 1}, \, \bm{\rho}(\mathbf{z}_k)=\left(\mathbf{z}_k\otimes\mathbf{z}_k\right)$, which is a Kronecker product that generates the basis function vector with components $z_{k,1}^2,$ $z_{k,1}z_{k,2},$ $z_{k,1}z_{k,3},$ $z_{k,1}z_{k,4},$ $z_{k,2}^2,$ $z_{k,2}z_{k,3},$ $z_{k,2}z_{k,4},$ $z_{k,3}^2,$ $z_{k,3}z_{k,4},$ and $z_{k,4}^2.$ Note that the critic weight $\bm{\omega}_c$ is related to the policy matrix ${\bf P}$ as  $\boldsymbol{\omega}_c^T = [0.5 \, P^{11},P^{12},P^{13},P^{14},  \, 0.5 \, P^{22}, P^{23},P^{24},$ $\,0.5 \, P^{33}, P^{34},\,0.5 \ P^{44}, ]^T \in \mathbb{R}^{1\times 10}$ with $P^{ij}$ being the $ij^{th}$ entry of matrix $\mathbf{P}.$ %
  %
- The critic weights $\boldsymbol{\omega}$ are updated using a gradient descent approach, where the tuning error $\varepsilon_k$ at each computational instance $k$ follows $\varepsilon_k =\boldsymbol{\omega}^T\tilde{\bm{\rho}}(\mathbf{z}_{k,k+1})-{v}_k,$ where $v_\kappa = \frac{1}{2}\mathbf{z}_{k}^T \, \bar{\mathbf{P}} \, \mathbf{z}_{k}$. As detailed earlier, it is required to perform at least $\eta \ge \bar n$ evaluation steps before updating the critic weights $\boldsymbol{\omega}$ (i.e., finding the new improved policy). Hence, it is required to minimize the sum of square errors such that %
+ Here, the critic weights $\boldsymbol{\omega}_c$ are updated using a gradient descent update rule. The tuning error $\varepsilon_k$ at each computational instance $k$ is given by $\varepsilon_k =\boldsymbol{\omega}_c^T\tilde{\bm{\rho}}(\mathbf{z}_{k,k+1})-{v}_k,$ where $v_\kappa = \frac{1}{2}\mathbf{z}_{k}^T \, \bar{\mathbf{P}} \, \mathbf{z}_{k}$. The error data $\varepsilon_k$ is collected online for at least  $\eta \ge \bar n$ evaluation steps before updating the critic weights $\boldsymbol{\omega}_c$ that is used to determine the improved policy ${\bf P}.$ The sum of squared tuning errors is given by 
  %
  \begin{multline*}
-   \delta_c =\sum_{\kappa=0}^{\eta-1}\frac{1}{2}(\boldsymbol{\omega}^T\tilde{\bm{\rho}}(\mathbf{z}_{k+\kappa,k+\kappa+1})-{v}_{k+\kappa})^2 = \frac{1}{2}\| \mathbf{v} - \bm{\Lambda}\bm{\omega}\|^2\\
+   \delta_c =\sum_{\kappa=0}^{\eta-1}\frac{1}{2}\varepsilon_{k+\kappa}^2=\sum_{\kappa=0}^{\eta-1}\frac{1}{2}(\boldsymbol{\omega}^T\tilde{\bm{\rho}}(\mathbf{z}_{k+\kappa,k+\kappa+1})-{v}_{k+\kappa})^2 = \frac{1}{2}\| \mathbf{v} - \bm{\Lambda}\bm{\omega}\|^2\\
    =\frac{1}{2}\left(\mathbf{v} - \bm{\Lambda}\bm{\omega}\right)^T \left(\mathbf{v} - \bm{\Lambda}\bm{\omega}\right), 
  \end{multline*}
- where $\bm{\Lambda} = [{\bf o}_0,{\bf o}_1,\ldots,{\bf o}_{\eta-1}]^T \in \mathbb{R}^{\eta\times 10}$ with ${\bf o}_\kappa = \tilde{\bm{\rho}}^T({\bf z}_{k+\kappa, k+\kappa+1}) \in \mathbb{R}^{1\times 15}$ and ${\bf v} =[v_0,v_1,\ldots,v_{\eta-1}]^T \in \mathbb{R}^{\eta}$ with $v_\kappa = \frac{1}{2}\mathbf{z}_{k+\kappa}^T \, \bar{\mathbf{P}} \, \mathbf{z}_{k+\kappa}$ for $\kappa = 0,1,\ldots, \eta-1$. %
- Therefore, the update law of the critic weights using the gradient decent approach for at least $\bar n$ samples is given by %
+ where $\bm{\Lambda} = [{\bf o}_0,{\bf o}_1,\ldots,{\bf o}_{\eta-1}]^T \in \mathbb{R}^{\eta\times 10}$ with ${\bf o}_\kappa = \tilde{\bm{\rho}}^T({\bf z}_{k+\kappa, k+\kappa+1}) \in \mathbb{R}^{1\times 10}$ and ${\bf v} =[v_0,v_1,\ldots,v_{\eta-1}]^T \in \mathbb{R}^{\eta}$ with $v_\kappa = \frac{1}{2}\mathbf{z}_{k+\kappa}^T \, \bar{\mathbf{P}} \, \mathbf{z}_{k+\kappa}$ for $\kappa = 0,1,\ldots, \eta-1$. %
+ The sum of squared error $\delta_c$ can be minimized by adapting the critic weight using the gradient decent approach for at least $\bar n$ data samples as 
  \begin{multline}
-   \bm{\omega}^{[r+1]} = \bm{\omega}^{[r]} - \ell_c\frac{\partial\delta_c}{\partial \bm{\omega}} = \bm{\omega}^{[r]} - \ell_c\left(-\bm{\Lambda}^T\mathbf{v} + \bm{\Lambda}^T \bm{\Lambda}\bm{\omega}^{[r]}\right)\\ 
- =\bm{\omega}^{[r]} - \ell_c \bm{\Lambda}^T\left(\bm{\Lambda}\bm{\omega}^{[r]}-\mathbf{v}\right), 
+   \bm{\omega}_c^{[r+1]} = \bm{\omega}_c^{[r]} - \ell_c\frac{\partial\delta_c}{\partial \bm{\omega}} = \bm{\omega}_c^{[r]} - \ell_c\left(-\bm{\Lambda}^T\mathbf{v} + \bm{\Lambda}^T \bm{\Lambda}\bm{\omega}_c^{[r]}\right)\\ 
+ =\bm{\omega}_c^{[r]} - \ell_c \bm{\Lambda}^T\left(\bm{\Lambda}\bm{\omega}_c^{[r]}-\mathbf{v}\right), 
  \label{eq:criticWeights}
  \end{multline}
  %
- where $0<\ell_c<1$ is a critic learning rate and $r$ is the  update index of the critic weights. 
-
-% The newly computed critic weights $\boldsymbol{\omega}$ are used to reconstruct the matrix ${\bf P}$ (i.e., updating the solving value function and hence calculating the associated policy) such that 
- %
+ where $0<\ell_c<1$ is a critic learning rate and $r$ is known as iteration index for updating the policy. The updated critic weights can be used to reconstruct the policy matrix ${\bf P}$ as
+ 
  \begin{center}
  ${\bf P}=\begin{bmatrix} 
- 2\,\omega^{1}    & \omega^{2}      & \omega^{3}       & \omega^{4}        \\ 
- \omega^{2}       &2\, \omega^{5}   & \omega^{6}       & \omega^{7}        \\
- \omega^{3}       & \omega^{6}      &2\, \omega^{8}   & \omega^{9}   \\   
- \omega^{4}       & \omega^{7}      & \omega^{9}      & 2\,\omega^{10}      
+ 2\,\omega^{[1]}    & \omega^{[2]}      & \omega^{[3]}       & \omega^{[4]}        \\ 
+ \omega^{[2]}       &2\, \omega^{[5]}   & \omega^{[6]}       & \omega^{[7]}        \\
+ \omega^{[3]}       & \omega^{[6]}      &2\, \omega^{[8]}   & \omega^{[9]}   \\   
+ \omega^{[4]}       & \omega^{[7]}      & \omega^{[9]}      & 2\,\omega^{[10]}      
  \end{bmatrix}\in \mathbb{R}^{4\times 4},$
  \end{center}
  %
- where $\omega^{i}$ is the $i^{th}$ entry of the weight vector $\bm{\omega}.$ 
- \todo[inline]{merge the actor weights discussion with the rest}
- The critic wegihts are then used to update the actor weights which maps the state error to the desired ploicy (control actions) at every time step $t$ with the following equation:
+ where $\omega^{[i]}$ is the $i^{th}$ entry of the weight vector $\bm{\omega}_c.$ 
+
+ The critic weights are then used to update the actor weights $W_a\mathbb{R}^{n\times m}$ (here $n=2$ and $m=2$) which maps the state error to the desired policy (control actions) as  at every time step $t$ with the following equation:
  \begin{align}
  \label{eq:actorWeightsPolicy}    
- \mathbf{u}_k  =  \mathbf{\omega_a^{T}} \mathbf{e}_k
- \end{align}   
+ \mathbf{u}_k  =  {\bf W}_a^T \mathbf{e}_k
+ \end{align}
+%
+ Equation~\eqref{eq:actorWeightsPolicy} is realized using a multi-layer actor neural network shown in Fig.~
+ 
  Applying a similar gradient descent approach as with the critic weights the actor weights are updated as follows:
 \begin{align}
    \bm{\omega_a}^{[r+1]} = \bm{\omega}^{[r]} - \ell_a(\mathbf{u}_k-\mathbf{u}_k^*)\mathbf{e}_k, 
