@@ -146,17 +146,17 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
 
 
 
-\section{Proposed actor-critic RL Approach}
+\section{Model-Free Reinforcement Learning Approach}
 \todo[inline]{Needs to be rewritten}
-
  \label{sec:RLSolution}
 
- The solution of the leader-follower formation problem is realized using a reinforcement learning approach. It employs model-free strategies for solving a temporal difference equation developed herein. This solution is equivalent to solving the underlying Bellman optimality equation for  the dynamical error model~\eqref{eq:stateError}. The relative importance of the states in the error vector ${\bf e}_k$ and the control decisions (linear velocity and steering angle) of the follower-robot are evaluated using the  performance (cost) index: %
+ 
+ Reinforcement learning is a promising  machine learning technique that is widely used in solving problems of many cyber-physical systems that pertain to the goal-directed learning from interaction~\cite{sutton2020reinforcement}. In this paper, tracking a mobile target using a wheeled mobile robot is formulated as a reinforcement learning problem, where the goal of the robot is to track the trajectory of the target while maintaining the safe-distance $d>0.$ The RL solution employed in the current problem leverages Bellman's principle of optimality to decide on the appropriate control actions (actuator commands) for the robot to track the position trajectory of the target. The relative importance of the states in the error vector ${\bf e}_k$ and the control decisions (linear velocity $\nu_k$ and steering angle $\gamma_k$) of the robot are evaluated using the  performance (cost) index: %
  \begin{align}
  \label{eq:costFunctional}
  J = \sum_{k=0}^\infty \frac{1}{2}\left[{\bf e}_k^T \, {\bf Q} \, {\bf e}_k + {\bf u}_k^T \, {\bf R} \, {\bf u_k}\right],
  \end{align}    
- where ${\bf Q}\in\mathbb{R}^{2\times 2}$ and ${\bf R}\in\mathbb{R}^{2\times 2}$ are symmetric positive definite weighting matrices. The objective of the optimization problem, following~\cite{Lewis2013-Reinforcement}, is to find an optimal sequence of control polices $\{\mathbf{u}^*_k\}_{k=0}^\infty$ that minimizes the cost index $J$ along the state-trajectories~\eqref{eq:leaderDT}~and~\eqref{eq:robotModel1-DT}. Motivated by the structure of the convex quadratic cost functional~\eqref{eq:costFunctional}, let the solution of the tracking control problem employ the value function $V({\bf e}_k,{\bf u}_k)$ defined by %
+ where ${\bf Q}\in\mathbb{R}^{2\times 2}$ and ${\bf R}\in\mathbb{R}^{2\times 2}$ are symmetric positive definite weighting matrices, and ${\bf u}_k^T = [\nu_k,\gamma_k]$ is the control input vector.  The objective of the optimization problem, following~\cite{Lewis2013-Reinforcement}, is to find an optimal sequence of control polices $\{\mathbf{u}^*_k\}_{k=0}^\infty$ that minimizes the cost index $J$ along the state-trajectories~\eqref{eq:leaderDT}~and~\eqref{eq:robotModelDT}. Motivated by the structure of the convex quadratic cost functional~\eqref{eq:costFunctional}, let the solution of the tracking control problem employ the value function $V({\bf e}_k,{\bf u}_k)$ defined by %
  %
  \begin{equation*}
  \label{eq:valueFunction}
@@ -189,23 +189,19 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
  where $V^*(\cdot,\cdot)$ is the optimal solution for Bellman optimality equation. This temporal difference equation is utilized by reinforcement learning process which solves the following temporal difference approximation form %
  %
  \begin{align}
- \hat{V}(\mathbf{z}_k) = \frac{1}{2}\mathbf{z}_k^T\, \bar{\mathbf{P}}\, \mathbf{z}_k + \hat{V}(\mathbf{z}_{k+1}),
+   V(\mathbf{z}_k) = \frac{1}{2}\mathbf{z}_k^T\, \bar{\mathbf{P}}\, \mathbf{z}_k + V(\mathbf{z}_{k+1}),
  \label{eq:valueFunctionEstimated}
  \end{align}
  %
  where $\mathbf{z}_k = \left[\mathbf{e}_k ,\mathbf{u}_k\right]^T\in\mathbb{R}^4,$ $V\left(\mathbf{e}_k,\mathbf{u}_k\right) \approx \hat{V}(\mathbf{z}_k),$  and $\bar{\mathbf{P}}$ is a symmetric block-diagonal matrix formed using $(\mathbf{Q},\mathbf{R}),$~\textit{i.e.,~}$\bar{\mathbf{P}} = \mathrm{blockdiag}(\mathbf{Q},\mathbf{R}).$ %
- The approximation of the solving value function $\hat{V}(\mathbf{z}_k)$ employs a quadratic form so that $\hat{V}(\mathbf{z}_k)=\frac{1}{2}\mathbf{z}_k^T\, \mathbf{P}\, \mathbf{z}_k,$ where $\mathbf{P}\in\mathbb{R}^{4\times 4}$ is a positive definite matrix. Hence, the optimal control strategy $\mathbf{u}_k^*$ can be expressed as follows %
+ The approximation of the solving value function $\hat{V}(\mathbf{z}_k)$ employs a quadratic form so that $\hat{V}(\mathbf{z}_k)=\frac{1}{2}\mathbf{z}_k^T\, \mathbf{P}\, \mathbf{z}_k,$ for some positive definite matrix  $\mathbf{P}\in\mathbb{R}^{4\times 4}.$ The optimal control input ${\bf u}_k*$ is then determined by setting $\frac{\partial\hat{V}({\bf z}_k)}{\partial{\bf u}_k} = 0,$ which yields %
  %
  \begin{align}
  \label{eq:modelFreePolicy}    
- \mathbf{u}_k^* = \argmin_{\mathbf{u}_k}\left[\hat{V}(\mathbf{z}_k)\right] = -\,  \mathbf{P}_{uu}^{-1}\, \mathbf{P}_{ue}\, \mathbf{e}_k,
+ \mathbf{u}_k^* = -\,  \mathbf{P}_{uu}^{-1}\, \mathbf{P}_{ue}\, \mathbf{e}_k,
  \end{align}
  %
- where $\mathbf{P}_{uu}$ and $\mathbf{P}_{ue}$ are sub-blocks of symmetric matrix $\mathbf{P}.$ %   
- %
- \todo[inline]{The following paragraph and the NN structure needs to be rewritten}
-A two-step solution mechanism that is based on policy iteration is employed to solve the temporal difference equation~\eqref{eq:valueFunctionEstimated} using the policy~\eqref{eq:modelFreePolicy}. First, the adaptive critics are used to approximate the solving value function $\hat V(\cdot)$ using a multi-layer critic neural network as shown in Fig.~\ref{fig:nnCritic}. %
- 
+ where $\mathbf{P}_{uu}$ and $\mathbf{P}_{ue}$ are sub-blocks of symmetric matrix $\mathbf{P}.$ The proposed approach approximates the block matrix ${\bf P}$ by following a two-step solution mechanism based on policy iteration method~\cite{sutton2020reinforcement}, which in turn approximates the value function~$\hat V(\cdot)$ given by ~\eqref{eq:valueFunctionEstimated}. First, a multi-layer critic neural network shown in Fig.~\ref{fig:nnCritic} is used to estimate the value function, $\hat V({\bf z}_k).$ 
 \begin{figure}
     \centering
     \fcolorbox{blue}{gray!5}{
