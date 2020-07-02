@@ -338,19 +338,130 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
  The critic weights are then used to update the actor weights $W_a\mathbb{R}^{n\times m}$ (here $n=2$ and $m=2$) which maps the state error to the desired policy (control actions) as  at every time step $t$ with the following equation:
  \begin{align}
  \label{eq:actorWeightsPolicy}    
- \mathbf{u}_k  =  {\bf W}_a^T \mathbf{e}_k
+ \hat{\mathbf{u}}_k  =  {\bf W}_a^T \bm{\sigma}(\mathbf{e}_k),
  \end{align}
+ %
+ where ${\bf W}_a\in\mathbb{R}^{2\times n^{'}}$ is the actor weight matrix and $\bm{\sigma}:\mathbb{R}^2 \to \mathbb{R}^{n^{'}}$ is the basis function vector.  Equation~\eqref{eq:actorWeightsPolicy} is realized using a multi-layer actor neural network shown in Fig.~\ref{fig:nnActor}. %
+ %
+\begin{figure}
+  \centering
+  \boxed{
+    \begin{adjustbox}{max width = 0.48\textwidth}
+      \tikzset{%
+        input neuron/.style={
+          circle,
+          fill=green!50,
+          minimum size=0.7cm
+        },
+        neuron missing/.style={
+          draw=none, 
+          scale=1,
+          fill=white,
+          text height=0.01cm,
+          execute at begin node=\color{black}$\vdots$
+        },
+      }
+
+      \tikzset{%
+        hidden neuron/.style={
+          circle,
+          fill=blue!50,
+          minimum size=0.7cm
+        },
+        neuron missing/.style={
+          draw=none, 
+          scale=1,
+          fill=white,
+          text height=0.01cm,
+          execute at begin node=\color{black}$\vdots$
+        },
+      }
+
+      \tikzset{%
+        output neuron/.style={
+          circle,
+          fill=red!50,
+          minimum size=0.7cm
+        },
+        neuron missing/.style={
+          draw=none, 
+          scale=1,
+          fill=white,
+          text height=0.01cm,
+          execute at begin node=\color{black}$\vdots$
+        },
+      }      
+
+      \begin{tikzpicture}[x=1.5cm, y=1.5cm]
+
+        \foreach \m/\l [count=\y] in {1,2}
+        \node [input neuron/.try, neuron \m/.try] (input-\m) at (0,2.5-\y) {};
+
+        \foreach \m [count=\y] in {1,2,missing,3}
+        \node [hidden neuron/.try, neuron \m/.try ] (hidden-\m) at (2,2.5-\y*1.1) {};
+
+        \foreach \m [count=\y] in {1,2}
+        \node [output neuron/.try, neuron \m/.try] (output-\m) at (4,2.5-\y*1.2) {};
+
+        \foreach \l [count=\i] in {1,2}
+        \draw [<-] (input-\i) -- ++(-1,0)
+        node [above, midway] {$\mathbf{e}_{k,\l}$};
+
+        \foreach \l [count=\i] in {1,2,\mbox{$n^{'}$}}
+        \node [above] at (hidden-\i.north) {$\sigma_{\l}$};
+
+        \foreach \l [count=\i] in {1,2}
+        \draw [->] (output-\i) -- ++(1,0)
+        node [above, midway] {$\hat{u}_{k,\l}$};
+
+        \foreach \i in {1,...,2}
+        \foreach \j in {1,...,3}
+        \draw [->] (input-\i) -- (hidden-\j);
+
+        \foreach \i in {1,...,3}
+        \foreach \j in {1,2}
+        \draw [->] (hidden-\i) -- (output-\j);
+        
+        \foreach \l [count=\x from 0] in {Input, Hidden, Ouput}
+        \node [align=center, above] at (\x*2,1.9) {\l \\ layer};
+
+        \draw[->,ultra thick]
+        (3,-1.5)node[anchor=west]{Weight~${\bf W}_a$} to[bend left] (3,1.6);
+        
+      \end{tikzpicture}
+    \end{adjustbox}      
+    }
+  \caption{Actor neural network structure for approximating control input.}
+  \label{fig:nnActor}
+\end{figure}
 %
- Equation~\eqref{eq:actorWeightsPolicy} is realized using a multi-layer actor neural network shown in Fig.~
- 
- Applying a similar gradient descent approach as with the critic weights the actor weights are updated as follows:
+The elements of the vector $\bm{\sigma}$ are the activation functions of the neurons in the hidden layer shown in Fig.~\ref{fig:nnActor}. We will need to determine the actor weight matrix ${\bf W}_a$ that minimizes the error between the estimated control inputs determined by model~\eqref{eq:actorWeightsPolicy} and the that determined by critic neural network approximation model~\eqref{eq:modelFreePolicy}. For that, let us define the error %
+%
 \begin{align}
-   \bm{\omega_a}^{[r+1]} = \bm{\omega}^{[r]} - \ell_a(\mathbf{u}_k-\mathbf{u}_k^*)\mathbf{e}_k, 
+  \label{eq:deltaActor}
+  \delta_a = \frac{1}{2}\|\hat{{\bf u}}_k - {\bf u}_k^*\|^2,
+\end{align}
+%
+which can be written as %
+%
+\begin{align*}
+  \delta_a = \frac{1}{2}\left( {\bf W}_a^T\bm{\sigma}({\bf e}_k) -  {\bf u}_k^*\right)^T\left( {\bf W}_a^T\bm{\sigma}({\bf e}_k) -  {\bf u}_k^*\right). 
+\end{align*}
+%
+Taking partial derivative of the above expression $\delta_a$  with respect to ${\bf W}_a$ gives %
+%
+\begin{align*}
+  \frac{\partial \delta_a}{\partial{\bf W}_a} = {\bf W}_a^T\bm{\sigma}({\bf e}_k)\bm{\sigma}^T({\bf e}_k) - {\bf u}_k^*\bm{\sigma}^T({\bf e}_k).
+\end{align*}
+%
+Therefore, actor weight matrix ${\bf W}_a$ in every policy iteration $r = 01,2,\ldots$ can be updated using the learning rule %
+%
+\begin{multline}
+  {\bf W}_a^{[r+1]} = {\bf W}_a^{[r]} - \ell_a\frac{\partial\delta_a}{\partial{\bf W}_a}\\
+  = {\bf W}_a^{[r]} - \ell_a\left( {\bf W}_a^T\bm{\sigma}({\bf e}_k)-\mathbf{u}_k^* \right)\bm{\sigma}^T({\bf e}_k), 
  \label{eq:actorWeights}
- \end{align}
- where $\ell$ is the actor learning rate. 
- \\
- The complete policy iteration solution process for the leader-follower problem is detailed out in Algorithm \ref{alg:ModelFreeTracking}. %
+ \end{multline}
+ where $\ell_a$ is the actor learning rate.  The complete policy iteration solution process for the leader-follower problem is detailed out in Algorithm \ref{alg:ModelFreeTracking}. %
  %
  \begin{algorithm2e}{
      \caption{\label{alg:ModelFreeTracking} Model-free actor-critic reinforcement learning using the policy iteration solution.}
@@ -386,7 +497,8 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
          }
      }
  \end{algorithm2e}    
-    
+ %
+For clarity, number of hidden neurons chosen in the actor neural network shown in Fig.~\ref{fig:nnActor} is $n^{'} = 2$ and the basis function vector is simply $\bm{\sigma}({\bf e}_k) = {\bf e}_k.$ In the following, we provide the computer simulation results to highlight the performance of the proposed model-free trajectory tracking approach for a mobile robot in tracking a random target while maintaining a geometric safe distance $d>0.$  
     
 
 

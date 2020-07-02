@@ -1,6 +1,6 @@
 # TeX auxiliary files #
 #######################
-paper*.pdf
+paperIEEE-MIC2020-V1.pdf
 *.aux
 *.idx
 *.ilg
