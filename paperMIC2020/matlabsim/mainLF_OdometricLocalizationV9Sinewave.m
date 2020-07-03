@@ -22,7 +22,7 @@ T = 0.001;  % Sampling time [s]
 tsteps = ceil((tf-t0)/T); % number of time steps
 dt = T*(0:tsteps)'; % Discrete time vector (include time t0 to plot initial state too)
 
-d = 0.2; %[m] safe distance
+d = 0.5; %[m] safe distance
 %ROBOT PARAMETERS
 %==========================================================================
 l = 0.381; % [m]
@@ -36,20 +36,22 @@ M = 2;  % input vector dimension
 
 
 % Leader's initial position
-pLeaderInit = [5;1]+rand(2,1); %[m]
-pLeaderTheta= 0; %[rad]
+pLeaderInit = [0;0]+ rand(2,1); %[m]
+pLeaderTheta(1:tsteps,1)= 0:(10*pi)/(tsteps-1):10*pi; %[rad]
+pLeaderTheta(tsteps+1,:)=10*pi;
+QD(1,:) = [pLeaderInit' cos(0.2*pLeaderTheta(1,:))];
 
-QD(1,:) = [pLeaderInit' pLeaderTheta];
+
 QDinit = QD(1,:);
 %Leader's velocity 
-vLeader = 0.1; % [m/s]
-uLeader=[vLeader pLeaderTheta];
+vLeader = 5; % [m/s]
+
 
 % Follower robot initialization% 
-qp = [0;0]; % [m] Follower robot's position
+qp = [-2;-5]; % [m] Follower robot's position
 qTheta = 0 ;% [rad] Follower robot's orientation 
  qInit = [qp',qTheta] ;%+ rand(1,3); % row vector
-vMax = 2; % [m/s] Follower's maximum linear speed 
+vMax = 5; % [m/s] Follower's maximum linear speed 
 
 Q(1,:) = qInit;
 
@@ -66,7 +68,7 @@ P = [3  0   2   0.5;
       0   3   0.5    2;
       1 0.5   3      0;
     0.5   1    0      3]
- P = P+2*rand;
+ P = P+5*rand;
 eig(P)
 Pinit = P;
 
@@ -82,17 +84,17 @@ lc = 0.00001; %learnging rate
 la= 0.01; %actor learning rate
 
 %initlize actor weights
-Wa=0.001*rand(2,2);
+Wa=0.01*rand(2,2);
 
 %reconstruct the P matrix to get the wheights matrix
- w(1,1) = 0.5 * P(1,1);
- w(2:4,1)=P(1,2:4);
- w(5,1) = 0.5*P(2,2);
- w(6:7,1) =P(2,3:4) ;
- w(8,1) = 0.5*P(3,3);
- w(9,1) =P(3,4) ;
- w(10,1) = 0.5*P(4,4);
-       
+w(1,1) = 0.5 * P(1,1);
+w(2:4,1)=P(1,2:4);
+w(5,1) = 0.5*P(2,2);
+w(6:7,1) =P(2,3:4) ;
+w(8,1) = 0.5*P(3,3);
+w(9,1) =P(3,4) ;
+w(10,1) = 0.5*P(4,4);
+
        
 % Store weight vector over time (every (n+m)*(n+m+1)/2 time steps).        
 W = zeros((N+M)*(N+M+1)/2,floor(tsteps/((N+M)*(N+M+1)/2))+1);
@@ -135,27 +137,12 @@ kappa = 1;  % data collection index
 indexWeight= 1; %weight saving index
 for k = 1:tsteps    % Main timing loop, k = time index
     
-%generating random path for the leader
-    if k == 1
-        pLeaderTheta = pi2pi(pLeaderTheta + 0.2*rand);
-    end
-
-    if k == tsteps/4  % change orientation of the leader
-        pLeaderTheta = pi2pi(pLeaderTheta-0.1*rand);        
-    end
-
-    if k == tsteps/2 % change orientation of the leader
-        pLeaderTheta = pLeaderTheta+0.1*rand;
-    end
-
-    if k ==3* tsteps/4 % change orientation of the leader
-        pLeaderTheta = pLeaderTheta-0.1*rand;
-    end
+%generating sine path for the leader
+    pKPlus1 =  [(pLeaderTheta(k+1,:));vLeader*sin(0.2*pLeaderTheta(k+1,:))];
+    QD(k+1,:) = [pKPlus1' cos(0.2*pLeaderTheta(k+1,:))];    
+    pk = pKPlus1;
     
-    %saving leader control actions
-    uLeader=[vLeader pLeaderTheta];
-    QD(k+1,:)=DDMR_modelEuler(uLeader,QDinit',T);
-    QDinit = QD(k+1,:);
+
 
     % update follower's position and orientation;    
     q(k+1,:) = DDMR_modelEuler(uk,qInit',T);
