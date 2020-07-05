@@ -532,7 +532,7 @@ For clarity, number of hidden neurons chosen in the actor neural network shown i
  x^{[d]}(t) = \alpha t, %
  y^{[d]}(t) = 5 \,\sin(\alpha t),$  and %
  $\theta^{[d]}(t) = cos(\alpha t),
- $ with $\alpha = 10\pi/t_f.$ Simulation results are shown in Fig.~\ref{fig:peformanceSinTrajectory}. In the beginning of the simulation, the robot starts to move away from the target according to the initial random actor weights. As the robot collects more data, the robot adjust the control actions as the actor and critic weights started to converge and the robot asymptotically follows the target's trajectory. %
+ $ with $\alpha = 10\pi/t_f.$ Simulation results are shown in Fig.~\ref{fig:performanceSin}. In the beginning of the simulation, the robot starts to move away from the target according to the initial random actor weights. As the robot collects more data, the robot adjust the control actions as the actor and critic weights started to converge and the robot asymptotically follows the target's trajectory. %
 %
  \begin{figure*}[htbp]%
  
@@ -551,56 +551,62 @@ For clarity, number of hidden neurons chosen in the actor neural network shown i
     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/controlInputRandomPathDistance.eps} }
   \\
  \subfigure[][]{%
-    \label{fig:weightCriticSin}%
+    \label{fig:criticWeightSin}%
     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/weightRandomPathDistance.eps} }
      \subfigure[][]{%
     \label{fig:actorWeightSin}%
     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/weightActor.eps} }
-\caption[Target tracking performance in following a sinusoidal trajectory.]{\comment{Target tracking performance in following a sinusoidal trajectory:}{Are you using CoppeliaSim results?} 
-  \subref{fig:trajectorySin} robot and target trajectories,~\subref{fig:stateErrorSin} position error $\tilde\rho_k$,~\subref{fig:controlInputsSin} linear speed and steering angle of the target, \subref{fig:weightCriticSin} critic learning weights~$\bm{\omega}_c,$ and \subref{fig:actorWeightSin} actor learning weights~${\bf W}_a$}%
-  \label{fig:peformanceSinTrajectory}%
+\caption[Robot tracking a target that is following a sinusoidal trajectory.]{\comment{Robot tracking a target that is  following a sinusoidal trajectory:}{Are you using CoppeliaSim results?} 
+  \subref{fig:trajectorySin} robot and target trajectories,~\subref{fig:stateErrorSin} position error $\tilde\rho_k$,~\subref{fig:controlInputsSin} linear speed and steering angle of the target, \subref{fig:criticWeightSin} critic learning weights~$\bm{\omega}_c,$ and \subref{fig:actorWeightSin} actor learning weights~${\bf W}_a$}%
+  \label{fig:performanceSin}%
 \end{figure*} 
 %
-\todo[inline]{Update the text below following the description for th first scenario.} %
 
-  In the second scenario, the target is set to move on a completely random trajectory starting from a random position around $(x^{[d]},y^{[d]})=(1,5)$ with 
- $\dot x^{[d]}(t) = \nu^{[d]}(t)\cos\theta^{[\ell]}(t),$ %
- $\dot y^{[d]}(t) = \nu^{[d]}(t)\sin\theta^{[\ell]}(t).$
-$ \dot\theta^{[d]}(t) = \omega(t)$,
- where $\nu^{[d]}(t)=0.2~[\si{\meter}].$\comment{~}{What about $\omega$?} The robot initial position and orientation being $(x,y) = (0,0)$. We intensify that the robot has no previous knowledge of the dynamic model of the moving target nor it's initial position. The results obtained by the simulation are shown in~Fig.\ref{fig:simulationResults}. The control actions of the robot are determined by the random actor weights. We clearly see tracking error converges and approaches zero as the control signal converging to values that allows target tracking. The results reveal the ability of the proposed algorithm to sucessfully track the dynamic moving target and adapt to the changes in the target's trajectory and learns online by trial and error in different scenarios.      
-
-    
-%  \begin{figure*}[htbp]%
- 
-%  \subfigure[][]{%
-%     \label{fig:trajectoryRandom}%
-%     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/trajectoryRandomPathDistance.eps} }
-% 	\subfigure[][]{%    
-%     \label{fig:euclideanDistance}%
-%     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/euclideanDistance.eps} }
-% \subfigure[][]{%
-%     \label{fig:stateErrorRandom}%
-%     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/stateErrorRandomPathDistance.eps} }
-%  \subfigure[][]{%
-%     \label{fig:controlInputsRandom}%
-%     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/controlInputRandomPathDistance.eps} }
-%  \subfigure[][]{%
-%     \label{fig:weightRandomDistance}%
-%     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/weightRandomPathDistance.eps} }
-%      \subfigure[][]{%
-%     \label{fig:actorWeightRandomDistance}%
-%     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/weightActor.eps} }
-% \caption[Leader-follower performance for random trajectory.]{Performance in tracking random trajectory: 
-%   \subref{fig:trajectoryRandom} robot and target trajectories,~\subref{fig:stateErrorRandom} position error~$\tilde{\rho}_k$,~\subref{fig:controlInputsRandom} linear speed and steering angle of the follower; and    \subref{fig:weightRandomDistance} learning weights.}%
-%   \label{fig:peformanceRandomTrajectory}%
-% 	\label{fig:simulationResults}
-% \end{figure*}
+In the second scenario, the target is set to move on a completely random trajectory starting from a random initial position $(x^{[d]},y^{[d]})\approx (1,5)~[\si{\meter}],$ where the \comment{target is now modeled as an unicycle robot}{Previously we talk about point robot model for the target but now you are using the following model for the target} described by %
+%
+ $x_{k+1}^{[d]} = x_k^{[d]} + T\nu_k^{[d]}\cos\theta_k^{[d]},$ %
+ $y_{k+1}^{[d]} = y_k^{[d]} + T\nu_k^{[d]}\sin\theta_k^{[d]},$ %
+ $\theta_{k+1}^{[d]} = \theta_k^{[d]} +T\omega_k^{[d]},$ %
+ %
+ where $\nu^{[d]}(t)=0.2~[\si{\meter}]$\comment{~}{What about $\omega$?} The robot initial position and orientation being $(x,y) = (0,0)~[\si{\meter}]$ and $\theta_0 = $ We intensify that the robot has no previous knowledge of the dynamic model of the moving target\comment{nor it's initial position}{Robot does need to know the target's position through the sensors}. The results obtained by the simulation are shown in Fig.~\ref{fig:performanceRandom}. The control actions of the robot are determined by the random actor weights. We clearly see tracking error converges and approaches zero as the control signal converging to values that allows target tracking. The results reveal the ability of the proposed algorithm to successfully track the dynamic moving target and adapt to the changes in the target's trajectory and learns online by trial and error in different scenarios. %
+%    
+ \begin{figure*}[htbp]%
+ \subfigure[][]{%
+    \label{fig:trajectoryRandom}%
+    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/trajectoryRandomPathDistance.eps} }
+	\subfigure[][]{%    
+    \label{fig:euclideanDistanceRandom}%
+    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/euclideanDistance.eps} }
+\subfigure[][]{%
+    \label{fig:stateErrorRandom}%
+    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/stateErrorRandomPathDistance.eps} }
+ \subfigure[][]{%
+    \label{fig:controlInputsRandom}%
+    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/controlInputRandomPathDistance.eps} }
+ \subfigure[][]{%
+    \label{fig:criticWeightRandom}%
+    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/weightRandomPathDistance.eps} }
+     \subfigure[][]{%
+    \label{fig:actorWeightRandom}%
+    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/weightActor.eps} }
+  \caption[Robot tracking a target that is  following a random trajectory.]{Robot tracking a target that is  following a random trajectory:
+  \subref{fig:trajectoryRandom} robot and target trajectories,~\subref{fig:stateErrorRandom} position error $\tilde\rho_k$,~\subref{fig:controlInputsRandom} linear speed and steering angle of the target, \subref{fig:criticWeightRandom} critic learning weights~$\bm{\omega}_c,$ and \subref{fig:actorWeightRandom} actor learning weights~${\bf W}_a$}%
+  \label{fig:performanceRandom}%
+\end{figure*}
 
 
+\section{Conclusion} \label{sec:conclusion}
 
- \section{Conclusion} \label{sec:conclusion}
-
-	A model free actor-critic reinfoncement learning algorithm for dynamic target tracking has been validated using set of computer simulation where a differenitial drive mobile robot and a randomly moving target are utilized in the simulation.Opposed to previous approaches in the litrature this Algorithm possess the advantage of being completlety model free and doesn't rely on any dynamic model to be known in priori. The actor weights which drives the control actions of the robot sucessfully converge to values that enable the robot to asymptotically track the moving target through unplanned trajectory. To the authors knowlege this work is the first of its kind to employ a model-free actor-critic RL approach  in the context of dynamic target tracking. In future work the proposed approach will be applied to multi-robot scenarios where a number of robots are to achieve a certain task in unknown enviroments.          
+A model free actor-critic reinforcement learning algorithm for dynamic target
+tracking has been proposed and validated using a set of computer simulation
+where a differential drive mobile robot and a randomly moving target are
+utilized in the simulation. As opposed to previous approaches in the literature,
+the proposed approach possess the advantage of being completely model free and
+does not  rely on any dynamic model of robots. The actor weights which
+drives the control actions of the robot successfully converge to values that
+enable the robot to asymptotically track the moving target through unplanned
+trajectory. In future work, the proposed approach will be applied to multi-robot scenarios
+where a number of robots are to achieve a certain task in unknown environments.
  
 
 
