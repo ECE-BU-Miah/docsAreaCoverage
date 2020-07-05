@@ -53,11 +53,7 @@
 
 \begin{abstract}
   %
-  Addressing the trajectory tracking problem of a mobile robot in tracking a dynamic target is still one of the challenging problems in the field of robotics. In this paper, we address the position tracking problem of a mobile robot where it is supposed to track the position of an mobile target whose dynamics is unknown a priori. This problem is even more challenging when the dynamics of the mobile robot is also assumed to be unknown, which is a basically a realistic assumption. Most of trajectory tracking problems proposed in the literature in the field of mobile robotics are either focused on algorithms that rely on mathematical models of the robots or driven by a  overwhelming degree of computational complexity. This paper proposes a model-free actor-critic reinforcement learning strategy to determine appropriate actuator commands for the robot to track the position trajectory (unknown a priori) of the target. We emphasize that mathematical models of both mobile robot and the target are not required in the current approach. Moreover, Bellman's principle of optimality is utilized to minimize the energy required for the robot to track the target. The performance of the proposed actor-critic reinforcement learning approach  is backed by a set of computer simulations with various complexities using a virtual circular-shaped mobile robot and a point target  modeled by an integrator. 
-
-%   It is even more challenging 
-% This paper advances the previous work done by authors by validating a model-free actor-critic reinforcement learning approach to solve dynamic target tracking problem for a car-like mobile robot. The learning approach generates the linear velocity and steering angle of the robot and it does not require any prior knowledge of the dynamic model of the moving target. Policy iteration approach is employed through Bellman's principle of optimality to assess the cost of the control actions derived by the proposed learning method. The algorithm is tested by coducting a set of computer expeeriments for complex secnarios using virtual robot expirementation platform widely known as CoppeliaSim.        
-% }{Need to be rewritten}  
+  Addressing the trajectory tracking problem of a mobile robot in tracking a dynamic target is still one of the challenging problems in the field of robotics. In this paper, we address the position tracking problem of a mobile robot where it is supposed to track the position of an mobile target whose dynamics is unknown a priori. This problem is even more challenging when the dynamics of the mobile robot is also assumed to be unknown, which is indeed a realistic assumption. Most of trajectory tracking problems proposed in the literature in the field of mobile robotics are either focused on algorithms that rely on mathematical models of the robots or driven by a  overwhelming degree of computational complexity. This paper proposes a model-free actor-critic reinforcement learning strategy to determine appropriate actuator commands for the robot to track the position of the target. We emphasize that mathematical models of both mobile robot and the target are not required in the current approach. Moreover, Bellman's principle of optimality is utilized to minimize the energy required for the robot to track the target. The performance of the proposed actor-critic reinforcement learning approach  is backed by a set of computer simulations with various complexities using a virtual circular-shaped mobile robot and a point target  modeled by an integrator. 
 %
 \end{abstract}
 
@@ -77,47 +73,51 @@ target tracking, mobile robots, reinforcement learning, policy iteration, trajec
 \label{sec:introduction}
 
 
-Tracking a random moving target using a mobile robot is a key problem and a fundemental feature in Autonomus robots in areas such as survillance,search and rescure missions, enviromental monitoring and household cleaning to name a few \cite{kolling2006},\cite{Encarnacao2001},\cite{Ju2001},\cite{Kitowski2012},\cite{Zhang2013}. Throught the years dynamic target tracking problem has recieved profound amount of research in academia and industry.  This is mainly due to their inherent complex nonlinear dynamics. Most of the target tracking algorithms proposed in the literature either rely on A) mathematical and kinematic models of both the robot and the target \cite{Huang2008}, B) the assumption that the target or it's path are static and known in prior, and C) nonlinear control techniques or driven by large amount of mostly offline data that leads to an overwhelming degree of computational complexity \cite{KD2007},\cite{Cren2017}. In a typical tracking problem a robot is to apply a local control actions that enables the robot to maintain a relative position and orientation from the designated target while following a certain path.It can also be applied on a fleet of robots where multiple robots mainatin a geometric configuration relative to the target\cite{Oh2015-Survey},\cite{Liu2017-Modular}.
+Tracking a random moving target using a mobile robot is a key problem and a fundamental feature in autonomous robots operating in areas such as surveillance, search and rescue missions, environmental monitoring, household cleaning, to name a few~\cite{kolling2006,Encarnacao2001,Ju2001,Kitowski2012,Zhang2013}. Throughout the years, the dynamic target tracking problem has received a profound amount of research in academia and industry\todo{Add 2 recent references}. This is mainly due to their inherent complex nonlinear dynamics. Most of the target tracking algorithms proposed in the literature either rely on A) mathematical and kinematic models of both the robot and the target \cite{Huang2008}, B) the assumption that the target or its trajectory are static and known a priori, and C) nonlinear control or soft-computing techniques that are driven by large amount of mostly offline data that leads to an overwhelming degree of computational complexity \cite{KD2007,Cren2017}. In a typical tracking problem, a robot is to apply a local control actions that enable it to maintain a relative position and orientation from the designated target while following a certain trajectory. It can also be applied on a fleet of robots where multiple robots maintain a geometric configuration relative to the target\cite{Oh2015-Survey,Liu2017-Modular}.
 
 %Tracking a random moving target using a mobile robot, for instance, is a challenging task.
 
 
 %Over the past years mobile robots has been used in several applications in commercial and military sectors such as surveillance, search and rescue missions,coverage optimization, cooperative localization and dynamic target tracking tasks to name a few .  In all of these mentioned applications a fleet of robot i.e agents interact with each other to achieve a certain goal. Leader-Follower or dynamic target tracking problem has recieved an extensive amount of study and research in the world of cooperative control theory due to it's promising applications in research and industry. In a typical target tracking formation a number of robots referred to as followers apply local control actions to follow a target in a specific predefined path such as \hl {cyclic, circular motion and time varying communication topologies.} 
 
-Reinforcement learning (RL) is an emerging field of machine learning which refers to a set of algorithms and techniques in which agent learn by interacting with the enviroment and generates it's own set of data. Reinorcement learning has long been applied on games and simulated enviroments but it has recently extended to robots in real world applications such as localization and mapping,area coverage, path planning and obstacle avoidance \cite{kober2013reinforcement},\cite{smart2002},\cite{michels2005},\cite{adekunle2016}. 
+Reinforcement learning (RL) is an emerging field of machine learning which refers to a set of algorithms and techniques in which agents learn by interacting with the environment and determine their own sets of actions that define trajectories. Reinforcement learning has long been applied on games and simulated environments but it has recently been explored to robots in real world applications, such as localization and mapping, area coverage, path planning and obstacle avoidance \cite{kober2013reinforcement,smart2002,michels2005,adekunle2016}. 
 
-In this paper we develop a model-free actor-critic learning  approach to control a non-holonomic wheeled mobile robot.The proposed method offers many advantages over other methods mentioned in the litreature such as being completely model free and does not require any knowledge of the mathemtaical model of the robot or the moving target and without the need for large computational power. The steering angle and the linear speed of the robot referred to as the policy are determined by collecting the position and orientation of both the target and the robot. This set of information is gathered online over a finite period of time. The optimal control actions are then generated by utilizing Bellman's principal of optimality which acts as model free-reinfocment learning approach that allows the  robot to follow the path of the target while avoiding collision by maintaining a safe distance. Here we extend the work proposed by authors in \cite{miah2020} by incorporating actor neural network along with critic network to find optimal control policy for the trajectory tracking problem. This work acts as first milestone in generalizing the algorithm to solve more sophisticated problem such as coverage and mapping.  
+In this paper, we develop a model-free actor-critic learning approach to control a non-holonomic wheeled mobile robot. The proposed method offers many advantages over other methods mentioned in the literature, such as being completely model free and does not require any knowledge of the mathematical model of the robot or the moving target and without the need for large computational power. The steering angle and the linear speed of the robot referred to as the policy (control actions) are determined by collecting the position and orientation of both the target and the robot. This set of information is gathered online over a finite period of time. The optimal control actions are then generated by utilizing Bellman's principle of optimality which acts as model free-reinforcement learning approach that allows the robot to follow the trajectory of the target while avoiding collision by maintaining a safe distance. Here, we extend the work proposed by authors in \cite{miah2020} by incorporating actor neural network along with critic network to find optimal control policy for the trajectory tracking problem. This work acts as first milestone in generalizing the algorithm to solve more sophisticated problem such as typical area coverage and mapping problems in the field of robotics.
 
-The rest of the paper is orgnized as follows. Section II lays down the problem setting of the dynamic target tracking problem and mathemetical models of the robot and the state error. The model free actor-critic reinforcment learning algorithm and all the mathemetical equations are detailed in section III.Section IV illustrates computer simulations for different secnarios that reflects the effectivness of the proposed method followed by conlusion and future work presented in section V.      
+The rest of the paper is organized as follows. Section~\ref{sec:problemSetting} lays down the problem setting of the dynamic target tracking problem and mathematical models of the robot and the state error. The model free actor-critic reinforcement learning algorithm and its associated  mathematical derivations are detailed in section~\ref{sec:RLSolution}. Section~\ref{sec:resultsExperiments} illustrates computer simulations for different scenarios that reflect the effectiveness of the proposed method followed by conlusion and future work presented in section~\ref{sec:conclusion}.      
 
 \section{Problem Setting} 
 \label{sec:problemSetting}
 
-Fig.~\ref{fig:leaderFollowerSetup} shows the setup of the problem that we address in this manuscript. The robot is characterized by its 2D position $(x_k,y_k)$ and orientation $\theta_k\in[-\pi,\pi)$ with respect to global coordinate frame X-Y at discrete time index $k=0,1,\ldots,$ where time $t=kT$ with $T>0$ being the sampling time. The time-varying position of the target is denoted by ${\bf p}_k^{[d]}= [x_k^{[d]},y_k^{[d]}]^T\in\mathbb{R}^2.$  Let the position and orientation (pose) of the robot is denoted by the vector  ${\bf q}_k^T\equiv[x_k,y_k,\theta_k]\in\mathbb{R}^2\times\mathbb{S}^1.$ Without loss of generality, assume that the robot tracks the target's trajectory while maintaining line-of-sight distance (also known as safe distance between the robot and the target) $d>0.$ We emphasize that the mathematical models of both robot and the target are not required in the proposed control technology. For illustration, let us assume that the robot (rear-wheel drive) follows the discrete-time kinematic model described by %
+Fig.~\ref{fig:leaderFollowerSetup} shows the setup of the problem that we address in this manuscript. The robot is characterized by its 2D position $(x_k,y_k)$ and orientation $\theta_k\in[-\pi,\pi)$ with respect to the global coordinate frame X-Y at discrete time index $k=0,1,\ldots,$ where time $t=kT$ with $T>0$ being the sampling time. The time-varying position of the target is denoted by the position vector ${\bf p}_k^{[d]}= [x_k^{[d]},y_k^{[d]}]^T\in\mathbb{R}^2.$  Let the position and orientation (pose) of the robot is denoted by the vector  ${\bf q}_k^T\equiv[x_k,y_k,\theta_k]\in\mathbb{R}^2\times\mathbb{S}^1.$ Without loss of generality, assume that the robot tracks the target trajectory while maintaining line-of-sight distance (also known as the safe distance between the robot and the target) $d>0.$ We emphasize that the mathematical models of both robot and the target are not required in the proposed control technology. For illustration, let us assume that the robot (rear-wheel drive) follows the discrete-time kinematic model described by %
 %
 \begin{subequations}
+  \label{eq:robotModelDT}  
   \begin{align}
-    \label{eq:robotModelDT}
     x_{k+1} &= x_k +T\nu_k\cos\theta_k,\\
     y_{k+1} &= y_k +T\nu_k\sin\theta_k,\\
     \theta_{k+1} &= \theta_k + T\frac{\nu_k}{L}\tan\gamma_k,
   \end{align}
 \end{subequations}
 %
-where $\gamma_k\in(-\frac{\pi}{2},\frac{\pi}{2})$ is the steering angle of the font castor of the robot (see Fig.~\ref{fig:leaderFollowerSetup}), and $\nu_k\in\mathbb{R}$ is the linear speed. Without loss of generality, this work considers a target modeled by an integrator and its discrete-time kinematic model is described by 
+where $\gamma_k\in(-\frac{\pi}{2},\frac{\pi}{2})$ is the steering angle of the font wheel/castor of the robot (see Fig.~\ref{fig:leaderFollowerSetup}), and $\nu_k\in\mathbb{R}$ is the linear speed. Without loss of generality, this work considers a target modeled by an integrator. The discrete-time kinematic model of the target is given as %
+%
  \begin{align}
    \label{eq:leaderDT}
    \mathbf{p}_{k+1}^{[d]} = \mathbf{p}_k^{[d]} + T_s \, \mathbf{u}_k^{[d]},
- \end{align}  
-with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocity) that defines the trajectory (considered random in this work) of the target.  In case, the robot modeled by~\eqref{eq:robotModelDT} is described by a differential drive mobile robot, then its left-wheel velocity $\nu_{L,k}$ and right-wheel velocity $(\nu_{R,k})$ are related as 
+ \end{align}
+% 
+ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocity) that defines the trajectory (considered random in this work) of the target.  In case, the robot modeled by~\eqref{eq:robotModelDT} is described by a differential drive mobile robot, then its left-wheel velocity $\nu_{L,k}$ and right-wheel velocity $\nu_{R,k}$ are related by
+ %
   \begin{figure}
    \centering
    \fcolorbox{gray!10}{gray!5}{
      \includegraphics[width=0.45\textwidth]{figs/ipe/LFMICSetup.eps}
     }
-   \caption{Mobile robot and its dynamic target tracking problem setup.}
+   \caption{Mobile robot and its dynamic target tracking problem setup. \todo[inline]{In this figure, replace $\tilde\theta_k$ with $\theta_k^{'}$}}
    \label{fig:leaderFollowerSetup}
  \end{figure}
+ %
  \begin{subequations}
    \begin{align}
      \nu_{k} &= \frac{1}{2}(\nu_{R,k} + \nu_{L,k}),\\
@@ -129,7 +129,7 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
  where $\omega_k = \frac{\nu_k}{L}\tan\gamma_k$ is the angular velocity of the robot's center $(x_k,y_k).$ Let us define the error vector as 
  \begin{align}
      \label{eq:stateError}
-   \mathbf{e}_k = [\tilde{\rho_k},\tilde\theta_k]^T=[\sqrt{\tilde{x}_k^2+\tilde{y}_k^2},\tilde{\theta_k}]^T% = \\
+   \mathbf{e}_k = \left[ \tilde{\rho_k},\tilde\theta_k \right]^T=\left[ \sqrt{\tilde{x}_k^2+\tilde{y}_k^2},\tilde{\theta_k} \right]^T% = \\
    % \begin{bmatrix}
    %   \sqrt{(x_k^{[d]} - x_k - d\cos\theta_k^{'})^2+
    %   (y_k^{[d]} - y_k - d\sin\theta_k^{'})^2},
@@ -138,7 +138,7 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
  \end{align}
 % 
  where $\theta_k^{'} = \mathrm{atan2}\left(y_k^{[d]}-y_k, x_k^{[d]}-x_k\right)$
- and ${\rho_k} =\sqrt{\tilde{x}_k^2+\tilde{y}_k^2} $ is the Euclidean distance at time instant $k$ as shown in Fig.~\ref{fig:leaderFollowerSetup} with $\tilde{x}_k = x_k^{[d]} - x_k - d\cos\theta_k^{'},$ $\tilde{y}_k = y_k^{[d]} - y_k - d\sin\theta_k^{'},$ and $\tilde{\theta}_k = \theta_k^{'} - \theta_k.$ The control problem can then be formally stated as follows: Find $\nu_k$ and $\gamma_k$ such that ${\bf e}_k\to {\bf 0}$ as  $k\to\infty$ subject to~\eqref{eq:robotModelDT}~and~\eqref{eq:leaderDT}.
+ and $\tilde{\rho}_k =\sqrt{\tilde{x}_k^2+\tilde{y}_k^2} $ is the Euclidean distance (position error) at time instant $k$ as shown in Fig.~\ref{fig:leaderFollowerSetup} with $\tilde{x}_k = x_k^{[d]} - x_k - d\cos\theta_k^{'},$ $\tilde{y}_k = y_k^{[d]} - y_k - d\sin\theta_k^{'},$ and $\tilde{\theta}_k = \theta_k^{'} - \theta_k$ is the orientation error.  The control problem can then be formally stated as follows: Find $\nu_k$ and $\gamma_k$ such that ${\bf e}_k\to {\bf 0}$ as  $k\to\infty$ subject to~\eqref{eq:robotModelDT}~and~\eqref{eq:leaderDT}.
 
 %
 %
@@ -150,11 +150,13 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
 \section{Model-Free Reinforcement Learning Approach}
  \label{sec:RLSolution}
 
- Reinforcement learning is a promising  machine learning technique that is widely used in solving problems of many cyber-physical systems that pertain to the goal-directed learning from interaction~\cite{sutton2020reinforcement}. In this paper, tracking a mobile target using a wheeled mobile robot is formulated as a reinforcement learning problem, where the goal of the robot is to track the trajectory of the target while maintaining the safe-distance $d>0.$ The RL solution employed in the current problem leverages Bellman's principle of optimality to decide on the appropriate control actions (actuator commands) for the robot to track the position trajectory of the target. The relative importance of the states in the error vector ${\bf e}_k$ and the control decisions (linear velocity $\nu_k$ and steering angle $\gamma_k$) of the robot are evaluated using the  performance (cost) index: %
+ Reinforcement learning is a promising  machine learning technique that is widely used in solving problems of many cyber-physical systems that pertain to the goal-directed learning from interaction~\cite{sutton2020reinforcement}. In this paper, tracking a mobile target using a wheeled mobile robot is formulated as a reinforcement learning problem, where the goal of the robot is to track the trajectory of a target while maintaining the safe-distance $d>0.$ The RL solution employed in the current problem leverages Bellman's principle of optimality to decide on the appropriate control actions (actuator commands) for the robot to track the position trajectory of the target. The relative importance of the states in the error vector ${\bf e}_k$ and the control decisions (linear velocity $\nu_k$ and steering angle $\gamma_k$) of the robot are evaluated using the  performance (cost) index %
+ %
  \begin{align}
  \label{eq:costFunctional}
-   J = \sum_{k=0}^\infty \frac{1}{2}\left[{\bf e}_k^T \, {\bf Q} \, {\bf e}_k + {\bf u}_k^T \, {\bf R} \, {\bf u_k}\right],
- \end{align}    
+   J =  \frac{1}{2} \sum_{k=0}^\infty\left[{\bf e}_k^T \, {\bf Q} \, {\bf e}_k + {\bf u}_k^T \, {\bf R} \, {\bf u_k}\right],
+ \end{align}
+ %
  where ${\bf Q}\in\mathbb{R}^{2\times 2}$ and ${\bf R}\in\mathbb{R}^{2\times 2}$ are symmetric positive definite weighting matrices, and ${\bf u}_k^T = [\nu_k,\gamma_k]$ is the control input vector.  The objective of the optimization problem, following~\cite{Lewis2013-Reinforcement}, is to find an optimal sequence of control polices $\{\mathbf{u}^*_k\}_{k=0}^\infty$ that minimizes the cost index $J$ along the state-trajectories~\eqref{eq:leaderDT}~and~\eqref{eq:robotModelDT}. Motivated by the structure of the convex quadratic cost functional~\eqref{eq:costFunctional}, let the solution of the tracking control problem employ the value function $V({\bf e}_k,{\bf u}_k)$ defined by %
  %
  \begin{equation*}
@@ -168,12 +170,12 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
  V({\bf e}_k,{\bf u}_k)= \frac{1}{2}\left[{\bf e}_k^T\, {\bf Q}\, {\bf e}_k + {\bf u}_k^T\, {\bf R}\, {\bf u_k}\right] +V({\bf e}_{k+1},{\bf u}_{k+1}).
  \end{equation*}
  %
- Following Bellman's optimality principle yields the optimal control policies ${\bf u}_k^*,~k\ge 0,$ such that~\cite{Lewis2012} %
+ Bellman's optimality principle yields the optimal control policies ${\bf u}_k^*,~k\ge 0,$ such that~\cite{Lewis2012} %
  %
  \begin{align*}
- {\bf u}^*_k = \argmin_{{\bf u}_k}\left[\frac{1}{2}\left[{\bf e}^T_k\,  {\bf Q}\, {\bf e}_k +{\bf u}^T_k\,  {\bf R} \,  {\bf u}_k\right]   +
- V({\bf e}_{k+1},{\bf u}_{k+1})\right].
- \label{eq:argMinControlAction}
+   {\bf u}^*_k = \argmin_{{\bf u}_k}\left[\frac{1}{2}\left[{\bf e}^T_k\,  {\bf Q}\, {\bf e}_k +{\bf u}^T_k\,  {\bf R} \,  {\bf u}_k\right]   +
+   V^*({\bf e}_{k+1},{\bf u}_{k+1}^*)\right].
+   \label{eq:argMinControlAction}
  \end{align*}
  %
  Alternatively, this optimal  policy form is equivalent to ${\bf u}^*_k = \argmin_{{\bf u}_k}\left[
@@ -185,22 +187,22 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
  V^*({\bf e}_k,{\bf u}^*_k)= \frac{1}{2}\left[{\bf e}_k^T\, {\bf Q}\, {\bf e}_k + {\bf u}_k^{*T}\, {\bf R}\, {\bf u}^*_k\right] +V^*({\bf e}_{k+1},{\bf u}^*_{k+1}),
  \end{equation*}
  %
- where $V^*(\cdot,\cdot)$ is the optimal solution for Bellman optimality equation. This temporal difference equation is utilized by reinforcement learning process which solves the following temporal difference approximation form %
+ where $V^*(\cdot,\cdot)$ is the optimal solution for Bellman's optimality equation. This temporal difference equation is utilized by reinforcement learning process which solves the following temporal difference approximation form %
  %
  \begin{align}
    V(\mathbf{z}_k) = \frac{1}{2}\mathbf{z}_k^T\, \bar{\mathbf{P}}\, \mathbf{z}_k + V(\mathbf{z}_{k+1}),
  \label{eq:valueFunctionEstimated}
  \end{align}
  %
- where $\mathbf{z}_k = \left[\mathbf{e}_k ,\mathbf{u}_k\right]^T\in\mathbb{R}^4,$ $V\left(\mathbf{e}_k,\mathbf{u}_k\right) \approx \hat{V}(\mathbf{z}_k),$  and $\bar{\mathbf{P}}$ is a symmetric block-diagonal matrix formed using $(\mathbf{Q},\mathbf{R}),$~\textit{i.e.,~}$\bar{\mathbf{P}} = \mathrm{blockdiag}(\mathbf{Q},\mathbf{R}).$ %
- The approximation of the solving value function $\hat{V}(\mathbf{z}_k)$ employs a quadratic form so that $\hat{V}(\mathbf{z}_k)=\frac{1}{2}\mathbf{z}_k^T\, \mathbf{P}\, \mathbf{z}_k,$ for some positive definite matrix  $\mathbf{P}\in\mathbb{R}^{4\times 4}.$ The optimal control input ${\bf u}_k*$ is then determined by setting $\frac{\partial\hat{V}({\bf z}_k)}{\partial{\bf u}_k} = 0,$ which yields %
+ where $\mathbf{z}_k = \left[\mathbf{e}_k ,\mathbf{u}_k\right]^T\in\mathbb{R}^4,$ $V\left(\mathbf{e}_k,\mathbf{u}_k\right) \equiv V(\mathbf{z}_k),$  and $\bar{\mathbf{P}}$ is a symmetric block-diagonal matrix formed using $(\mathbf{Q},\mathbf{R}),$~\textit{i.e.,~}$\bar{\mathbf{P}} = \mathrm{blockdiag}(\mathbf{Q},\mathbf{R}).$ %
+ The approximation of the solving value function $V(\mathbf{z}_k)$ employs a quadratic form so that $\hat{V}(\mathbf{z}_k)=\frac{1}{2}\mathbf{z}_k^T\, \mathbf{P}\, \mathbf{z}_k,$ for some positive definite matrix  $\mathbf{P}\in\mathbb{R}^{4\times 4}.$ The optimal control input ${\bf u}_k^*$ is then determined by setting $\frac{\partial\hat{V}({\bf z}_k)}{\partial{\bf u}_k} = 0,$ which yields %
  %
  \begin{align}
  \label{eq:modelFreePolicy}    
  \mathbf{u}_k^* = -\,  \mathbf{P}_{uu}^{-1}\, \mathbf{P}_{ue}\, \mathbf{e}_k,
  \end{align}
  %
- where $\mathbf{P}_{uu}$ and $\mathbf{P}_{ue}$ are sub-blocks of symmetric matrix $\mathbf{P}.$ The proposed approach approximates the block matrix ${\bf P}$ by following a two-step solution mechanism based on policy iteration method~\cite{sutton2020reinforcement}, which in turn approximates the value function~$\hat V(\cdot)$ given by ~\eqref{eq:valueFunctionEstimated}. First, a multi-layer critic neural network shown in Fig.~\ref{fig:nnCritic} is used to estimate the value function, $\hat V({\bf z}_k).$ 
+ where $\mathbf{P}_{uu}$ and $\mathbf{P}_{ue}$ are sub-blocks of symmetric matrix $\mathbf{P}.$ The proposed approach approximates the block matrix ${\bf P}$ by following a two-step solution mechanism based on policy iteration method~\cite{sutton2020reinforcement}, which in turn approximates the value function~$V(\cdot).$ First, a multi-layer critic neural network shown in Fig.~\ref{fig:nnCritic} is used for determining the estimated value function, $\hat V({\bf z}_k).$
 \begin{figure}
     \centering
     \fcolorbox{blue}{gray!5}{
@@ -286,8 +288,7 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
             \foreach \l [count=\x from 0] in {Input, Hidden, Output}
             \node [align=center, above] at (\x*2,1.9) {\l \\ layer};
            
-            \node [align=center, below] at (3,-2.5) {Weights \\ $\boldsymbol{\omega}_c$};
-            \draw[-stealth,ultra thick](3,-2.5) to[bend left] (3,1.4);
+            \draw[-stealth,ultra thick](3,-2.5)node[right]{Weights $\boldsymbol{\omega}_c$} to[bend left] (3,1.4);
            
             \end{tikzpicture}
         \end{adjustbox}      
@@ -296,23 +297,23 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
     \label{fig:nnCritic}
       \end{figure}
  %      
- Second, the policy evaluation step that follows is utilized to update the critic weights $\bm{\omega}_c$ in real-time regardless of the mathematical models of the robot and the target. This step is aimed to search for a strictly better policy using the updated critic weights $\bm{\omega}_c.$ Note that $\hat V({\bf z}_k)$ can also be written using temporal difference form as $\hat V({\bf z}_k) = \mathbf{z}_k^T\, \bar{\mathbf{P}}\, \mathbf{z}_k + \hat V({\bf z}_{k+1}),$ which is described by 
+      Second, the policy evaluation step that follows is utilized to update the critic weights $\bm{\omega}_c$ in real-time regardless of the mathematical models of the robot and the target. This step is aimed to search for a strictly better policy using the updated critic weights $\bm{\omega}_c.$ Note that $\hat V({\bf z}_k)$ can also be written using temporal difference form as $\hat V({\bf z}_k) = \mathbf{z}_k^T\, \bar{\mathbf{P}}\, \mathbf{z}_k + \hat V({\bf z}_{k+1}),$ which is described by
  %
  \begin{equation}
  \label{eq:const}
  \mathbf{z}_k^T\, \mathbf{P}\, \mathbf{z}_k - \mathbf{z}_{k+1}^T\, \mathbf{P}\, \mathbf{z}_{k+1} = \mathbf{z}_k^T\, \bar{\mathbf{P}}\, \mathbf{z}_k. 
  \end{equation}
  %
- Equation~\eqref{eq:const} is evaluated repeatedly to collect data online for at least $\eta\ge \bar n, \bar n= (2+2)(2+2+1)/2 = 10$ evaluation steps due to the fact that the matrix ${\bf P}$ is positive definite and symmetric. The strictly better policy ${\bf P},$ is determined every $\eta$ time/evaluation steps. To find the better policy in terms of matrix ${\bf P},$ let us define the vector $\boldsymbol{\omega}=\mathrm{vec}(\mathbf{P})\in\mathbb{R}^{16},$ which is formed by stacking columns of ${\bf P}$ matrix.  However, since ${\bf P}$ is symmetric, we only need determine the weight $\bm{\omega}_c\in\mathbb{R}^{\bar n}$ using the critic neural network shown in Fig.~\eqref{fig:nnCritic}. The left hand side of~\eqref{eq:const} is expressed using the following critic approximation form %
+ Equation~\eqref{eq:const} is evaluated repeatedly to collect data online for at least $\eta\ge \bar n,$ with $\bar n= (2+2)(2+2+1)/2 = 10$ evaluation steps due to the fact that the matrix ${\bf P}$ is positive definite and symmetric. The strictly better policy matrix ${\bf P},$ is determined every $\eta$ time/evaluation steps. To find the better policy in terms of matrix ${\bf P},$ let us define the vector $\boldsymbol{\omega}=\mathrm{vec}(\mathbf{P})\in\mathbb{R}^{16},$ which is formed by stacking columns of ${\bf P}$ matrix.  However, since ${\bf P}$ is symmetric, we only need to determine the weight $\bm{\omega}_c\in\mathbb{R}^{\bar n}$ using the critic neural network shown in Fig.~\eqref{fig:nnCritic}. The left hand side of~\eqref{eq:const} is expressed using the following critic approximation form %
  %
  $$\hat{V}(\mathbf{z}_k)-\hat{V}(\mathbf{z}_{k+1})=\boldsymbol{\omega}_c^T\tilde{\bm{\rho}}(\mathbf{z}_{k,k+1}),$$
  %
  where $\tilde{\bm{\rho}}(\mathbf{z}_{k,k+1})=\bm{\rho}(\mathbf{z}_k)-\bm{\rho}(\mathbf{z}_{k+1}) \in \mathbb{R}^{10 \times 1}, \, \bm{\rho}(\mathbf{z}_k)=\left(\mathbf{z}_k\otimes\mathbf{z}_k\right)$, which is a Kronecker product that generates the basis function vector with components $z_{k,1}^2,$ $z_{k,1}z_{k,2},$ $z_{k,1}z_{k,3},$ $z_{k,1}z_{k,4},$ $z_{k,2}^2,$ $z_{k,2}z_{k,3},$ $z_{k,2}z_{k,4},$ $z_{k,3}^2,$ $z_{k,3}z_{k,4},$ and $z_{k,4}^2.$ Note that the critic weight $\bm{\omega}_c$ is related to the policy matrix ${\bf P}$ as  $\boldsymbol{\omega}_c^T = [0.5 \, P^{11},P^{12},P^{13},P^{14},  \, 0.5 \, P^{22}, P^{23},P^{24},$ $\,0.5 \, P^{33}, P^{34},\,0.5 \ P^{44}, ]^T \in \mathbb{R}^{1\times 10}$ with $P^{ij}$ being the $ij^{th}$ entry of matrix $\mathbf{P}.$ %
  %
- Here, the critic weights $\boldsymbol{\omega}_c$ are updated using a gradient descent update rule. The tuning error $\varepsilon_k$ at each computational instance $k$ is given by $\varepsilon_k =\boldsymbol{\omega}_c^T\tilde{\bm{\rho}}(\mathbf{z}_{k,k+1})-{v}_k,$ where $v_\kappa = \frac{1}{2}\mathbf{z}_{k}^T \, \bar{\mathbf{P}} \, \mathbf{z}_{k}$. The error data $\varepsilon_k$ is collected online for at least  $\eta \ge \bar n$ evaluation steps before updating the critic weights $\boldsymbol{\omega}_c$ that is used to determine the improved policy ${\bf P}.$ The sum of squared tuning errors is given by 
+ Here, the critic weights $\boldsymbol{\omega}_c$ are updated using a gradient descent update rule. The tuning error $\varepsilon_k$ at each computational instance $k$ is given by $\varepsilon_k =\boldsymbol{\omega}_c^T\tilde{\bm{\rho}}(\mathbf{z}_{k,k+1})-{v}_k,$ where $v_\kappa = \frac{1}{2}\mathbf{z}_{k}^T \, \bar{\mathbf{P}} \, \mathbf{z}_{k}$. The error data $\varepsilon_k$ is collected online for at least  $\eta \ge \bar n$ evaluation steps before updating the critic weights $\boldsymbol{\omega}_c$ that is used to determine the improved policy matrix ${\bf P}.$ The sum of squared tuning errors is given by 
  %
  \begin{align}
-   \delta_c =\sum_{\kappa=0}^{\eta-1}\frac{1}{2}\varepsilon_{k+\kappa}^2 &=\sum_{\kappa=0}^{\eta-1}\frac{1}{2}(\boldsymbol{\omega_c}^T\tilde{\bm{\rho}}(\mathbf{z}_{k+\kappa,k+\kappa+1})-{v}_{k+\kappa})^2 \nonumber \\        	
+   \delta_c =\frac{1}{2}\sum_{\kappa=0}^{\eta-1}\varepsilon_{k+\kappa}^2 &=\frac{1}{2}\sum_{\kappa=0}^{\eta-1}(\boldsymbol{\omega_c}^T\tilde{\bm{\rho}}(\mathbf{z}_{k+\kappa,k+\kappa+1})-{v}_{k+\kappa})^2 \nonumber \\        	
    	&=\frac{1}{2}\| \mathbf{v} - \bm{\Lambda}\bm{\omega_c}\|^2 \nonumber \\
    &=\frac{1}{2}\left(\mathbf{v} - \bm{\Lambda}\bm{\omega_c}\right)^T \left(\mathbf{v} - \bm{\Lambda}\bm{\omega_c}\right), 
  \end{align}
@@ -337,13 +338,13 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
  %
  where $\omega^{[i]}$ is the $i^{th}$ entry of the weight vector $\bm{\omega}_c.$ 
 
- The critic weights are then used to update the actor weights $W_a\mathbb{R}^{n\times m}$ (here $n=2$ and $m=2$) which maps the state error to the desired policy (control actions) as  at every time step $t$ with the following equation:
+ The critic weights are then used to update the actor weights $W_a\in\mathbb{R}^{n\times m}$ (here $n=2$ and $m=2$) which maps the state error to the desired policy (control actions) at time step $k$ with the following equation:
  \begin{align}
  \label{eq:actorWeightsPolicy}    
  \hat{\mathbf{u}}_k  =  {\bf W}_a^T \bm{\sigma}(\mathbf{e}_k),
  \end{align}
  %
- where ${\bf W}_a\in\mathbb{R}^{2\times n^{'}}$ is the actor weight matrix and $\bm{\sigma}:\mathbb{R}^2 \to \mathbb{R}^{n^{'}}$ is the basis function vector.  Equation~\eqref{eq:actorWeightsPolicy} is realized using a multi-layer actor neural network shown in Fig.~\ref{fig:nnActor}. %
+ where ${\bf W}_a\in\mathbb{R}^{n^{'}\times 2}$ is the actor weight matrix and $\bm{\sigma}:\mathbb{R}^2 \to \mathbb{R}^{n^{'}}$ is the basis function vector.  Equation~\eqref{eq:actorWeightsPolicy} is realized using a multi-layer actor neural network shown in Fig.~\ref{fig:nnActor}. %
  %
 \begin{figure}
   \centering
@@ -408,7 +409,7 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
         \foreach \l [count=\i] in {1}
         \draw [<-] (input-\i) -- ++(-1,0)
         node [above, midway] {$\mathbf{e}_{k,1}=\tilde{\rho_{k}}$};
-		\draw [<-] (input-2) -- ++(-1,0)
+        \draw [<-] (input-2) -- ++(-1,0)
         node [above, midway] {$\mathbf{e}_{k,2}=\tilde{\theta_{k}}$};
         \foreach \l [count=\i] in {1,2,\mbox{$n^{'}$}}
         \node [above] at (hidden-\i.north) {$\sigma_{\l}$};
@@ -430,7 +431,6 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
 
         \draw[->,ultra thick]
         (3,-1.5)node[anchor=west]{Weight~${\bf W}_a$} to[bend left] (3,1.6);
-        
       \end{tikzpicture}
     \end{adjustbox}      
     }
@@ -438,7 +438,7 @@ with $\mathbf{u}_k^{[d]}\in\mathbb{R}^2$ being the control input vector (velocit
   \label{fig:nnActor}
 \end{figure}
 %
-The elements of the vector $\bm{\sigma}$ are the activation functions of the neurons in the hidden layer shown in Fig.~\ref{fig:nnActor}. We will need to determine the actor weight matrix ${\bf W}_a$ that minimizes the error between the estimated control inputs determined by model~\eqref{eq:actorWeightsPolicy} and the that determined by critic neural network approximation model~\eqref{eq:modelFreePolicy}. For that, let us define the error %
+The elements of the vector function $\bm{\sigma}(\cdot)$ are the activation functions of the neurons in the hidden layer shown in Fig.~\ref{fig:nnActor}. We will need to determine the actor weight matrix ${\bf W}_a$ that minimizes the error between the estimated control inputs determined by model~\eqref{eq:actorWeightsPolicy} and that determined by critic neural network approximation model~\eqref{eq:modelFreePolicy}. For that, let us define the error %
 %
 \begin{align}
   \label{eq:deltaActor}
@@ -451,20 +451,22 @@ which can be written as %
   \delta_a = \frac{1}{2}\left( {\bf W}_a^T\bm{\sigma}({\bf e}_k) -  {\bf u}_k^*\right)^T\left( {\bf W}_a^T\bm{\sigma}({\bf e}_k) -  {\bf u}_k^*\right). 
 \end{align*}
 %
-Taking partial derivative of the above expression $\delta_a$  with respect to ${\bf W}_a$ gives %
+Taking partial derivative of the above expression of $\delta_a$  with respect to ${\bf W}_a$ gives %
 %
-\begin{align*}
-  \frac{\partial \delta_a}{\partial{\bf W}_a} = {\bf W}_a^T\bm{\sigma}({\bf e}_k)\bm{\sigma}^T({\bf e}_k) - {\bf u}_k^*\bm{\sigma}^T({\bf e}_k).
-\end{align*}
+\begin{multline*}
+  \frac{\partial \delta_a}{\partial{\bf W}_a} = \bm{\sigma}({\bf e}_k)\bm{\sigma}^T({\bf e}_k){\bf W}_a - \bm{\sigma}({\bf e}_k)\left( {\bf u}_k^* \right)^T\\
+  =\bm{\sigma}({\bf e}_k)\left[ \bm{\sigma}^T({\bf e}_k){\bf W}_a -\left( {\bf u}_k^* \right)^T \right].
+\end{multline*}
 %
-Therefore, actor weight matrix ${\bf W}_a$ in every policy iteration $r = 01,2,\ldots$ can be updated using the learning rule %
+Therefore, actor weight matrix ${\bf W}_a$ in every policy iteration $r = 0,1,2,\ldots$ can be updated using the learning rule %
 %
 \begin{multline}
   {\bf W}_a^{[r+1]} = {\bf W}_a^{[r]} - \ell_a\frac{\partial\delta_a}{\partial{\bf W}_a}\\
-  = {\bf W}_a^{[r]} - \ell_a\left( {\bf W}_a^T\bm{\sigma}({\bf e}_k)-\mathbf{u}_k^* \right)\bm{\sigma}^T({\bf e}_k), 
+  = {\bf W}_a^{[r]} - \ell_a\bm{\sigma}({\bf e}_k)\left[ \bm{\sigma}^T({\bf e}_k){\bf W}_a -\left( {\bf u}_k^* \right)^T \right], 
  \label{eq:actorWeights}
- \end{multline}
- where $\ell_a$ is the actor learning rate.  The complete policy iteration solution process for the leader-follower problem is detailed out in Algorithm \ref{alg:ModelFreeTracking}. %
+\end{multline}
+%
+ where $\ell_a$ is the actor learning rate.  The complete policy iteration solution process for the leader-follower problem is detailed out in Algorithm~\ref{alg:ModelFreeTracking}. \todo[inline]{In Algorithm 1, add a line with $n=2$ (state error dimension) and $m=2$ (input dimension)} %
  %
  \begin{algorithm2e}{
      \caption{\label{alg:ModelFreeTracking} Model-free actor-critic reinforcement learning using the policy iteration solution.}
@@ -510,92 +512,89 @@ For clarity, number of hidden neurons chosen in the actor neural network shown i
  \section{Computer Experiments and Results}
  \label{sec:resultsExperiments}
 
- This section adopts the theoritical results discussed in the previous section by simulating the Algorithm using a differential drive mobile robot. The proposed Actor-Critic RL algorithm is tested  utilizing Matlab software and Robot Operating system (ROS)  as a prelminary step to implement the Algorithm experimantally in real world.Here we present the performance of the proposed method and the convergence characterisitcs of the actor and critic weights. The weighting matrices are set to $\mathbf{Q} = \mathrm{diag}[0.001,0.001]$ and $\mathbf{R} = \mathrm{diag}[10^{-5}, 10^{-5}].$ % 
-  \[Q=0.001 
-  \begin{bmatrix}
-  1       & 0   \\
-  0       & 1   \\
-  \end{bmatrix},
-  R=0.00001
-  \begin{bmatrix}
-  1       & 0 \\
-  0       & 1 
-  \end{bmatrix}.\]
+ This section adopts the theoretical results discussed in the previous section by simulating Algorithm~\ref{alg:ModelFreeTracking} using a differential drive mobile robot. The proposed actor-critic RL algorithm is tested  utilizing MATLAB software and Robot Operating System (ROS)  as a preliminary step to implement the Algorithm experimentally in real world. Here we present the performance of the proposed method and the convergence characteristics of the actor and critic weights. The weighting matrices are set to $\mathbf{Q} = \mathrm{diag}[0.001,0.001]$ and $\mathbf{R} = \mathrm{diag}[10^{-5}, 10^{-5}].$ % 
+  % \[Q=0.001 
+  % \begin{bmatrix}
+  % 1       & 0   \\
+  % 0       & 1   \\
+  % \end{bmatrix},
+  % R=0.00001
+  % \begin{bmatrix}
+  % 1       & 0 \\
+  % 0       & 1 
+  % \end{bmatrix}.\]
   
   
- The actor and critic learning rates $\ell_c$,$\ell_a$ are set to  $0.0001$ and $0.01$ respectively. The sampling time $T_s$ is set to $0.001 \sec.$ The desired distance offset between the leader and the follower is set to $ d = 0.2$ [m] for the first scenario and $d = 0.5$ [m] for the second.
+ The actor and critic learning rates are set to $\ell_c = 0.00001$ and $\ell_a=0.01,$ respectively. The sampling time $T$ is set to $0.001 \sec.$ The desired distance offset between the target and the robot is set to $ d = 0.2~[\si{\meter}]$ for the first scenario and $d = 0.5~[\si{\meter}]$ for the second scenario. 
 
  
-   In the first scenario the differential drive robot was initally placed at position $(x^d,y^d) = (-1,-5) $ [m] with an orientation $\theta = 0 \degree$ .The Target which is modeled as a cylinder object was initially located at a random position around  $(x,y) = (0,0)$ [m]. The simulation was run for the duration of 60 seconds.The targer is set to move following a sinusoidal path modeled as  $
- x^{[d]}(t) = \alpha (t) \in [0,10\pi], %
+ In the first scenario, the differential drive robot was initially placed at position $(x^d,y^d) = (-1,-5)~[\si{\meter}] $ with an orientation of $\theta = 0\degree.$ The target which is modeled as a \comment{cylinder object}{we are running MATLAB simulation and using point robot as a target} was initially located at a random position around  $(x,y) = (0,0)~[\si{\meter}].$ The simulation was run for the duration of $t_f=60~[\second].$ The target is set to move following a sinusoidal path modeled as  $
+ x^{[d]}(t) = \alpha t, %
  y^{[d]}(t) = 5 \,\sin(\alpha t),$  and %
- $\theta^{[d]}(t) = cos(\alpha t).  %
-$ In the begining of the simulation the robot starts to move away from the target according to the intial random actor weights.As the robot collects more information the robot adjust the control actions as the actor and critic weights started to converge and the robot asymptotically follows the target's trajectory. 
-    
-  In the second scenario the Target is set to move on a completely random trajectory starting from a random position around $(x^[d],y^[d])=(1,5)$ with 
+ $\theta^{[d]}(t) = cos(\alpha t),
+ $ with $\alpha = 10\pi/t_f.$ Simulation results are shown in Fig.~\ref{fig:peformanceSinTrajectory}. In the beginning of the simulation, the robot starts to move away from the target according to the initial random actor weights. As the robot collects more data, the robot adjust the control actions as the actor and critic weights started to converge and the robot asymptotically follows the target's trajectory. %
+%
+ \begin{figure*}[htbp]%
+ 
+ \subfigure[][]{%
+    \label{fig:trajectorySin}%
+    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/trajectoryRandomPathDistance.eps} }
+	\subfigure[][]{%    
+    \label{fig:euclideanDistanceSin}%
+    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/euclideanDistance.eps} }
+  \\
+\subfigure[][]{%
+    \label{fig:stateErrorSin}%
+    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/stateErrorRandomPathDistance.eps} }
+ \subfigure[][]{%
+    \label{fig:controlInputsSin}%
+    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/controlInputRandomPathDistance.eps} }
+  \\
+ \subfigure[][]{%
+    \label{fig:weightCriticSin}%
+    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/weightRandomPathDistance.eps} }
+     \subfigure[][]{%
+    \label{fig:actorWeightSin}%
+    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/weightActor.eps} }
+\caption[Target tracking performance in following a sinusoidal trajectory.]{\comment{Target tracking performance in following a sinusoidal trajectory:}{Are you using CoppeliaSim results?} 
+  \subref{fig:trajectorySin} robot and target trajectories,~\subref{fig:stateErrorSin} position error $\tilde\rho_k$,~\subref{fig:controlInputsSin} linear speed and steering angle of the target, \subref{fig:weightCriticSin} critic learning weights~$\bm{\omega}_c,$ and \subref{fig:actorWeightSin} actor learning weights~${\bf W}_a$}%
+  \label{fig:peformanceSinTrajectory}%
+\end{figure*} 
+%
+\todo[inline]{Update the text below following the description for th first scenario.} %
+
+  In the second scenario, the target is set to move on a completely random trajectory starting from a random position around $(x^{[d]},y^{[d]})=(1,5)$ with 
  $\dot x^{[d]}(t) = \nu^{[d]}(t)\cos\theta^{[\ell]}(t),$ %
  $\dot y^{[d]}(t) = \nu^{[d]}(t)\sin\theta^{[\ell]}(t).$
 $ \dot\theta^{[d]}(t) = \omega(t)$,
- where $\nu^{[d]}(t)=0.2$ [m]. The robot intial position and orientation being $(x,y) = (0,0)$. We intensify that the robot has no previous knoweledge of the dynamic model of the moving target nor it's initial position. The results obtained by the simulation are shown in figure \ref{fig:simulationResults}. the control actions of the robot are determined by the random actor weights .we clearly see tracking error converges and approaches zero as the control signal converging to values that allows target tracking. the results reveal the ability of the proposed algorithm to sucessfully track the dynamic moving target and adapt to the changes in the target's trajectory and learns online by trial and error in different scenarios.      
-%\begin{figure}
-%   \centering
-%   \fcolorbox{gray!10}{gray!5}{
-%     \includegraphics[width=0.45\textwidth]{figs/coppeliasim.png}
-%`     }
-%   \caption{Simulation Setup}
-%   \label{fig:CoppeliaSim Scene}
-% \end{figure}  
- \begin{figure*}[htbp]%
- 
- \subfigure[][]{%
-    \label{fig:trajectoryRandom}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/trajectoryRandomPathDistance.eps} }
-	\subfigure[][]{%    
-    \label{fig:euclideanDistance}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/euclideanDistance.eps} }
-\subfigure[][]{%
-    \label{fig:stateErrorRandom}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/stateErrorRandomPathDistance.eps} }
- \subfigure[][]{%
-    \label{fig:controlInputsRandom}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/controlInputRandomPathDistance.eps} }
- \subfigure[][]{%
-    \label{fig:weightRandomDistance}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/weightRandomPathDistance.eps} }
-     \subfigure[][]{%
-    \label{fig:actorWeightRandomDistance}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/weightActor.eps} }
-\caption[Leader-follower performance for random trajectory.]{Performance in tracking random trajectory: 
-  \subref{fig:trajectoryRandom} leader-follower trajectories,~\subref{fig:stateErrorRandom} state error,~\subref{fig:controlInputsRandom} linear speed and steering angle of the follower; and    \subref{fig:weightRandomDistance} learning weights.}%
-  \label{fig:peformanceRandomTrajectory}%
-	\label{fig:simulationResults}
-\end{figure*}
+ where $\nu^{[d]}(t)=0.2~[\si{\meter}].$\comment{~}{What about $\omega$?} The robot initial position and orientation being $(x,y) = (0,0)$. We intensify that the robot has no previous knowledge of the dynamic model of the moving target nor it's initial position. The results obtained by the simulation are shown in~Fig.\ref{fig:simulationResults}. The control actions of the robot are determined by the random actor weights. We clearly see tracking error converges and approaches zero as the control signal converging to values that allows target tracking. The results reveal the ability of the proposed algorithm to sucessfully track the dynamic moving target and adapt to the changes in the target's trajectory and learns online by trial and error in different scenarios.      
+
     
- \begin{figure*}[htbp]%
+%  \begin{figure*}[htbp]%
  
- \subfigure[][]{%
-    \label{fig:trajectoryRandom}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/trajectoryRandomPathDistance.eps} }
-	\subfigure[][]{%    
-    \label{fig:euclideanDistance}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/euclideanDistance.eps} }
-\subfigure[][]{%
-    \label{fig:stateErrorRandom}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/stateErrorRandomPathDistance.eps} }
- \subfigure[][]{%
-    \label{fig:controlInputsRandom}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/controlInputRandomPathDistance.eps} }
- \subfigure[][]{%
-    \label{fig:weightRandomDistance}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/weightRandomPathDistance.eps} }
-     \subfigure[][]{%
-    \label{fig:actorWeightRandomDistance}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/weightActor.eps} }
-\caption[Leader-follower performance for random trajectory.]{Performance in tracking random trajectory: 
-  \subref{fig:trajectoryRandom} leader-follower trajectories,~\subref{fig:stateErrorRandom} state error,~\subref{fig:controlInputsRandom} linear speed and steering angle of the follower; and    \subref{fig:weightRandomDistance} learning weights.}%
-  \label{fig:peformanceRandomTrajectory}%
-	\label{fig:simulationResults}
-\end{figure*}
+%  \subfigure[][]{%
+%     \label{fig:trajectoryRandom}%
+%     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/trajectoryRandomPathDistance.eps} }
+% 	\subfigure[][]{%    
+%     \label{fig:euclideanDistance}%
+%     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/euclideanDistance.eps} }
+% \subfigure[][]{%
+%     \label{fig:stateErrorRandom}%
+%     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/stateErrorRandomPathDistance.eps} }
+%  \subfigure[][]{%
+%     \label{fig:controlInputsRandom}%
+%     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/controlInputRandomPathDistance.eps} }
+%  \subfigure[][]{%
+%     \label{fig:weightRandomDistance}%
+%     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/weightRandomPathDistance.eps} }
+%      \subfigure[][]{%
+%     \label{fig:actorWeightRandomDistance}%
+%     \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/weightActor.eps} }
+% \caption[Leader-follower performance for random trajectory.]{Performance in tracking random trajectory: 
+%   \subref{fig:trajectoryRandom} robot and target trajectories,~\subref{fig:stateErrorRandom} position error~$\tilde{\rho}_k$,~\subref{fig:controlInputsRandom} linear speed and steering angle of the follower; and    \subref{fig:weightRandomDistance} learning weights.}%
+%   \label{fig:peformanceRandomTrajectory}%
+% 	\label{fig:simulationResults}
+% \end{figure*}
 
 
 
