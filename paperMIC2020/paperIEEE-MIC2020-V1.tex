@@ -114,7 +114,7 @@ where $\gamma_k\in(-\frac{\pi}{2},\frac{\pi}{2})$ is the steering angle of the f
    \fcolorbox{gray!10}{gray!5}{
      \includegraphics[width=0.45\textwidth]{figs/ipe/LFMICSetup.eps}
     }
-   \caption{Mobile robot and its dynamic target tracking problem setup. \todo[inline]{In this figure, replace $\tilde\theta_k$ with $\theta_k^{'}$}}
+   \caption{Mobile robot and its dynamic target tracking problem setup.}
    \label{fig:leaderFollowerSetup}
  \end{figure}
  %
@@ -477,6 +477,7 @@ Therefore, actor weight matrix ${\bf W}_a$ in every policy iteration $r = 0,1,2,
      % \KwResult{output******************************}
      \Begin{
          $k=0, r = 0$ \tcc*[h]{Discrete time and policy indices}\;
+         n = 2 , m = 2 \tcc*[h]{state error and input dimensions}\;
          $\eta = (n+m)(n+m+1)/2$\;
          Initialize $\mathbf{P}^{[0]}$ \tcc*[h]{Positive definite}\;
                  Set offset distance $d$\;
@@ -512,7 +513,7 @@ For clarity, number of hidden neurons chosen in the actor neural network shown i
  \section{Computer Experiments and Results}
  \label{sec:resultsExperiments}
 
- This section adopts the theoretical results discussed in the previous section by simulating Algorithm~\ref{alg:ModelFreeTracking} using a differential drive mobile robot. The proposed actor-critic RL algorithm is tested  utilizing MATLAB software and Robot Operating System (ROS)  as a preliminary step to implement the Algorithm experimentally in real world. Here we present the performance of the proposed method and the convergence characteristics of the actor and critic weights. The weighting matrices are set to $\mathbf{Q} = \mathrm{diag}[0.001,0.001]$ and $\mathbf{R} = \mathrm{diag}[10^{-5}, 10^{-5}].$ % 
+ This section adopts the theoretical results discussed in the previous section by simulating Algorithm~\ref{alg:ModelFreeTracking} using a differential drive mobile robot. The proposed actor-critic RL algorithm is tested  utilizing MATLAB software in a laptop computer running Ubuntu 18.04 as a preliminary step to implement the Algorithm experimentally in real world. Here we present the performance of the proposed method and the convergence characteristics of the actor and critic weights. The weighting matrices are set to $\mathbf{Q} = \mathrm{diag}[0.001,0.001]$ and $\mathbf{R} = \mathrm{diag}[10^{-5}, 10^{-5}].$ % 
   % \[Q=0.001 
   % \begin{bmatrix}
   % 1       & 0   \\
@@ -528,69 +529,65 @@ For clarity, number of hidden neurons chosen in the actor neural network shown i
  The actor and critic learning rates are set to $\ell_c = 0.00001$ and $\ell_a=0.01,$ respectively. The sampling time $T$ is set to $0.001 \sec.$ The desired distance offset between the target and the robot is set to $ d = 0.2~[\si{\meter}]$ for the first scenario and $d = 0.5~[\si{\meter}]$ for the second scenario. 
 
  
- In the first scenario, the differential drive robot was initially placed at position $(x^d,y^d) = (-1,-5)~[\si{\meter}] $ with an orientation of $\theta = 0\degree.$ The target which is modeled as a \comment{cylinder object}{we are running MATLAB simulation and using point robot as a target} was initially located at a random position around  $(x,y) = (0,0)~[\si{\meter}].$ The simulation was run for the duration of $t_f=60~[\second].$ The target is set to move following a sinusoidal path modeled as  $
+ In the first scenario, the differential drive robot was initially placed at position $(x^d,y^d) = (-2,-2)~[\si{\meter}] $ with an orientation of $\theta = 0\degree.$ The target which is modeled as a point robot was initially located at a random position around  $(x,y) = (0,0)~[\si{\meter}].$ The simulation was run for the duration of $t_f=60~[\second].$ The target is set to move following a sinusoidal path modeled as  $
  x^{[d]}(t) = \alpha t, %
  y^{[d]}(t) = 5 \,\sin(\alpha t),$  and %
  $\theta^{[d]}(t) = cos(\alpha t),
- $ with $\alpha = 10\pi/t_f.$ Simulation results are shown in Fig.~\ref{fig:performanceSin}. In the beginning of the simulation, the robot starts to move away from the target according to the initial random actor weights. As the robot collects more data, the robot adjust the control actions as the actor and critic weights started to converge and the robot asymptotically follows the target's trajectory. %
+ $ with $\alpha = 4\pi/t_f.$ and $t=kT$, $T$ represents the sampling time while $k$ being timing index. Simulation results are shown in Fig.~\ref{fig:performanceSin}. In the beginning of the simulation, the robot starts to move away from the target according to the initial random actor weights as we see in \ref{fig:trajectorySin}.In Fig \ref{fig:euclideanDistanceSin} the euclidean distance overshoots before finally approaching zero. As the robot collects more data, the robot adjust the control actions as the actor and critic weights started to converge and the robot asymptotically follows the target's trajectory as can be seen in Fig \ref{fig:criticWeightSin} and \ref{fig:actorWeightSin}. %
 %
  \begin{figure*}[htbp]%
  
  \subfigure[][]{%
     \label{fig:trajectorySin}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/trajectoryRandomPathDistance.eps} }
+    \includegraphics[width=0.48\textwidth,height=0.15\textheight]{matlabsim/sinePath/OUT/trajectorySineWave.eps} }
 	\subfigure[][]{%    
     \label{fig:euclideanDistanceSin}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/euclideanDistance.eps} }
-  \\
-\subfigure[][]{%
-    \label{fig:stateErrorSin}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/stateErrorRandomPathDistance.eps} }
- \subfigure[][]{%
-    \label{fig:controlInputsSin}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/controlInputRandomPathDistance.eps} }
+    \includegraphics[width=0.48\textwidth,height=0.15\textheight]{matlabsim/sinePath/OUT/euclideanDistanceSineWave.eps} }
+%  \\
+%\subfigure[][]{%
+%    \label{fig:stateErrorSin}%
+%    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/stateErrorRandomPathDistance.eps} }
+% \subfigure[][]{%
+%    \label{fig:controlInputsSin}%
+%    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/controlInputRandomPathDistance.eps} }
   \\
  \subfigure[][]{%
     \label{fig:criticWeightSin}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/weightRandomPathDistance.eps} }
+    \includegraphics[width=0.48\textwidth,height=0.15\textheight]{matlabsim/sinePath/OUT/weightSineWave.eps} }
      \subfigure[][]{%
     \label{fig:actorWeightSin}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/secondScenario/weightActor.eps} }
-\caption[Robot tracking a target that is following a sinusoidal trajectory.]{\comment{Robot tracking a target that is  following a sinusoidal trajectory:}{Are you using CoppeliaSim results?} 
-  \subref{fig:trajectorySin} robot and target trajectories,~\subref{fig:stateErrorSin} position error $\tilde\rho_k$,~\subref{fig:controlInputsSin} linear speed and steering angle of the target, \subref{fig:criticWeightSin} critic learning weights~$\bm{\omega}_c,$ and \subref{fig:actorWeightSin} actor learning weights~${\bf W}_a$}%
-  \label{fig:performanceSin}%
+    \includegraphics[width=0.48\textwidth,height=0.15\textheight]{matlabsim/sinePath/OUT/weightActorSineWave.eps} }
+\caption[Robot tracking a target that is  following a random trajectory.]{Robot tracking a target that is  following a random trajectory:
+  \subref{fig:trajectoryRandom} robot and target trajectories,~\subref{fig:euclideanDistanceRandom} position error $\tilde\rho_k$, \subref{fig:criticWeightRandom} critic learning weights~$\bm{\omega}_c,$ and \subref{fig:actorWeightRandom} actor learning weights~${\bf W}_a$}
+    \label{fig:performanceSin}%
 \end{figure*} 
 %
 
-In the second scenario, the target is set to move on a completely random trajectory starting from a random initial position $(x^{[d]},y^{[d]})\approx (1,5)~[\si{\meter}],$ where the \comment{target is now modeled as an unicycle robot}{Previously we talk about point robot model for the target but now you are using the following model for the target} described by %
-%
- $x_{k+1}^{[d]} = x_k^{[d]} + T\nu_k^{[d]}\cos\theta_k^{[d]},$ %
- $y_{k+1}^{[d]} = y_k^{[d]} + T\nu_k^{[d]}\sin\theta_k^{[d]},$ %
- $\theta_{k+1}^{[d]} = \theta_k^{[d]} +T\omega_k^{[d]},$ %
+In the second scenario, the target is set to move on a completely random trajectory starting from a random initial position $(x^{[d]},y^{[d]})\approx (2,-1)~[\si{\meter}],$ where the target is now modeled as a point robot as described in ~\eqref{eq:leaderDT}
  %
- where $\nu^{[d]}(t)=0.2~[\si{\meter}]$\comment{~}{What about $\omega$?} The robot initial position and orientation being $(x,y) = (0,0)~[\si{\meter}]$ and $\theta_0 = $ We intensify that the robot has no previous knowledge of the dynamic model of the moving target\comment{nor it's initial position}{Robot does need to know the target's position through the sensors}. The results obtained by the simulation are shown in Fig.~\ref{fig:performanceRandom}. The control actions of the robot are determined by the random actor weights. We clearly see tracking error converges and approaches zero as the control signal converging to values that allows target tracking. The results reveal the ability of the proposed algorithm to successfully track the dynamic moving target and adapt to the changes in the target's trajectory and learns online by trial and error in different scenarios. %
+ where $\mathbf{u}_k^{[d]}=[\nu^{[d]},\omega^{[d]}] $ with $\nu^{[d]}(t)=0.2~[\si{\meter}]$ and $\omega$ randomly chaning in the range of $({-\pi},{\pi}) $.  The robot initial position and orientation are $(x,y) = (0,0)~[\si{\meter}]$ and $\theta_0=0$ .We intensify that the robot has no previous knowledge of the dynamic model of the moving target. The results obtained by the simulation are shown in Fig.~\ref{fig:performanceRandom}.Figure \ref{fig:trajectoryRandom} describes the trajectory of the robot and the target during the simulation. The control actions of the robot are determined by the random actor weights. We clearly see euclidean distance in Fig \ref{fig:euclideanDistanceRandom} converges and approaches zero as actor and critic weights converges to values that allows target tracking as can be seen in fig \ref{fig:criticWeightRandom} and \ref{fig:actorWeightRandom}. The results reveal the ability of the proposed algorithm to successfully track the dynamic moving target and adapt to the changes in the target's trajectory and learns online by trial and error in different scenarios. %
 %    
  \begin{figure*}[htbp]%
  \subfigure[][]{%
     \label{fig:trajectoryRandom}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/trajectoryRandomPathDistance.eps} }
+    \includegraphics[width=0.48\textwidth,height=0.15\textheight]{matlabsim/randomPath/OUT/trajectoryRandom.eps} }
 	\subfigure[][]{%    
     \label{fig:euclideanDistanceRandom}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/euclideanDistance.eps} }
-\subfigure[][]{%
-    \label{fig:stateErrorRandom}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/stateErrorRandomPathDistance.eps} }
- \subfigure[][]{%
-    \label{fig:controlInputsRandom}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/controlInputRandomPathDistance.eps} }
+    \includegraphics[width=0.48\textwidth,height=0.15\textheight]{matlabsim/randomPath/OUT/euclideanDistanceRandom.eps} }
+%\subfigure[][]{%
+%    \label{fig:stateErrorRandom}%
+%    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/stateErrorRandomPathDistance.eps} }
+% \subfigure[][]{%
+%    \label{fig:controlInputsRandom}%
+%    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/controlInputRandomPathDistance.eps} }
  \subfigure[][]{%
     \label{fig:criticWeightRandom}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/weightRandomPathDistance.eps} }
+    \includegraphics[width=0.48\textwidth,height=0.15\textheight]{matlabsim/randomPath/OUT/weightRandom.eps} }
      \subfigure[][]{%
     \label{fig:actorWeightRandom}%
-    \includegraphics[width=0.48\textwidth,height=0.25\textheight]{figs/coppelia/firstScenario/weightActor.eps} }
+    \includegraphics[width=0.48\textwidth,height=0.15\textheight]{matlabsim/randomPath/OUT/weightActorRandom.eps} }
   \caption[Robot tracking a target that is  following a random trajectory.]{Robot tracking a target that is  following a random trajectory:
-  \subref{fig:trajectoryRandom} robot and target trajectories,~\subref{fig:stateErrorRandom} position error $\tilde\rho_k$,~\subref{fig:controlInputsRandom} linear speed and steering angle of the target, \subref{fig:criticWeightRandom} critic learning weights~$\bm{\omega}_c,$ and \subref{fig:actorWeightRandom} actor learning weights~${\bf W}_a$}%
+  \subref{fig:trajectoryRandom} robot and target trajectories,~\subref{fig:euclideanDistanceRandom} position error $\tilde\rho_k$, \subref{fig:criticWeightRandom} critic learning weights~$\bm{\omega}_c,$ and \subref{fig:actorWeightRandom} actor learning weights~${\bf W}_a$}%
   \label{fig:performanceRandom}%
 \end{figure*}
 
