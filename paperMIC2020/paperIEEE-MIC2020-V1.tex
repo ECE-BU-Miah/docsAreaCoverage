@@ -32,33 +32,41 @@
 }
 
 \author{%~
-\IEEEauthorblockN{Amr Elhussein and Md Suruz Miah}
-\IEEEauthorblockA{\textit{Electrical \& Computer Eng.} \\
-\textit{Bradley University}, Peoria, Illinois, USA \\
- aelhussein@mail.bradley.edu and smiah@bradley.edu}
-% \and
-% \IEEEauthorblockN{Fazel Keshtkar}
-% \IEEEauthorblockA{\textit{Div. of Computer Science, Math. and Science} \\
-% \textit{St John's University}, Queens, NY, USA \\
-% keshtkaf@stjohns.edu}
-% \and
-% \IEEEauthorblockN{Mohammed Abouheaf}
-% \IEEEauthorblockA{\textit{School of EECS} \\
-% \textit{Univ. of Ottawa}, Canada\\
-% mabouhea@uottawa.ca}
-%
+  ~ % Author names removed for blind review 
+% \IEEEauthorblockN{Amr Elhussein and Md Suruz Miah}
+% \IEEEauthorblockA{\textit{Electrical \& Computer Eng.} \\
+% \textit{Bradley University}, Peoria, Illinois, USA \\
+%  aelhussein@mail.bradley.edu and smiah@bradley.edu}
 }
 
 \maketitle
 
 \begin{abstract}
   %
-  Addressing the trajectory tracking problem of a mobile robot in tracking a dynamic target is still one of the challenging problems in the field of robotics. In this paper, we address the position tracking problem of a mobile robot where it is supposed to track the position of an mobile target whose dynamics is unknown a priori. This problem is even more challenging when the dynamics of the mobile robot is also assumed to be unknown, which is indeed a realistic assumption. Most of trajectory tracking problems proposed in the literature in the field of mobile robotics are either focused on algorithms that rely on mathematical models of the robots or driven by a  overwhelming degree of computational complexity. This paper proposes a model-free actor-critic reinforcement learning strategy to determine appropriate actuator commands for the robot to track the position of the target. We emphasize that mathematical models of both mobile robot and the target are not required in the current approach. Moreover, Bellman's principle of optimality is utilized to minimize the energy required for the robot to track the target. The performance of the proposed actor-critic reinforcement learning approach  is backed by a set of computer simulations with various complexities using a virtual circular-shaped mobile robot and a point target  modeled by an integrator. 
+  Addressing the trajectory tracking problem of a mobile robot in tracking a
+  dynamic target is still one of the challenging problems in the field of
+  robotics. In this paper, we address the position tracking problem of a mobile
+  robot where it is supposed to track the position of an mobile target whose
+  dynamics is unknown a priori. This problem is even more challenging when the
+  dynamics of the mobile robot is also assumed to be unknown, which is indeed a
+  realistic assumption. Most of the trajectory tracking solutions proposed in the
+  literature in the field of mobile robotics are either focused on algorithms
+  that rely on mathematical models of the robots or driven by a overwhelming
+  degree of computational complexity. This paper proposes a model-free
+  actor-critic reinforcement learning strategy to determine appropriate actuator
+  commands for the robot to track the position of the target. We emphasize that
+  mathematical models of both mobile robot and the target are not required in
+  the current approach. Moreover, Bellman's principle of optimality is utilized
+  to minimize the energy required for the robot to track the target. The
+  performance of the proposed actor-critic reinforcement learning approach is
+  backed by a set of computer experiments with various complexities using a
+  virtual circular-shaped mobile robot and a point target modeled by an
+  integrator.
 %
 \end{abstract}
 
 \begin{IEEEkeywords}
-target tracking, mobile robots, reinforcement learning, policy iteration, trajectory tracking
+  Mobile robots, policy iteration, reinforcement learning, target tracking, trajectory tracking
 \end{IEEEkeywords}
 
 % \begin{nomenclature}
@@ -73,18 +81,63 @@ target tracking, mobile robots, reinforcement learning, policy iteration, trajec
 \label{sec:introduction}
 
 
-Tracking a random moving target using a mobile robot is a key problem and a fundamental feature in autonomous robots operating in areas such as surveillance, search and rescue missions, environmental monitoring, household cleaning, to name a few~\cite{kolling2006,Encarnacao2001,Ju2001,Kitowski2012,Zhang2013}. Throughout the years, the dynamic target tracking problem has received a profound amount of research in academia and industry\todo{Add 2 recent references}. This is mainly due to their inherent complex nonlinear dynamics. Most of the target tracking algorithms proposed in the literature either rely on A) mathematical and kinematic models of both the robot and the target \cite{Huang2008}, B) the assumption that the target or its trajectory are static and known a priori, and C) nonlinear control or soft-computing techniques that are driven by large amount of mostly offline data that leads to an overwhelming degree of computational complexity \cite{KD2007,Cren2017}. In a typical tracking problem, a robot is to apply a local control actions that enable it to maintain a relative position and orientation from the designated target while following a certain trajectory. It can also be applied on a fleet of robots where multiple robots maintain a geometric configuration relative to the target\cite{Oh2015-Survey,Liu2017-Modular}.
+Tracking a random moving target using a mobile robot is a key problem and a
+fundamental feature in autonomous robots operating in areas such as
+surveillance, search and rescue missions, environmental monitoring, household
+cleaning, to name a
+few~\cite{kolling2006,Encarnacao2001,Ju2001,Kitowski2012,Zhang2013}. Throughout
+the years, the dynamic target tracking problem has received a profound amount of
+research in academia and industry\todo{Add 2 recent references}. This is mainly
+due to their inherent complex nonlinear dynamics. Most of the target tracking
+algorithms proposed in the literature either rely on A) mathematical and
+kinematic models of both the robot and the target \cite{Huang2008}, B) the
+assumption that the target or its trajectory are static and known a priori, and
+C) nonlinear control or soft-computing techniques that are driven by large
+amount of mostly offline data that leads to an overwhelming degree of
+computational complexity~\cite{KD2007,Cren2017}. In a typical target tracking problem,
+a robot is to apply local control actions that enable it to maintain a
+relative position and orientation from the designated target while following a
+certain trajectory. It can also be applied on a fleet of robots where multiple
+robots maintain a geometric configuration relative to the
+target~\cite{Oh2015-Survey,Liu2017-Modular}.
 
 %Tracking a random moving target using a mobile robot, for instance, is a challenging task.
 
 
 %Over the past years mobile robots has been used in several applications in commercial and military sectors such as surveillance, search and rescue missions,coverage optimization, cooperative localization and dynamic target tracking tasks to name a few .  In all of these mentioned applications a fleet of robot i.e agents interact with each other to achieve a certain goal. Leader-Follower or dynamic target tracking problem has recieved an extensive amount of study and research in the world of cooperative control theory due to it's promising applications in research and industry. In a typical target tracking formation a number of robots referred to as followers apply local control actions to follow a target in a specific predefined path such as \hl {cyclic, circular motion and time varying communication topologies.} 
 
-Reinforcement learning (RL) is an emerging field of machine learning which refers to a set of algorithms and techniques in which agents learn by interacting with the environment and determine their own sets of actions that define trajectories. Reinforcement learning has long been applied on games and simulated environments but it has recently been explored to robots in real world applications, such as localization and mapping, area coverage, path planning and obstacle avoidance \cite{kober2013reinforcement,smart2002,michels2005,adekunle2016}. 
+Reinforcement learning (RL) is an emerging sub-field of machine learning which
+refers to a set of algorithms and techniques in which agents learn by
+interacting with the environment and determine their own sets of actions that
+define trajectories. Reinforcement learning has long been applied on games and
+simulated environments but it has recently been explored to robots in real world
+applications, such as localization and mapping, area coverage, path planning and
+obstacle avoidance
+\cite{kober2013reinforcement,smart2002,michels2005,adekunle2016}.
 
-In this paper, we develop a model-free actor-critic learning approach to control a non-holonomic wheeled mobile robot. The proposed method offers many advantages over other methods mentioned in the literature, such as being completely model free and does not require any knowledge of the mathematical model of the robot or the moving target and without the need for large computational power. The steering angle and the linear speed of the robot referred to as the policy (control actions) are determined by collecting the position and orientation of both the target and the robot. This set of information is gathered online over a finite period of time. The optimal control actions are then generated by utilizing Bellman's principle of optimality which acts as model free-reinforcement learning approach that allows the robot to follow the trajectory of the target while avoiding collision by maintaining a safe distance. Here, we extend the work proposed by authors in \cite{miah2020} by incorporating actor neural network along with critic network to find optimal control policy for the trajectory tracking problem. This work acts as first milestone in generalizing the algorithm to solve more sophisticated problem such as typical area coverage and mapping problems in the field of robotics.
+In this paper, we develop a model-free actor-critic learning approach to control
+a non-holonomic wheeled mobile robot. The proposed method offers many advantages
+over other methods mentioned in the literature, such as being completely model
+free and does not require any knowledge of the mathematical model of the robot
+or the moving target and without the need for large computational power. The
+steering angle and the linear speed of the robot referred to as the policy
+(control actions) are determined by collecting the position and orientation of
+both the target and the robot. This set of information is gathered online over a
+finite period of time. The optimal control actions are then generated by
+utilizing Bellman's principle of optimality which acts as model-free reinforcement learning approach that allows the robot to follow the
+trajectory of the target while avoiding collision by maintaining a safe
+distance. Here, we extend the work proposed by authors in~\cite{miah2020} by
+incorporating actor neural network along with critic network to find optimal
+control policy for the trajectory tracking problem. This work acts as the first
+milestone in generalizing the algorithm to solve more sophisticated problem such
+as typical area coverage and mapping problems in the field of robotics.
 
-The rest of the paper is organized as follows. Section~\ref{sec:problemSetting} lays down the problem setting of the dynamic target tracking problem and mathematical models of the robot and the state error. The model free actor-critic reinforcement learning algorithm and its associated  mathematical derivations are detailed in section~\ref{sec:RLSolution}. Section~\ref{sec:resultsExperiments} illustrates computer simulations for different scenarios that reflect the effectiveness of the proposed method followed by conlusion and future work presented in section~\ref{sec:conclusion}.      
+The rest of the paper is organized as follows. Section~\ref{sec:problemSetting}
+lays down the problem setting of the dynamic target tracking problem and
+mathematical models of the robot and the state error. The model~free
+actor-critic reinforcement learning algorithm and its associated  mathematical
+derivations are detailed in section~\ref{sec:RLSolution}.
+Section~\ref{sec:resultsExperiments} illustrates computer experiments for different scenarios that reflect the effectiveness of the proposed method followed by conclusion and future work presented in section~\ref{sec:conclusion}.      
 
 \section{Problem Setting} 
 \label{sec:problemSetting}
@@ -150,7 +203,18 @@ where $\gamma_k\in(-\frac{\pi}{2},\frac{\pi}{2})$ is the steering angle of the f
 \section{Model-Free Reinforcement Learning Approach}
  \label{sec:RLSolution}
 
- Reinforcement learning is a promising  machine learning technique that is widely used in solving problems of many cyber-physical systems that pertain to the goal-directed learning from interaction~\cite{sutton2020reinforcement}. In this paper, tracking a mobile target using a wheeled mobile robot is formulated as a reinforcement learning problem, where the goal of the robot is to track the trajectory of a target while maintaining the safe-distance $d>0.$ The RL solution employed in the current problem leverages Bellman's principle of optimality to decide on the appropriate control actions (actuator commands) for the robot to track the position trajectory of the target. The relative importance of the states in the error vector ${\bf e}_k$ and the control decisions (linear velocity $\nu_k$ and steering angle $\gamma_k$) of the robot are evaluated using the  performance (cost) index %
+ Reinforcement learning is a promising machine learning technique that is widely
+ used for solving problems of many cyber-physical systems that pertain to  
+ goal-directed learning from interaction~\cite{sutton2020reinforcement}. In this
+ paper, tracking a mobile target using a wheeled mobile robot is formulated as a
+ reinforcement learning problem, where the goal of the robot is to track the
+ trajectory of a target while maintaining the safe-distance $d>0.$ The RL
+ solution employed in the current problem leverages Bellman's principle of
+ optimality to decide on the appropriate control actions (actuator commands) for
+ the robot to track the position trajectory of the target. The relative
+ importance of the states in the error vector ${\bf e}_k$ and the control
+ decisions (linear velocity $\nu_k$ and steering angle $\gamma_k$) of the robot
+ are evaluated using the performance (cost) index %
  %
  \begin{align}
  \label{eq:costFunctional}
@@ -466,7 +530,8 @@ Therefore, actor weight matrix ${\bf W}_a$ in every policy iteration $r = 0,1,2,
  \label{eq:actorWeights}
 \end{multline}
 %
- where $\ell_a$ is the actor learning rate.  The complete policy iteration solution process for the leader-follower problem is detailed out in Algorithm~\ref{alg:ModelFreeTracking}. 
+ where $\ell_a$ is the actor learning rate.  The complete policy iteration
+ solution process for the target tracking problem is detailed out in Algorithm~\ref{alg:ModelFreeTracking}. 
  %
  \begin{algorithm2e}{
      \caption{\label{alg:ModelFreeTracking} Model-free actor-critic reinforcement learning using the policy iteration solution.}
@@ -529,11 +594,21 @@ For clarity, number of hidden neurons chosen in the actor neural network shown i
  The actor and critic learning rates are set to $\ell_c = 0.00001$ and $\ell_a=0.01,$ respectively. The sampling time $T$ is set to $0.001 \sec.$ The desired distance offset between the target and the robot is set to $ d = 0.2~[\si{\meter}]$ for the first scenario and $d = 0.5~[\si{\meter}]$ for the second scenario. 
 
  
- In the first scenario, the differential drive robot was initially placed at position $(x^d,y^d) = (-2,-2)~[\si{\meter}] $ with an orientation of $\theta = 0\degree.$ The target which is modeled as a point robot was initially located at a random position around  $(x,y) = (0,0)~[\si{\meter}].$ The simulation was run for the duration of $t_f=60~[\second].$ The target is set to move following a sinusoidal path modeled as  $
- x^{[d]}(t) = \alpha t, %
- y^{[d]}(t) = 5 \,\sin(\alpha t),$  and %
- $\theta^{[d]}(t) = cos(\alpha t),
- $ with $\alpha = 4\pi/t_f.$ and $t=kT$, $T$ represents the sampling time while $k$ being timing index. Simulation results are shown in Fig.~\ref{fig:performanceSin}. In the beginning of the simulation, the robot starts to move away from the target according to the initial random actor weights as we see in \ref{fig:trajectorySin}.In Fig \ref{fig:euclideanDistanceSin} the euclidean distance overshoots before finally approaching zero. As the robot collects more data, the robot adjust the control actions as the actor and critic weights started to converge and the robot asymptotically follows the target's trajectory as can be seen in Fig \ref{fig:criticWeightSin} and \ref{fig:actorWeightSin}. %
+ In the first scenario, the differential drive robot was initially placed at
+ position $(x^d,y^d) = (-2,-2)~[\si{\meter}] $ with an orientation of $\theta =
+ 0\degree.$ The target which is modeled as a point robot was initially located
+ at a random position around $(x,y) = (0,0)~[\si{\meter}].$ The simulation was
+ run for the duration of $t_f=60~[\second].$ The target is set to move following
+ a sinusoidal path modeled as $ x^{[d]}(t) = \alpha t, %
+ y^{[d]}(t) = 5 \,\sin(\alpha t),$ and %
+ $\theta^{[d]}(t) = cos(\alpha t), $ with $\alpha = 4\pi/t_f.$ and $t=kT$, $T$
+ represents the sampling time while $k$ being timing index. Simulation results
+ are shown in Fig.~\ref{fig:performanceSin}. In the beginning of the simulation,
+ the robot starts to move away from the target according to the initial random
+ actor weights as we see in \ref{fig:trajectorySin}. In Fig.~\ref{fig:euclideanDistanceSin} the euclidean distance overshoots before finally
+ approaching zero. As the robot collects more data, the robot adjust the control
+ actions as the actor and critic weights started to converge and the robot
+ asymptotically follows the target's trajectory as can be seen in Fig.~\ref{fig:criticWeightSin}~and~\ref{fig:actorWeightSin}. %
 %
  \begin{figure*}[htbp]%
  
@@ -557,15 +632,27 @@ For clarity, number of hidden neurons chosen in the actor neural network shown i
      \subfigure[][]{%
     \label{fig:actorWeightSin}%
     \includegraphics[width=0.48\textwidth,height=0.15\textheight]{matlabsim/sinePath/OUT/weightActorSineWave.eps} }
-\caption[Robot tracking a target that is  following a random trajectory.]{Robot tracking a target that is  following a random trajectory:
-  \subref{fig:trajectoryRandom} robot and target trajectories,~\subref{fig:euclideanDistanceRandom} position error $\tilde\rho_k$, \subref{fig:criticWeightRandom} critic learning weights~$\bm{\omega}_c,$ and \subref{fig:actorWeightRandom} actor learning weights~${\bf W}_a$}
+\caption[Robot tracking a target that is  following a sinusoidal trajectory.]{Robot tracking a target that is  following a sinusoidal trajectory:
+  \subref{fig:trajectorySin} robot and target trajectories,~\subref{fig:euclideanDistanceSin} position error $\tilde\rho_k$, \subref{fig:criticWeightSin} critic learning weights~$\bm{\omega}_c,$ and \subref{fig:actorWeightRandom} actor learning weights~${\bf W}_a$}
     \label{fig:performanceSin}%
 \end{figure*} 
 %
 
-In the second scenario, the target is set to move on a completely random trajectory starting from a random initial position $(x^{[d]},y^{[d]})\approx (2,-1)~[\si{\meter}],$ where the target is now modeled as a point robot as described in ~\eqref{eq:leaderDT}
+In the second scenario, the target is set to move on a completely random trajectory starting from a random initial position $(x^{[d]},y^{[d]})\approx (2,-1)~[\si{\meter}],$ where the target is now modeled as a point robot as described in~\eqref{eq:leaderDT}
  %
- where $\mathbf{u}_k^{[d]}=[\nu^{[d]},\omega^{[d]}] $ with $\nu^{[d]}(t)=0.2~[\si{\meter}]$ and $\omega$ randomly chaning in the range of $({-\pi},{\pi}) $.  The robot initial position and orientation are $(x,y) = (0,0)~[\si{\meter}]$ and $\theta_0=0$ .We intensify that the robot has no previous knowledge of the dynamic model of the moving target. The results obtained by the simulation are shown in Fig.~\ref{fig:performanceRandom}.Figure \ref{fig:trajectoryRandom} describes the trajectory of the robot and the target during the simulation. The control actions of the robot are determined by the random actor weights. We clearly see euclidean distance in Fig \ref{fig:euclideanDistanceRandom} converges and approaches zero as actor and critic weights converges to values that allows target tracking as can be seen in fig \ref{fig:criticWeightRandom} and \ref{fig:actorWeightRandom}. The results reveal the ability of the proposed algorithm to successfully track the dynamic moving target and adapt to the changes in the target's trajectory and learns online by trial and error in different scenarios. %
+where $\mathbf{u}_k^{[d]}=[\nu^{[d]},\omega^{[d]}] $ with
+$\nu^{[d]}(t)=0.2~[\si{\meter}]$ and $\omega$ randomly changing in the range of
+$({-\pi},{\pi}) $. The robot initial position and orientation are $(x,y) =
+(0,0)~[\si{\meter}]$ and $\theta_0=0$. We intensify that the robot has no
+previous knowledge of the dynamic model of the moving target. The results
+obtained by the simulation are shown in Fig.~\ref{fig:performanceRandom}. Fig.~\ref{fig:trajectoryRandom} describes the trajectory of the robot and the target
+during the simulation. The control actions of the robot are determined by the
+random actor weights. We clearly see Euclidean distance in Fig.~\ref{fig:euclideanDistanceRandom} converges and approaches zero as actor and
+critic weights converges to values that allows target tracking as can be seen in
+Fig.~\ref{fig:criticWeightRandom}~and~\ref{fig:actorWeightRandom}. The results
+reveal the ability of the proposed algorithm to successfully track the dynamic
+moving target and adapt to the changes in the target's trajectory and learns
+online by trial and error in different scenarios. %
 %    
  \begin{figure*}[htbp]%
  \subfigure[][]{%
@@ -595,7 +682,7 @@ In the second scenario, the target is set to move on a completely random traject
 \section{Conclusion} \label{sec:conclusion}
 
 A model free actor-critic reinforcement learning algorithm for dynamic target
-tracking has been proposed and validated using a set of computer simulation
+tracking has been proposed and validated using a set of computer experiments  
 where a differential drive mobile robot and a randomly moving target are
 utilized in the simulation. As opposed to previous approaches in the literature,
 the proposed approach possess the advantage of being completely model free and
