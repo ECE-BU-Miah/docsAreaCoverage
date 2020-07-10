@@ -2,7 +2,7 @@
 %Edited by AMR Elhussein on May, 29,2020.
 %gradient descent Appraoch, three cases comined fixed point, horzintal and inclined line, 
 %converged Example
-function mainLF_OdometricLocalizationV7
+function mainActorCriticRL_TargetTrackingRnd
 
 % Created by S. Miah on Nov. 03, 2015.
 %edited by AMR Elhussein on Aug, 30,2019.
@@ -36,7 +36,7 @@ M = 2;  % input vector dimension
 
 
 % Leader's initial position
-pLeaderInit = [5;1]+rand(2,1); %[m]
+pLeaderInit = [2;-1]+rand(2,1); %[m]
 pLeaderTheta= 0; %[rad]
 
 QD(1,:) = [pLeaderInit' pLeaderTheta];
@@ -82,7 +82,7 @@ lc = 0.00001; %learnging rate
 la= 0.01; %actor learning rate
 
 %initlize actor weights
-Wa=0.001*rand(2,2);
+Wa=0.0001*rand(2,2);
 
 %reconstruct the P matrix to get the wheights matrix
  w(1,1) = 0.5 * P(1,1);
@@ -137,19 +137,19 @@ for k = 1:tsteps    % Main timing loop, k = time index
     
 %generating random path for the leader
     if k == 1
-        pLeaderTheta = pLeaderTheta + 0.5*rand*pi/4;
+        pLeaderTheta = pLeaderTheta + 0.5*rand*pi;
     end
 
     if k == tsteps/4  % change orientation of the leader
-        pLeaderTheta = pLeaderTheta-0.5*rand;        
+        pLeaderTheta = pLeaderTheta-0.5*rand*pi;        
     end
 
     if k == tsteps/2 % change orientation of the leader
-        pLeaderTheta = pLeaderTheta+0.5*rand*pi/4;
+        pLeaderTheta = pLeaderTheta+0.5*rand*pi;
     end
 
     if k ==3* tsteps/4 % change orientation of the leader
-        pLeaderTheta = pLeaderTheta-0.5*rand*pi/4;
+        pLeaderTheta = pLeaderTheta-0.5*rand*pi;
     end
     
     %saving leader control actions
