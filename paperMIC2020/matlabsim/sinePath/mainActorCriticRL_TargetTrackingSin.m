@@ -2,7 +2,7 @@
 %Edited by AMR Elhussein on May, 29,2020.
 %gradient descent Appraoch, three cases comined fixed point, horzintal and inclined line, 
 %converged Example
-function mainLF_OdometricLocalizationV7
+function mainActorCriticRL_TargetTrackingSin
 
 % Created by S. Miah on Nov. 03, 2015.
 %edited by AMR Elhussein on Aug, 30,2019.

@@ -2,7 +2,7 @@
 %Edited by AMR Elhussein on May, 29,2020.
 %gradient descent Appraoch, three cases comined fixed point, horzintal and inclined line, 
 %converged Example
-function mainLF_OdometricLocalizationV7
+function mainActorCriticRL_TargetTrackingRnd
 
 % Created by S. Miah on Nov. 03, 2015.
 %edited by AMR Elhussein on Aug, 30,2019.
@@ -17,12 +17,12 @@ disp('Please wait while the simulation runs ...');
 % ---------------------
 
 % Simulation time
-t0 = 0; tf = 10; % initial and final simulation time [s]
+t0 = 0; tf = 60; % initial and final simulation time [s]
 T = 0.001;  % Sampling time [s]
 tsteps = ceil((tf-t0)/T); % number of time steps
 dt = T*(0:tsteps)'; % Discrete time vector (include time t0 to plot initial state too)
 
-d = 0.5; %[m] safe distance
+d = 0.2; %[m] safe distance
 %ROBOT PARAMETERS
 %==========================================================================
 l = 0.381; % [m]
@@ -36,24 +36,20 @@ M = 2;  % input vector dimension
 
 
 % Leader's initial position
-pLeaderInit = [0;0]+ rand(2,1); %[m]
-pLeaderTheta(:,1)= 0:(4*pi)/(tsteps-1):4*pi; %[rad]
-alpha = 4*pi/tf;
-pLeaderTheta(tsteps+1,:)=4*pi
+pLeaderInit = [2;-1]+rand(2,1); %[m]
+pLeaderTheta= 0; %[rad]
 
-QD(1,:) = [pLeaderInit' cos(0.1*pLeaderTheta(1,:))];
-
-
+QD(1,:) = [pLeaderInit' pLeaderTheta];
 QDinit = QD(1,:);
 %Leader's velocity 
-vLeader = 2; % [m/s]
-
+vLeader = 0.1; % [m/s]
+uLeader=[vLeader pLeaderTheta];
 
 % Follower robot initialization% 
-qp = [-2;-2]; % [m] Follower robot's position
+qp = [0;0]; % [m] Follower robot's position
 qTheta = 0 ;% [rad] Follower robot's orientation 
  qInit = [qp',qTheta] ;%+ rand(1,3); % row vector
-vMax = 5; % [m/s] Follower's maximum linear speed 
+vMax = 2; % [m/s] Follower's maximum linear speed 
 
 Q(1,:) = qInit;
 
@@ -68,9 +64,9 @@ pk = pLeaderInit;
 %initiating matrices
 P = [3  0   2   0.5;
       0   3   0.5    2;
-      2 0.5   3      0;
-    0.5   2    0      3]
- P = P+5*rand;
+      1 0.5   3      0;
+    0.5   1    0      3];
+ P = P+2*rand;
 eig(P)
 Pinit = P;
 
@@ -83,20 +79,20 @@ Pbar = blkdiag(Q,R);
 
 %Learning parameters
 lc = 0.00001; %learnging rate
-la= 0.001; %actor learning rate
+la= 0.01; %actor learning rate
 
 %initlize actor weights
-Wa=0.01*rand(2,2);
+Wa=0.0001*rand(2,2);
 
 %reconstruct the P matrix to get the wheights matrix
-w(1,1) = 0.5 * P(1,1);
-w(2:4,1)=P(1,2:4);
-w(5,1) = 0.5*P(2,2);
-w(6:7,1) =P(2,3:4) ;
-w(8,1) = 0.5*P(3,3);
-w(9,1) =P(3,4) ;
-w(10,1) = 0.5*P(4,4);
-
+ w(1,1) = 0.5 * P(1,1);
+ w(2:4,1)=P(1,2:4);
+ w(5,1) = 0.5*P(2,2);
+ w(6:7,1) =P(2,3:4) ;
+ w(8,1) = 0.5*P(3,3);
+ w(9,1) =P(3,4) ;
+ w(10,1) = 0.5*P(4,4);
+       
        
 % Store weight vector over time (every (n+m)*(n+m+1)/2 time steps).        
 W = zeros((N+M)*(N+M+1)/2,floor(tsteps/((N+M)*(N+M+1)/2))+1);
@@ -139,15 +135,31 @@ kappa = 1;  % data collection index
 indexWeight= 1; %weight saving index
 for k = 1:tsteps    % Main timing loop, k = time index
     
-%generating sine path for the leader
-%     pKPlus1 =  [(pLeaderTheta(k+1,:));vLeader*sin(0.5*pLeaderTheta(k+1,:))];
-%     QD(k+1,:) = [pKPlus1' cos(0.5*pLeaderTheta(k+1,:))];    
-%     pk = pKPlus1;
-    
-    pKPlus1 =  [alpha*k*T;vLeader*sin(0.5*alpha*k*T)];
-    QD(k+1,:) = [pKPlus1' cos(0.5*alpha*k*T)];    
-    pk = pKPlus1;
+%generating random path for the leader
+    if k == 1
+        pLeaderTheta = pLeaderTheta + 0.5*rand*pi;
+    end
 
+    if k == tsteps/4  % change orientation of the leader
+        pLeaderTheta = pLeaderTheta-0.5*rand*pi;        
+    end
+
+    if k == tsteps/2 % change orientation of the leader
+        pLeaderTheta = pLeaderTheta+0.5*rand*pi;
+    end
+
+    if k ==3* tsteps/4 % change orientation of the leader
+        pLeaderTheta = pLeaderTheta-0.5*rand*pi;
+    end
+    
+    %saving leader control actions
+%     uLeader=[vLeader pLeaderTheta];
+%     QD(k+1,:)=DDMR_modelEuler(uLeader,QDinit',T);
+%     QDinit = QD(k+1,:);
+    pKPlus1 =  pk + T*[vLeader*cos(pLeaderTheta);vLeader*sin(pLeaderTheta)];
+    QD(k+1,:) = [pKPlus1' pLeaderTheta];    
+    pk = pKPlus1;
+    
     % update follower's position and orientation;    
     q(k+1,:) = DDMR_modelEuler(uk,qInit',T);
     qInit= q(k+1,:);
@@ -259,7 +271,7 @@ xlabel('Time [s]');
 ylabel('{\bf \omega_c}');
 grid on
 set(gca, 'PlotBoxAspectRatio',[3 1 1]);
-savefilename = 'OUT/weightRandomPathDistance';
+savefilename = 'OUT/weightRandom';
 saveas(gcf, savefilename, 'fig');
 print('-depsc2', '-r300', [savefilename, '.eps']);
 
@@ -270,7 +282,7 @@ xlabel('Time [s]');
 ylabel('{\bf W_a}');
 grid on
 set(gca, 'PlotBoxAspectRatio',[3 1 1]);
-savefilename = 'OUT/weightActor';
+savefilename = 'OUT/weightActorRandom';
 saveas(gcf, savefilename, 'fig');
 print('-depsc2', '-r300', [savefilename, '.eps']);
 
@@ -348,7 +360,7 @@ function generatePlots(Tn, t, actualStates, desiredStates, error, u,trackingErro
     ylabel('Steering angle [deg]');
     grid on
     set(gca, 'PlotBoxAspectRatio',[3 1 1]);
-    savefilename = ['OUT/controlInputRandomPathDistance'];
+    savefilename = ['OUT/controlInputRandom'];
     saveas(gcf, savefilename, 'fig');
     print('-depsc2', '-r300', [savefilename, '.eps']);
     
@@ -371,8 +383,8 @@ function generatePlots(Tn, t, actualStates, desiredStates, error, u,trackingErro
     for i = 1:100:Tn-1,
         clf;
         box on;
-         axis([xmin-5 xmax+5 ymin-5 ymax+5]);
-        axis equal;
+        axis([xmin-2 xmax+2 ymin-2 ymax+2]);
+%         axis equal;
         axis manual;
         [Xa,Ya] = plot_DDMR(actualStates(i,:),axis(gca)); % 
         
@@ -390,18 +402,18 @@ function generatePlots(Tn, t, actualStates, desiredStates, error, u,trackingErro
         hold off;
         xlabel('x [m]');
         ylabel('y [m]');
-%         F = getframe(fig);
+        F = getframe(fig);
 %         writeVideo(vid,F);          
     end
     [Xa,Ya] = plot_DDMR(actualStates(1,:),axis(gca)); % DDMR => Differential drive mobile robot
     grid on
-    set(gca, 'PlotBoxAspectRatio',[3 1 1]);
     hold on
     plot(Xa,Ya);    
     hold on
     legend([actual desired],'Robot', 'Target');
     set(gca, 'PlotBoxAspectRatio',[3 1 1]);
-    savefilename = 'OUT/trajectoryRandomPathDistance';
+    set(gca, 'PlotBoxAspectRatio',[3 1 1]);
+    savefilename = 'OUT/trajectoryRandom';
     saveas(gcf, savefilename, 'fig');
     print('-depsc2', '-r300', [savefilename, '.eps']);
        
@@ -432,7 +444,7 @@ function generatePlots(Tn, t, actualStates, desiredStates, error, u,trackingErro
     set(gca, 'PlotBoxAspectRatio',[3 1 1]);
     %plot euclidean distance rho_e
     
-    savefilename = ['OUT/stateErrorRandomPathDistance'];
+    savefilename = ['OUT/stateErrorRandom'];
     saveas(gcf, savefilename, 'fig');
     print('-depsc2', '-r300', [savefilename, '.eps']);
     
@@ -443,7 +455,7 @@ function generatePlots(Tn, t, actualStates, desiredStates, error, u,trackingErro
     ylabel('$$\tilde{\rho_k}$$','Interpreter','latex');        
     grid on
     set(gca, 'PlotBoxAspectRatio',[3 1 1]);
-    savefilename = ['OUT/euclideanDistance'];
+    savefilename = ['OUT/euclideanDistanceRandom'];
     saveas(gcf, savefilename, 'fig');
     print('-depsc2', '-r300', [savefilename, '.eps']);
     
