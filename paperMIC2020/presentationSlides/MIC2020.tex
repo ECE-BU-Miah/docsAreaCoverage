@@ -66,10 +66,10 @@
 \usepackage{mathtools}
 \usepackage{amsmath,amssymb,bm}
 \usepackage{subcaption}
-%\usepackage{subfigure}
+%\usepackage{subfig}
 \usepackage{media9}
 \usepackage{algorithm2e}   % package for algorithm
-
+\usepackage{epstopdf}
 
 \usepackage{tikz}
 %\usetikzlibrary{arrows,shapes,snakes,automata,backgrounds,petri}
@@ -228,23 +228,87 @@ Robot Applications in real world:
 %%------------------------
 \section{Previous Approaches}
 \begin{frame}{Traditional Approaches}{Litrature Review}
-\
+\begin{itemize}
+\item The target or it's path is static. 
+\item Rely on dynamic models for both the target and the robot.
+\end{itemize}
 \end{frame}
 %-----------------------------
 \section{Reinforcement Learning Approach}
 \begin{frame}{Our Approach}{What is RL Learning?}
-
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item Reinforcement learning (RL) is an emerging sub-field of
+machine learning which refers to a set of algorithms and
+techniques in which agents learn by interacting with the
+environment and determine their own sets of actions that define
+trajectories.
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\includegraphics[scale=0.25]{figs/img/Ref-L-agent.pdf}
+\end{column}
+\end{columns}
 \end{frame}
-
+%-----------------------------------
+\begin{frame}{Key Equations}
+\begin{equation}
+  J =  \frac{1}{2} \sum_{k=0}^\infty\left[{\bf e}_k^T \, {\bf Q} \, {\bf e}_k + {\bf u}_k^T \, {\bf R} \, {\bf u_k}\right],
+\end{equation}
+\begin{equation}
+ \mathbf{u}_k^* = -\,  \mathbf{P}_{uu}^{-1}\, \mathbf{P}_{ue}\, \mathbf{e}_k,
+\end{equation}
+\begin{center}
+with P being:
+ ${\bf P}=\begin{bmatrix} 
+ 2\,\omega_c^{[1]}    & \omega_c^{[2]}      & \omega_c^{[3]}       & \omega_c^{[4]}        \\ 
+ \omega_c^{[2]}       &2\, \omega_c^{[5]}   & \omega_c^{[6]}       & \omega_c^{[7]}        \\
+ \omega_c^{[3]}       & \omega_c^{[6]}      &2\, \omega_c^{[8]}   & \omega_c^{[9]}   \\   
+ \omega_c^{[4]}       & \omega_c^{[7]}      & \omega_c^{[9]}      & 2\,\omega_c^{[10]}      
+ \end{bmatrix}\in \mathbb{R}^{4\times 4}$
+ \end{center}
+\end{frame}
 %%-------------------------
 \section{Computer Simulations}
-\begin{frame}{Results}
-
+\begin{frame}{Results}{First Scenario}{Sine wave}
+\begin{figure} 
+{\includegraphics[scale=0.3]{figs/matlab/Sinewave/trajectorySineWave.eps}}
+{\includegraphics[scale=0.3]{figs/matlab/Sinewave/euclideanDistanceSineWave.eps}}
+\caption{Trajectory and Euclidean Distance}
+\end{figure}
+\begin{figure}
+{\includegraphics[scale=0.3]{figs/matlab/Sinewave/weightActorSineWave.eps}}
+{\includegraphics[scale=0.3]{figs/matlab/Sinewave/weightSineWave.eps}}
+\caption{Actor and Critic Weights}
+\end{figure}
 \end{frame}
 %%----------------
+\begin{frame}{Results}{Second Scenario}{Random Path}
+\begin{figure} 
+{\includegraphics[scale=0.4]{figs/matlab/Random/trajectoryRandom.eps}}
+{\includegraphics[scale=0.4]{figs/matlab/Random/euclideanDistanceRandom.eps}}
+\caption{Trajectory and Euclidean Distance}
+\end{figure}
+\begin{figure}
+{\includegraphics[scale=0.4]{figs/matlab/Random/weightActorRandom.eps}}
+{\includegraphics[scale=0.4]{figs/matlab/Random/weightRandom.eps}}
+\caption{Actor and Critic Weights}
+\end{figure}
+\end{frame}
+%--------------
 \section{Conclusion}
 \begin{frame}{In Summary}
-
+\begin{itemize}
+\item A model free actor-critic reinforcement learning algorithm for dynamic target
+tracking has been proposed and validated using a set of computer experiments .
+\item  a differential drive mobile robot and a randomly moving target are
+utilized in the simulation. 
+\item The actor weights which
+drives the control actions of the robot successfully converge to values that
+enable the robot to asymptotically track the moving target through unplanned
+trajectory. 
+\end{itemize}
 \end{frame}
 %\begin{frame}{Conclusion}
 %In this work, we have presented a new framework,
