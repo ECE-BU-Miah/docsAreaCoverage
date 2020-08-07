@@ -110,7 +110,7 @@
 % - Use the \inst command only if there are several affiliations.
 % - Keep it simple, no one is interested in your street address.
 \date[MIC~2020]
-{{\footnotesize Midwest Industry Conference
+{{\footnotesize IEEE Midwest Industry Conference
 \\
 August 7-8, 2020 ~}
 }
@@ -199,9 +199,9 @@ Robot Applications in real world:
 \begin{itemize}
 \item Health Care.
 \item  Perimeter surveillance 
-\item Environment monitoring 
-\item  Cooperative estimation and formation control
-\item Indoor navigation using mobile robots.
+\item Environment monitoring. 
+\item  Search and Rescue.
+\item package delivery.
 \end{itemize}
   
 \end{frame}
@@ -223,8 +223,43 @@ Robot Applications in real world:
 \end{figure}
 \end{center}
 \end{frame}
-%
 
+\begin{frame}{Main Components}
+\begin{itemize}
+\item Differential drive robot modeled as: 
+\begin{subequations}
+  \label{eq:robotModelDT}  
+  \begin{align}
+    x_{k+1} &= x_k +T\nu_k\cos\theta_k,\\
+    y_{k+1} &= y_k +T\nu_k\sin\theta_k,\\
+    \theta_{k+1} &= \theta_k + T\frac{\nu_k}{L}\tan\gamma_k,
+  \end{align}
+\end{subequations}
+\item Dynamic target modeled as: 
+ \begin{align}
+   \label{eq:leaderDT}
+   \mathbf{p}_{k+1}^{[d]} = \mathbf{p}_k^{[d]} + T_s \, \mathbf{u}_k^{[d]},
+ \end{align}
+\item Error Vector defined as:\
+\begin{equation}    
+\mathbf{e}_k = \left[ \tilde{\rho_k},\tilde\theta_k \right]^T=\left[ \sqrt{\tilde{x}_k^2+\tilde{y}_k^2},\tilde{\theta_k} \right]^T
+\end{equation} 
+\end{itemize}
+\end{frame}
+%
+\begin{frame}{Objective}
+\begin{itemize}
+\item Let the control actions of the robot be defined as: 
+ \begin{subequations}
+   \begin{align}
+     \nu_{k} &= \frac{1}{2}(\nu_{R,k} + \nu_{L,k}),\\
+     \omega_{k} &= \frac{1}{\ell}(\nu_{R,k} - \nu_{L,k}) = \frac{\nu_{k}}{L}\tan(\gamma_k) 	
+   \end{align}
+ \label{eq:robotModel1-DT}
+ \end{subequations}
+\item Our goal is to find $\nu_k$ and $\gamma_k$ such that ${\bf e}_k\to {\bf 0}$ as  $k\to\infty$
+\end{itemize}
+\end{frame}
 %%------------------------
 \section{Previous Approaches}
 \begin{frame}{Traditional Approaches}{Litrature Review}
@@ -247,12 +282,18 @@ trajectories.
 \end{itemize}
 \end{column}
 \begin{column}{0.5\textwidth}
+\begin{figure}
 \includegraphics[scale=0.25]{figs/img/Ref-L-agent.pdf}
+\caption{Reinforcement Learning Schematic}
+\end{figure}
 \end{column}
 \end{columns}
 \end{frame}
 %-----------------------------------
 \begin{frame}{Key Equations}
+\begin{equation}
+\mathbf{z}_k = \left[\mathbf{e}_k ,\mathbf{u}_k\right]^T\in\mathbb{R}^4
+\end{equation}
 \begin{equation}
   J =  \frac{1}{2} \sum_{k=0}^\infty\left[{\bf e}_k^T \, {\bf Q} \, {\bf e}_k + {\bf u}_k^T \, {\bf R} \, {\bf u_k}\right],
 \end{equation}
@@ -270,6 +311,14 @@ with P being:
  \end{center}
 \end{frame}
 %%-------------------------
+\begin{frame}{Algorithm}
+\begin{figure}
+\includegraphics[scale=0.12]{figs/img/critic.png}
+\includegraphics[scale=0.12]{figs/img/actor.png}
+\caption{Actor-Critic Neural Network}
+\end{figure}
+\end{frame}
+%--------------------
 \section{Computer Simulations}
 \begin{frame}{Results}{First Scenario}{Sine wave}
 \begin{figure} 
