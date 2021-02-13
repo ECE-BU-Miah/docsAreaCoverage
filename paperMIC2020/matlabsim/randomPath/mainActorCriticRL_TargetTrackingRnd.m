@@ -1,4 +1,4 @@
-% Odometric localization or dead reckoning%   Script for simulating mobile robot.
+ %Odometric localization or dead reckoning%   Script for simulating mobile robot.
 %Edited by AMR Elhussein on May, 29,2020.
 %gradient descent Appraoch, three cases comined fixed point, horzintal and inclined line, 
 %converged Example
